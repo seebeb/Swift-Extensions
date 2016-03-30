@@ -1,7 +1,6 @@
 //
 //  UIColor+Extension.swift
 //
-//
 //  Created by Augus on 9/4/15.
 //  Copyright © 2015 iAugus. All rights reserved.
 //
@@ -32,6 +31,10 @@ extension UIColor {
         var a = CGFloat(0)
         self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
         return UIColor(hue: h, saturation: s * delta, brightness: b, alpha: a)
+    }
+    
+    func alpha(alpha: CGFloat) -> UIColor {
+        return colorWithAlphaComponent(alpha)
     }
     
 }

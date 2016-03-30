@@ -8,6 +8,10 @@
 import Foundation
 
 
+
+public typealias CompletionHandler = () -> ()
+
+
 class Utils {
     
     class func documentPath() -> String {
@@ -25,6 +29,7 @@ class Utils {
 
 
 // MARK: - GCD
+
 var GlobalMainQueue: dispatch_queue_t {
     return dispatch_get_main_queue()
 }
@@ -43,4 +48,14 @@ var GlobalUtilityQueue: dispatch_queue_t {
 
 var GlobalBackgroundQueue: dispatch_queue_t {
     return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
+}
+
+// MARK: - Delay
+
+func excuteAfterDelay(seconds: Double, completion: (() -> Void)) {
+    let delayInSeconds: Double = seconds
+    let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC) * delayInSeconds))
+    dispatch_after(popTime, dispatch_get_main_queue(), {
+        completion()
+    })
 }

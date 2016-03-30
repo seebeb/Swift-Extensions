@@ -77,3 +77,10 @@ extension UIView {
 
     }
 }
+
+extension UIView {
+    
+    func isPointInside(fromView: UIView, point: CGPoint, event: UIEvent?) -> Bool {
+        return pointInside(fromView.convertPoint(point, toView: self), withEvent: event)
+    }
+}

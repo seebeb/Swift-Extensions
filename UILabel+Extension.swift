@@ -30,19 +30,34 @@ func ausFrameSizeForText(label: UILabel, text: NSString, maximum: CGSize) -> CGR
 
 extension UILabel {
     
-    /**
-    Methods to allow using HTML code with CoreText
+    func isTruncated() -> Bool {
+        if let string = text {
+            let size = string.boundingRectWithSize(
+                CGSize(width: frame.size.width, height: CGFloat.max),
+                options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+                attributes: [NSFontAttributeName: font],
+                context: nil).size
+            
+            if size.height > bounds.size.height {
+                return true
+            }
+        }
+        return false
+    }
     
-    */
+    /**
+     Methods to allow using HTML code with CoreText
+     
+     */
     func ausAttributedText(data: String) {
         do {
             let formatedData = data.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             let text = try NSAttributedString(data: formatedData.dataUsingEncoding(NSUnicodeStringEncoding,allowLossyConversion: false)!,
-                options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-                documentAttributes: nil)
+                                              options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                                              documentAttributes: nil)
             self.attributedText = text
         }catch{
-            print("something error with NSAttributedString")
+            NSLog("something error with NSAttributedString")
         }
     }
     
@@ -71,16 +86,18 @@ extension UILabel {
         var numberOfLines = 0
         var index = 0
         var lineRange : NSRange = NSMakeRange(0, 0)
-        for (; index < layoutManager.numberOfGlyphs; numberOfLines++) {
+        
+        while index < layoutManager.numberOfGlyphs {
+            numberOfLines += 1
             layoutManager.lineFragmentRectForGlyphAtIndex(index, effectiveRange: &lineRange)
             index = NSMaxRange(lineRange)
         }
         
-        return numberOfLines
+        return max(numberOfLines - 1, 0)
     }
     
     func ausCalculateLabelSizeToFit() {
-
+        
         let constraint = CGSizeMake(self.frame.width, CGFloat.max)
         
         let context = NSStringDrawingContext()
