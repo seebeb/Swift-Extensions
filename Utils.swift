@@ -52,7 +52,7 @@ var GlobalBackgroundQueue: dispatch_queue_t {
 
 // MARK: - Delay
 
-func excuteAfterDelay(seconds: Double, completion: (() -> Void)) {
+func executeAfterDelay(seconds: Double, completion: (() -> Void)) {
     let delayInSeconds: Double = seconds
     let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC) * delayInSeconds))
     dispatch_after(popTime, dispatch_get_main_queue(), {
