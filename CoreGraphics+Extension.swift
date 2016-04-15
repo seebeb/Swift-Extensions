@@ -52,4 +52,22 @@ private func touchArea(point: CGPoint, center: CGPoint) -> Double {
 private func square(x: CGFloat) -> Double {
     return pow(Double(x), 2)
 }
-    
+
+
+// MARK: -
+
+func CGRectsNotContainPoint(point: CGPoint, rects: CGRect...) -> Bool {
+    return CGRectsNotContainPoint(point, rects: rects)
+}
+
+func CGRectsNotContainPoint(point: CGPoint, rects: Array<CGRect>) -> Bool {
+    for rect in rects {
+        if CGRectContainsPoint(rect, point) {
+            return false
+        }
+    }
+    return true
+}
+
+
+// MARK: - 
