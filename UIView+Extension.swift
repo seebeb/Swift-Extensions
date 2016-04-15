@@ -84,3 +84,63 @@ extension UIView {
         return pointInside(fromView.convertPoint(point, toView: self), withEvent: event)
     }
 }
+
+
+// MARK: - rotation animation
+
+extension UIView {
+    
+    /**
+     Angle: 𝞹
+     
+     - parameter duration:           <#duration description#>
+     - parameter beginWithClockwise: <#beginWithClockwise description#>
+     - parameter clockwise:          <#clockwise description#>
+     - parameter animated:           <#animated description#>
+     */
+    func rotationAnimation(duration: CFTimeInterval? = 0.4, beginWithClockwise: Bool, clockwise: Bool, animated: Bool) {
+        
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        
+        let angle: Double = beginWithClockwise ? (clockwise ? M_PI : 0) : (clockwise ? 0 : -M_PI)
+        
+        if beginWithClockwise {
+            if !clockwise { rotationAnimation.fromValue = M_PI }
+        } else {
+            if clockwise { rotationAnimation.fromValue = -M_PI }
+        }
+        
+        
+        rotationAnimation.toValue = angle
+        rotationAnimation.duration = animated ? duration! : 0
+        rotationAnimation.repeatCount = 0
+        rotationAnimation.delegate = self
+        rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        rotationAnimation.fillMode = kCAFillModeForwards
+        rotationAnimation.removedOnCompletion = false
+        
+        layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
+    }
+    
+    /**
+     Angle: 𝞹/2
+     
+     - parameter duration:  <#duration description#>
+     - parameter clockwise: <#clockwise description#>
+     - parameter animated:  <#animated description#>
+     */
+    func rotationAnimation(duration: NSTimeInterval, clockwise: Bool, animated: Bool) {
+        
+        let angle = CGFloat(clockwise ? M_PI_2 : -M_PI_2)
+        
+        if animated {
+            UIView.animateWithDuration(duration, delay: 0, options: .CurveLinear, animations: { () -> Void in
+                self.transform = CGAffineTransformRotate(self.transform, angle)
+                }, completion: nil)
+        } else {
+            self.transform = CGAffineTransformRotate(self.transform, angle)
+        }
+        
+    }
+
+}
