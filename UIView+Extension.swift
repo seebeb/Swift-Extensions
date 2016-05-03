@@ -38,7 +38,7 @@ extension UIView {
         frame.size.width = width
         self.frame = frame
     }
-
+    
     func setFrameOriginX(originX: CGFloat) {
         var frame = self.frame
         frame.origin.x = originX
@@ -50,7 +50,7 @@ extension UIView {
         frame.origin.y = originY
         self.frame = frame
     }
-
+    
     /**
      set current view's absolute center to other view's center
      
@@ -74,7 +74,7 @@ extension UIView {
                     self.alpha = 1
                     }, completion: nil)
         })
-
+        
     }
 }
 
@@ -142,5 +142,31 @@ extension UIView {
         }
         
     }
+    
+}
 
+
+// MARK: - Twinkle
+
+extension UIView {
+    
+    func twinkling(duration: NSTimeInterval, minAlpha: CGFloat = 0, maxAlpha: CGFloat = 1) {
+        
+        UIView.animateWithDuration(duration, animations: {
+            self.alpha = minAlpha
+            
+        }) { (finished) in
+            
+            if finished {
+                UIView.animateWithDuration(duration, animations: {
+                    self.alpha = maxAlpha
+                    }, completion: { (finished) in
+                        
+                        if finished {
+                            self.twinkling(duration, minAlpha: minAlpha, maxAlpha: maxAlpha)
+                        }
+                })
+            }
+        }
+    }
 }

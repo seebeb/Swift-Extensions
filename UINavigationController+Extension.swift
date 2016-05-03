@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 
 extension UINavigationController {
@@ -19,13 +20,16 @@ extension UINavigationController {
     }
     
     func transparentBlurBar() {
+        
         completelyTransparentBar()
         
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
-        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
-        visualEffectView.frame = CGRectMake(0, 0, navigationBar.frame.width, navigationBar.frame.height + statusBarHeight)
-        visualEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         view.insertSubview(visualEffectView, belowSubview: navigationBar)
+        
+        visualEffectView.snp_makeConstraints { (make) in
+            make.top.equalTo(view)
+            make.left.bottom.right.equalTo(navigationBar)
+        }
     }
     
 }

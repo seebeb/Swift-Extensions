@@ -8,12 +8,20 @@
 import UIKit
 
 
+extension UIDevice {
+    
+    static var isPad: Bool {
+        return UIDevice.currentDevice().userInterfaceIdiom == .Pad
+    }
+}
+
+
 // MARK: - Check if device supports blur
 // REFERENCE: - http://stackoverflow.com/a/29997626/4656574
 
 extension UIDevice {
     
-    func isBlurSupported() -> Bool {
+    var isBlurSupported: Bool {
         var supported = Set<String>()
         supported.insert("iPad")
         supported.insert("iPad1,1")

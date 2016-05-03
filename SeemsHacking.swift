@@ -8,20 +8,61 @@
 import Foundation
 
 
-// MARK: - 
+// MARK: -
 
 private var latestSystemUpTime = NSProcessInfo.processInfo().systemUptime
 
-func onlyExecuteOnceIfEventsTooClose(execution: (() -> ())) {
+/// Not executing at the first time anyway
+func onlyExecuteOnceIfEventsTooClose(equal equal: Bool = false, interval: NSTimeInterval = 0.1, closure: (() -> ())) {
+    
     let systemUptime = NSProcessInfo.processInfo().systemUptime
     
-    if systemUptime - latestSystemUpTime > 0.1 {
-        execution()
+    let calculation: (_: Double, _: Double) -> Bool = equal ? (>=) : (>)
+    
+    if calculation(systemUptime - latestSystemUpTime, interval) {
+        closure()
     }
     
     latestSystemUpTime = systemUptime
 }
 
 
-// MARK: - 
+private var latestSystemUpTimeExceptTheFirstTime: NSTimeInterval!
+
+/// Executing at the first time anyway
+func onlyExecuteOnceIfEventsTooCloseExceptTheFirstTime(equal equal: Bool = false, interval: NSTimeInterval = 0.1, closure: (() -> ())) {
+    
+    let systemUptime = NSProcessInfo.processInfo().systemUptime
+    
+    let calculation: (_: Double, _: Double) -> Bool = equal ? (>=) : (>)
+    
+    if latestSystemUpTimeExceptTheFirstTime == nil || calculation(systemUptime - latestSystemUpTime, interval) {
+        closure()
+    }
+    
+    latestSystemUpTimeExceptTheFirstTime = systemUptime
+}
+
+
+private var latestSystemUpTimeExecutionsTooClose: NSTimeInterval!
+
+func executionsTooClose(equal equal: Bool = false, interval: NSTimeInterval = 0.1, firstTimeResult: Bool = false) -> Bool {
+    
+    if latestSystemUpTimeExecutionsTooClose == nil { return firstTimeResult }
+    
+    let systemUptime = NSProcessInfo.processInfo().systemUptime
+    
+    let calculation: (_: Double, _: Double) -> Bool = equal ? (>) : (>=)
+    
+    if calculation(systemUptime - latestSystemUpTimeExecutionsTooClose, interval) {
+        latestSystemUpTimeExecutionsTooClose = systemUptime
+        return false
+    } else {
+        latestSystemUpTimeExecutionsTooClose = systemUptime
+        return true
+    }
+}
+
+
+// MARK: -
 
