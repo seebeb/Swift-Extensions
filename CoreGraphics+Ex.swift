@@ -25,6 +25,32 @@ extension CGRect {
         rect.size = CGSize(width: _min, height: _min)
         return rect
     }
+    
+    // MARK: - 
+    
+    func plusX(_ delta: CGFloat) -> CGRect {
+        var frame = self
+        frame.origin.x += delta
+        return frame
+    }
+    
+    func plusY(_ delta: CGFloat) -> CGRect {
+        var frame = self
+        frame.origin.y += delta
+        return frame
+    }
+    
+    func plusPoint(_ point: CGPoint) -> CGRect {
+        var frame = self
+        frame.origin.x += point.x
+        frame.origin.y += point.y
+        return frame
+    }
+    
+    func plusXY(x: CGFloat, y: CGFloat) -> CGRect {
+        let point = CGPoint(x: x, y: y)
+        return plusPoint(point)
+    }
 }
 
 extension CGSize {

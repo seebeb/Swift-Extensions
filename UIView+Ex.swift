@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIView {
+    
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
@@ -112,14 +113,12 @@ extension UIView {
 
 extension UIView {
     
-    /**
-     Angle: 𝞹
-     
-     - parameter duration:           <#duration description#>
-     - parameter beginWithClockwise: <#beginWithClockwise description#>
-     - parameter clockwise:          <#clockwise description#>
-     - parameter animated:           <#animated description#>
-     */
+    /// Angle: 𝞹
+    ///
+    /// - parameter duration:           <#duration description#>
+    /// - parameter beginWithClockwise: <#beginWithClockwise description#>
+    /// - parameter clockwise:          <#clockwise description#>
+    /// - parameter animated:           <#animated description#>
     
     func rotationAnimation(_ duration: CFTimeInterval? = 0.4, beginWithClockwise: Bool, clockwise: Bool, animated: Bool) {
         
@@ -133,7 +132,6 @@ extension UIView {
             if clockwise { rotationAnimation.fromValue = -M_PI }
         }
         
-        
         rotationAnimation.toValue = angle
         rotationAnimation.duration = animated ? duration! : 0
         rotationAnimation.repeatCount = 0
@@ -145,13 +143,12 @@ extension UIView {
         layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
     
-    /**
-     Angle: 𝞹/2
-     
-     - parameter duration:  <#duration description#>
-     - parameter clockwise: <#clockwise description#>
-     - parameter animated:  <#animated description#>
-     */
+    /// Angle: 𝞹/2
+    ///
+    /// - parameter duration:  <#duration description#>
+    /// - parameter clockwise: <#clockwise description#>
+    /// - parameter animated:  <#animated description#>
+    
     func rotationAnimation(_ duration: TimeInterval, clockwise: Bool, animated: Bool) {
         
         let angle = CGFloat(clockwise ? M_PI_2 : -M_PI_2)
