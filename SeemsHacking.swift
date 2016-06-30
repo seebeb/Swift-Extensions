@@ -10,12 +10,12 @@ import Foundation
 
 // MARK: -
 
-private var latestSystemUpTime = NSProcessInfo.processInfo().systemUptime
+private var latestSystemUpTime = ProcessInfo.processInfo().systemUptime
 
 /// Not executing at the first time anyway
-func onlyExecuteOnceIfEventsTooClose(equal equal: Bool = false, interval: NSTimeInterval = 0.1, closure: (() -> ())) {
+func onlyExecuteOnceIfEventsTooClose(_ equal: Bool = false, interval: TimeInterval = 0.1, closure: (() -> ())) {
     
-    let systemUptime = NSProcessInfo.processInfo().systemUptime
+    let systemUptime = ProcessInfo.processInfo().systemUptime
     
     let calculation: (_: Double, _: Double) -> Bool = equal ? (>=) : (>)
     
@@ -27,12 +27,12 @@ func onlyExecuteOnceIfEventsTooClose(equal equal: Bool = false, interval: NSTime
 }
 
 
-private var latestSystemUpTimeExceptTheFirstTime: NSTimeInterval!
+private var latestSystemUpTimeExceptTheFirstTime: TimeInterval!
 
 /// Executing at the first time anyway
-func onlyExecuteOnceIfEventsTooCloseExceptTheFirstTime(equal equal: Bool = false, interval: NSTimeInterval = 0.1, closure: (() -> ())) {
+func onlyExecuteOnceIfEventsTooCloseExceptTheFirstTime(_ equal: Bool = false, interval: TimeInterval = 0.1, closure: (() -> ())) {
     
-    let systemUptime = NSProcessInfo.processInfo().systemUptime
+    let systemUptime = ProcessInfo.processInfo().systemUptime
     
     let calculation: (_: Double, _: Double) -> Bool = equal ? (>=) : (>)
     
@@ -44,13 +44,13 @@ func onlyExecuteOnceIfEventsTooCloseExceptTheFirstTime(equal equal: Bool = false
 }
 
 
-private var latestSystemUpTimeExecutionsTooClose: NSTimeInterval!
+private var latestSystemUpTimeExecutionsTooClose: TimeInterval!
 
-func executionsTooClose(equal equal: Bool = false, interval: NSTimeInterval = 0.1, firstTimeResult: Bool = false) -> Bool {
+func executionsTooClose(_ equal: Bool = false, interval: TimeInterval = 0.1, firstTimeResult: Bool = false) -> Bool {
     
     if latestSystemUpTimeExecutionsTooClose == nil { return firstTimeResult }
     
-    let systemUptime = NSProcessInfo.processInfo().systemUptime
+    let systemUptime = ProcessInfo.processInfo().systemUptime
     
     let calculation: (_: Double, _: Double) -> Bool = equal ? (>) : (>=)
     

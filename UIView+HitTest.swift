@@ -1,46 +1,60 @@
 //
 //  UIView+HitTest.swift
 //
-//  Created by Augus on 2/6/16.
+//  Created by Augus on 6/27/16.
 //  Copyright © 2016 iAugus. All rights reserved.
 //
 
 import UIKit
 
 
+// REFERENCE: http://stackoverflow.com/a/34774177/4656574
 
-extension UIButton {
+// Handle issue when you need to receive touch on top most visible view.
+
+extension UIView {
     
-    override public func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        
-        return _hitTest(self, point: point, withEvent: event)
+    func overlapHitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        // 1
+        if !isUserInteractionEnabled || isHidden || alpha == 0 {
+            return nil
+        }
+        //2
+        var hitView: UIView? = self
+        if !self.point(inside: point, with: event) {
+            if clipsToBounds {
+                return nil
+            } else {
+                hitView = nil
+            }
+        }
+        //3
+        for subview in subviews.reversed() {
+            let insideSubview = convert(point, to: subview)
+            if let sview = subview.overlapHitTest(insideSubview, with: event) {
+                return sview
+            }
+        }
+        return hitView
     }
 }
 
-extension UIImageView {
-    
-    override public func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        
-        return _hitTest(self, point: point, withEvent: event)
-    }
-}
+/**
+ 1. We should not send touch events for hidden or transparent views, or views with userInteractionEnabled set to NO;
+ 2. If touch is inside self, self will be considered as potential result.
+ 3. Check recursively all subviews for hit. If any, return it.
+ 4. Else return self or nil depending on result from step 2.
+ 
+ Note: 'subviews.reversed()' needed to follow view hierarchy from top most to bottom. And check for clipsToBounds to ensure not to test masked subviews.
+ 
+ Usage:
+ 
+ Import category in your subclassed view.
+ Replace hitTest:withEvent: with this
 
-extension UIControl {
-    
-    override public func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        
-        return _hitTest(self, point: point, withEvent: event)
-    }
-}
-
-private func _hitTest(view: UIView, point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-    
-    let minimalWidthAndHeight: CGFloat = 60
-    
-    let buttonSize = view.frame.size
-    let widthToAdd = (minimalWidthAndHeight - buttonSize.width > 0) ? minimalWidthAndHeight - buttonSize.width : 0
-    let heightToAdd = (minimalWidthAndHeight - buttonSize.height > 0) ? minimalWidthAndHeight - buttonSize.height : 0
-    let largerFrame = CGRect(x: 0-(widthToAdd / 2), y: 0-(heightToAdd / 2), width: buttonSize.width + widthToAdd, height: buttonSize.height + heightToAdd)
-    
-    return CGRectContainsPoint(largerFrame, point) ? view : nil
-}
+ override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    let uiview = super.hitTest(point, withEvent: event)
+    print(uiview)
+    return overlapHitTest(point, withEvent: event)
+ }
+ */

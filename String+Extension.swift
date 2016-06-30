@@ -1,20 +1,20 @@
 //
-//  NSString+Addtions.swift
+//  String+Extension.swift
 //
-//  Created by Augus on 9/5/15.
-//  Copyright © 2015 iAugus. All rights reserved.
+//  Created by Augus on 6/21/16.
+//  Copyright © 2016 iAugus. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-extension String{
-    func ausCalculateSize(size: CGSize, font: UIFont) -> CGSize {
-        var expectedLabelSize: CGSize = CGSizeZero
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        let attributes: [String : AnyObject] = [NSFontAttributeName: font, NSParagraphStyleAttributeName: paragraphStyle.copy()]
-        expectedLabelSize = self.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil).size
-        return CGSizeMake(ceil(expectedLabelSize.width), ceil(expectedLabelSize.height))
-    }
+
+extension String {
     
+    var isBlank : Bool {
+        let s = self
+        let cset = CharacterSet.newlines.inverted
+        let r = s.rangeOfCharacter(from: cset)
+        let ok = s.isEmpty || r == nil
+        return ok
+    }
 }

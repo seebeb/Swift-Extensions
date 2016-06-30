@@ -5,27 +5,64 @@
 //  Copyright © 2016 iAugus. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+
+// MARK: -
+
+extension CGRect {
+    
+    var Max: CGRect {
+        var rect = self
+        let _max = max(width, height)
+        rect.size = CGSize(width: _max, height: _max)
+        return rect
+    }
+    
+    var Min: CGRect {
+        var rect = self
+        let _min = min(width, height)
+        rect.size = CGSize(width: _min, height: _min)
+        return rect
+    }
+}
+
+extension CGSize {
+    
+    var Max: CGSize {
+        var size = self
+        let _max = max(width, height)
+        size = CGSize(width: _max, height: _max)
+        return size
+    }
+    
+    var Min: CGSize {
+        var size = self
+        let _max = min(width, height)
+        size = CGSize(width: _max, height: _max)
+        return size
+    }
+}
 
 
 // MARK: - distance
 
-func CGDistance(l1: CGFloat, _ l2: CGFloat) -> CGFloat {
-    guard l1 != 0 && l2 != 0 else { return 0 }
-    
-    return sqrt(pow(l1, 2) + pow(l2, 2))
-}
-
-func CGDistance(p1: CGPoint, _ p2: CGPoint) -> CGFloat {
+func CGDistance(_ p1: CGPoint, _ p2: CGPoint) -> CGFloat {
     guard p1 != p2 else { return 0 }
     
     return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2))
 }
 
+func CGTriangleDistance(_ l1: CGFloat, _ l2: CGFloat) -> CGFloat {
+    guard l1 != 0 && l2 != 0 else { return 0 }
+    
+    return sqrt(pow(l1, 2) + pow(l2, 2))
+}
+
 
 // MARK: - point
 
-func CGPointInsideLoop(point: CGPoint, center: CGPoint, firstRadius: CGFloat, secondRadius: CGFloat) -> Bool {
+func CGPointInsideLoop(_ point: CGPoint, center: CGPoint, firstRadius: CGFloat, secondRadius: CGFloat) -> Bool {
     let area = touchArea(point, center: center)
     let smaller = square(min(firstRadius, secondRadius))
     let bigger = square(max(firstRadius, secondRadius))
@@ -37,7 +74,7 @@ func CGPointInsideLoop(point: CGPoint, center: CGPoint, firstRadius: CGFloat, se
     return false
 }
 
-func CGPointInsideCircle(point: CGPoint, center: CGPoint, radius: CGFloat) -> Bool {
+func CGPointInsideCircle(_ point: CGPoint, center: CGPoint, radius: CGFloat) -> Bool {
     let area = touchArea(point, center: center)
     if area <= square(radius) {
         return true
@@ -45,24 +82,24 @@ func CGPointInsideCircle(point: CGPoint, center: CGPoint, radius: CGFloat) -> Bo
     return false
 }
 
-private func touchArea(point: CGPoint, center: CGPoint) -> Double {
+private func touchArea(_ point: CGPoint, center: CGPoint) -> Double {
     return square(point.x - center.x) + square(point.y - center.y)
 }
 
-private func square(x: CGFloat) -> Double {
+private func square(_ x: CGFloat) -> Double {
     return pow(Double(x), 2)
 }
 
 
 // MARK: -
 
-func CGRectsNotContainPoint(point: CGPoint, rects: CGRect...) -> Bool {
+func CGRectsNotContainPoint(_ point: CGPoint, rects: CGRect...) -> Bool {
     return CGRectsNotContainPoint(point, rects: rects)
 }
 
-func CGRectsNotContainPoint(point: CGPoint, rects: Array<CGRect>) -> Bool {
+func CGRectsNotContainPoint(_ point: CGPoint, rects: Array<CGRect>) -> Bool {
     for rect in rects {
-        if CGRectContainsPoint(rect, point) {
+        if rect.contains(point) {
             return false
         }
     }
@@ -70,4 +107,41 @@ func CGRectsNotContainPoint(point: CGPoint, rects: Array<CGRect>) -> Bool {
 }
 
 
-// MARK: - 
+// MARK: -
+
+func CGSizeWithEqualLength(_ sideLength: CGFloat) -> CGSize {
+    return CGSize(width: sideLength, height: sideLength)
+}
+
+func CGSizeWithEqualLength(_ sideLength: Double) -> CGSize {
+    return CGSize(width: sideLength, height: sideLength)
+}
+
+func CGSizeWithEqualLength(_ sideLength: Int) -> CGSize {
+    return CGSize(width: sideLength, height: sideLength)
+}
+
+
+// MARK: - Math Function
+
+func CGLinearFunction(_ point1: CGPoint, _ point2: CGPoint, x: CGFloat) -> CGPoint {
+    let k = (point2.y - point1.y) / (point1.x - point1.x)
+    let b = (point1.y + point2.y - k * (point1.x + point2.x)) / 2
+    let y = k * x + b
+    return CGPoint(x: x, y: y)
+}
+
+func CGLinearFunction(_ point1: CGPoint, _ point2: CGPoint, y: CGFloat) -> CGPoint {
+    let point = CGLinearFunction(point1, point2, x: y)
+    return CGPoint(x: point.y, y: point.x)
+}
+
+func CGLinearFunctionIsPointOnLine(_ point1: CGPoint, _ point2: CGPoint, _ point3: CGPoint) -> Bool {
+    let k = (point2.y - point1.y) / (point1.x - point1.x)
+    let b = (point1.y + point2.y - k * (point1.x + point2.x)) / 2
+    return point3.y == k * point3.x + b
+}
+
+
+
+

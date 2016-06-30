@@ -12,13 +12,13 @@ extension UIResponder {
     
     private static var _currentFirstResponder: UIResponder?
     
-    class func currentFirstResponder() -> UIResponder? {
+    class var currentFirstResponder: UIResponder? {
         UIResponder._currentFirstResponder = nil
-        UIApplication.sharedApplication().sendAction(#selector(UIResponder.findFirstResponder(_:)), to: nil, from: nil, forEvent: nil)
+        UIApplication.shared().sendAction(#selector(UIResponder.findFirstResponder(_:)), to: nil, from: nil, for: nil)
         return UIResponder._currentFirstResponder
     }
     
-    internal func findFirstResponder(sender: AnyObject) {
+    @objc func findFirstResponder(_ sender: AnyObject) {
         UIResponder._currentFirstResponder = self
     }
     

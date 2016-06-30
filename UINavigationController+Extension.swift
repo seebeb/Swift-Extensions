@@ -12,24 +12,39 @@ import SnapKit
 extension UINavigationController {
     
     func completelyTransparentBar() {
-        navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
-        navigationBar.translucent = true
-        view.backgroundColor = UIColor.clearColor()
-        navigationBar.backgroundColor = UIColor.clearColor()
+        navigationBar.isTranslucent = true
+        view.backgroundColor = UIColor.clear()
+        navigationBar.backgroundColor = UIColor.clear()
     }
     
     func transparentBlurBar() {
         
         completelyTransparentBar()
         
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
-        view.insertSubview(visualEffectView, belowSubview: navigationBar)
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        navigationBar.insertSubview(visualEffectView, belowSubview: navigationBar)
         
-        visualEffectView.snp_makeConstraints { (make) in
-            make.top.equalTo(view)
-            make.left.bottom.right.equalTo(navigationBar)
+        visualEffectView.snp.makeConstraints { (make) in
+            _ = make.top.equalTo(view)
+            _ = make.left.bottom.right.equalTo(navigationBar)
         }
     }
     
+    func blurBarWithColor(_ color: UIColor, alpha: CGFloat = 1) {
+        
+        completelyTransparentBar()
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        visualEffectView.backgroundColor = color
+        visualEffectView.alpha = alpha
+        visualEffectView.isUserInteractionEnabled = false
+        navigationBar.insertSubview(visualEffectView, aboveSubview: navigationBar)
+        
+        visualEffectView.snp.makeConstraints { (make) in
+            _ = make.top.equalTo(navigationBar).offset(-22)
+            _ = make.left.bottom.right.equalTo(navigationBar)
+        }
+    }
 }

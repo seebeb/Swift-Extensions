@@ -8,20 +8,22 @@
 
 import UIKit
 
+
+private var xoAssociationKey: UInt8 = 0
+
 extension UINavigationBar {
     
-    func hideBottomHairline() {
-        let navigationBarImageView = hairlineImageViewInNavigationBar(self)
-        navigationBarImageView?.hidden = true
+    var isBottomHairlineHidden: Bool {
+        get {
+            return objc_getAssociatedObject(self, &xoAssociationKey) as? Bool ?? false
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &xoAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
     }
     
-    func showBottomHairline() {
-        let navigationBarImageView = hairlineImageViewInNavigationBar(self)
-        navigationBarImageView?.hidden = false
-    }
-    
-    private func hairlineImageViewInNavigationBar(view: UIView) -> UIImageView? {
-        if view.isKindOfClass(UIImageView) && view.bounds.height <= 1.0 {
+    private func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
+        if view is UIImageView && view.bounds.height <= 1.0 {
             return view as? UIImageView
         }
         

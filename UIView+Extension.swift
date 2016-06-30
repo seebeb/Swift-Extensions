@@ -11,7 +11,7 @@ extension UIView {
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
-            parentResponder = parentResponder!.nextResponder()
+            parentResponder = parentResponder!.next()
             if let viewController = parentResponder as? UIViewController {
                 return viewController
             }
@@ -21,31 +21,53 @@ extension UIView {
 }
 
 extension UIView {
-    func setFrameSize(size: CGSize) {
+    
+    var maxSize: CGSize {
+        let maxL = max(frame.width, frame.height)
+        return CGSize(width: maxL, height: maxL)
+    }
+    
+    var minSize: CGSize {
+        let minL = min(frame.width, frame.height)
+        return CGSize(width: minL, height: minL)
+    }
+
+    var maxBounds: CGRect {
+        return CGRect(origin: .zero, size: maxSize)
+    }
+    
+    var minBounds: CGRect {
+        return CGRect(origin: .zero, size: minSize)
+    }
+}
+
+extension UIView {
+    
+    func setFrameSize(_ size: CGSize) {
         var frame = self.frame
         frame.size = size
         self.frame = frame
     }
     
-    func setFrameHeight(height: CGFloat) {
+    func setFrameHeight(_ height: CGFloat) {
         var frame = self.frame
         frame.size.height = height
         self.frame = frame
     }
     
-    func setFrameWidth(width: CGFloat) {
+    func setFrameWidth(_ width: CGFloat) {
         var frame = self.frame
         frame.size.width = width
         self.frame = frame
     }
     
-    func setFrameOriginX(originX: CGFloat) {
+    func setFrameOriginX(_ originX: CGFloat) {
         var frame = self.frame
         frame.origin.x = originX
         self.frame = frame
     }
     
-    func setFrameOriginY(originY: CGFloat) {
+    func setFrameOriginY(_ originY: CGFloat) {
         var frame = self.frame
         frame.origin.y = originY
         self.frame = frame
@@ -56,7 +78,7 @@ extension UIView {
      
      - parameter view: other view
      */
-    func centerTo(view view: UIView) {
+    func centerTo(_ view: UIView) {
         self.frame.origin.x = view.bounds.midX - self.frame.width / 2
         self.frame.origin.y = view.bounds.midY - self.frame.height / 2
         
@@ -66,12 +88,12 @@ extension UIView {
 extension UIView {
     
     func simulateHighlight() {
-        UIView.animateWithDuration(0.1, animations: { () -> Void in
-            self.alpha = 0.5
+        UIView.animate(withDuration: 0.1, animations: { [weak self] in
+            self?.alpha = 0.5
             
             }, completion: { (_) -> Void in
-                UIView.animateWithDuration(0.1, delay: 0.1, options: .CurveEaseInOut, animations: { () -> Void in
-                    self.alpha = 1
+                UIView.animate(withDuration: 0.1, delay: 0.1, options: [], animations: { [weak self] in
+                    self?.alpha = 1
                     }, completion: nil)
         })
         
@@ -80,8 +102,8 @@ extension UIView {
 
 extension UIView {
     
-    func isPointInside(fromView: UIView, point: CGPoint, event: UIEvent?) -> Bool {
-        return pointInside(fromView.convertPoint(point, toView: self), withEvent: event)
+    func isPointInside(_ fromView: UIView, point: CGPoint, event: UIEvent?) -> Bool {
+        return self.point(inside: fromView.convert(point, to: self), with: event)
     }
 }
 
@@ -98,7 +120,8 @@ extension UIView {
      - parameter clockwise:          <#clockwise description#>
      - parameter animated:           <#animated description#>
      */
-    func rotationAnimation(duration: CFTimeInterval? = 0.4, beginWithClockwise: Bool, clockwise: Bool, animated: Bool) {
+    
+    func rotationAnimation(_ duration: CFTimeInterval? = 0.4, beginWithClockwise: Bool, clockwise: Bool, animated: Bool) {
         
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         
@@ -117,9 +140,9 @@ extension UIView {
         rotationAnimation.delegate = self
         rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         rotationAnimation.fillMode = kCAFillModeForwards
-        rotationAnimation.removedOnCompletion = false
+        rotationAnimation.isRemovedOnCompletion = false
         
-        layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
+        layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
     
     /**
@@ -129,16 +152,16 @@ extension UIView {
      - parameter clockwise: <#clockwise description#>
      - parameter animated:  <#animated description#>
      */
-    func rotationAnimation(duration: NSTimeInterval, clockwise: Bool, animated: Bool) {
+    func rotationAnimation(_ duration: TimeInterval, clockwise: Bool, animated: Bool) {
         
         let angle = CGFloat(clockwise ? M_PI_2 : -M_PI_2)
         
         if animated {
-            UIView.animateWithDuration(duration, delay: 0, options: .CurveLinear, animations: { () -> Void in
-                self.transform = CGAffineTransformRotate(self.transform, angle)
+            UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { () -> Void in
+                self.transform = self.transform.rotate(angle)
                 }, completion: nil)
         } else {
-            self.transform = CGAffineTransformRotate(self.transform, angle)
+            self.transform = self.transform.rotate(angle)
         }
         
     }
@@ -150,23 +173,85 @@ extension UIView {
 
 extension UIView {
     
-    func twinkling(duration: NSTimeInterval, minAlpha: CGFloat = 0, maxAlpha: CGFloat = 1) {
+    func twinkling(_ duration: TimeInterval, minAlpha: CGFloat = 0, maxAlpha: CGFloat = 1) {
         
-        UIView.animateWithDuration(duration, animations: {
+        UIView.animate(withDuration: duration, animations: {
             self.alpha = minAlpha
             
-        }) { (finished) in
+        }) { [weak self] (finished) in
             
             if finished {
-                UIView.animateWithDuration(duration, animations: {
-                    self.alpha = maxAlpha
-                    }, completion: { (finished) in
+                UIView.animate(withDuration: duration, animations: {
+                    self?.alpha = maxAlpha
+                    }, completion: { [weak self] (finished) in
                         
                         if finished {
-                            self.twinkling(duration, minAlpha: minAlpha, maxAlpha: maxAlpha)
+                            self?.twinkling(duration, minAlpha: minAlpha, maxAlpha: maxAlpha)
                         }
                 })
             }
         }
     }
 }
+
+// MARK: - Corner raidus
+// REFERENCE: http://stackoverflow.com/a/35621736/4656574
+
+extension UIView {
+    
+    /**
+     Rounds the given set of corners to the specified radius
+     
+     - parameter corners: Corners to round
+     - parameter radius:  Radius to round to
+     */
+    func round(corners: UIRectCorner, radius: CGFloat) {
+        _ = _round(corners, radius: radius)
+    }
+    
+    /**
+     Rounds the given set of corners to the specified radius with a border
+     
+     - parameter corners:     Corners to round
+     - parameter radius:      Radius to round to
+     - parameter borderColor: The border color
+     - parameter borderWidth: The border width
+     */
+    func round(corners: UIRectCorner, radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
+        let mask = _round(corners, radius: radius)
+        addBorder(mask, borderColor: borderColor, borderWidth: borderWidth)
+    }
+    
+    /**
+     Fully rounds an autolayout view (e.g. one with no known frame) with the given diameter and border
+     
+     - parameter diameter:    The view's diameter
+     - parameter borderColor: The border color
+     - parameter borderWidth: The border width
+     */
+    func fullyRound(diameter: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
+        layer.masksToBounds = true
+        layer.cornerRadius = diameter / 2
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor.cgColor
+    }
+    
+    private func _round(_ corners: UIRectCorner, radius: CGFloat) -> CAShapeLayer {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+        return mask
+    }
+    
+    private func addBorder(_ mask: CAShapeLayer, borderColor: UIColor, borderWidth: CGFloat) {
+        let borderLayer = CAShapeLayer()
+        borderLayer.path = mask.path
+        borderLayer.fillColor = UIColor.clear().cgColor
+        borderLayer.strokeColor = borderColor.cgColor
+        borderLayer.lineWidth = borderWidth
+        borderLayer.frame = bounds
+        layer.addSublayer(borderLayer)
+    }
+}
+

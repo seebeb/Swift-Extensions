@@ -9,35 +9,133 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 enum PanDirection {
-    case Vertical
-    case Horizontal
+    case left
+    case leftEdge
+    case right
+    case rightEdge
+    case up
+    case down
+    case vertical
+    case horizontal
+    case none
 }
 
 class PanDirectionGestureRecognizer: UIPanGestureRecognizer {
     
-    let direction : PanDirection
+    let direction: PanDirection
     
     init(direction: PanDirection, target: AnyObject, action: Selector) {
         self.direction = direction
         super.init(target: target, action: action)
     }
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesMoved(touches, withEvent: event)
-        if state == .Began {
-            let velocity = velocityInView(self.view!)
-            switch direction {
-//                // disable local gesture when locationInView < 44 to ensure UIScreenEdgePanGestureRecognizer is only avalible
-//                // The comfortable minimum size of tappable UI elements is 44 x 44 points.
-//            case .Horizontal where fabs(velocity.y) > fabs(velocity.x) || locationInView(self.view).x <= 44:
-            case .Horizontal where fabs(velocity.y) > fabs(velocity.x):
-                state = .Cancelled
-            case .Vertical where fabs(velocity.x) > fabs(velocity.y):
-                state = .Cancelled
-            default:
-                break
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesMoved(touches, with: event)
+        
+        guard state == .began else { return }
+        
+        let velocity = self.velocity(in: view)
+        let isHorizontal = fabs(velocity.x) > fabs(velocity.y)
+        let isVertical = fabs(velocity.y) > fabs(velocity.x)
+        
+        switch direction {
+            
+        case .left where velocity.x > 0 || isVertical:
+            state = .cancelled
+        case .right where velocity.x < 0 || isVertical:
+            state = .cancelled
+        case .up where velocity.y > 0 || isHorizontal:
+            state = .cancelled
+        case .down where velocity.y < 0 || isHorizontal:
+            state = .cancelled
+            
+        case .horizontal where isVertical:
+            state = .cancelled
+        case .vertical where isHorizontal:
+            state = .cancelled
+            
+        default:
+            break
+        }
+    }
+    
+}
+
+class UIPanGestureRecognizerWithDirection: UIPanGestureRecognizer {
+    
+    var direction: PanDirection
+    
+    override init(target: AnyObject?, action: Selector?) {
+        direction = .none
+        super.init(target: target, action: action)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesMoved(touches, with: event)
+        
+        guard state == .began else { return }
+        
+        let velocity = self.velocity(in: view)
+        let isHorizontal = fabs(velocity.x) > fabs(velocity.y)
+        
+        if isHorizontal {
+            if velocity.x > 0 {
+                direction = .right
+            } else {
+                direction = .left
+            }
+        } else {
+            if velocity.y > 0 {
+                direction = .down
+            } else {
+                direction = .up
             }
         }
-
     }
-  
+}
+
+class UIPanGestureRecognizerWithEdgeDirection: UIPanGestureRecognizer {
+    
+    var direction: PanDirection
+    
+    private let edgeOffset: CGFloat = 44.0
+    
+    override init(target: AnyObject?, action: Selector?) {
+        direction = .none
+        super.init(target: target, action: action)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesMoved(touches, with: event)
+        
+        guard state == .began else { return }
+        
+        let velocity = self.velocity(in: view)
+        let locationX = location(in: view).x
+        let isHorizontal = fabs(velocity.x) > fabs(velocity.y)
+        
+        print(velocity)
+        
+        if isHorizontal {
+            if velocity.x > 0 {
+                if locationX < edgeOffset {
+                    direction = .leftEdge
+                } else {
+                    direction = .right
+                }
+            } else {
+                if locationX > UIScreen.width - edgeOffset {
+                    direction = .rightEdge
+                } else {
+                    direction = .left
+                }
+            }
+        } else {
+            if velocity.y > 0 {
+                direction = .down
+            } else {
+                direction = .up
+            }
+        }
+    }
 }
