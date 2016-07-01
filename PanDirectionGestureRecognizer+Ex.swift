@@ -113,9 +113,7 @@ class UIPanGestureRecognizerWithEdgeDirection: UIPanGestureRecognizer {
         let velocity = self.velocity(in: view)
         let locationX = location(in: view).x
         let isHorizontal = fabs(velocity.x) > fabs(velocity.y)
-        
-        print(velocity)
-        
+                
         if isHorizontal {
             if velocity.x > 0 {
                 if locationX < edgeOffset {

@@ -16,4 +16,13 @@ extension UIWindow {
     var isKeyboardWindow: Bool {
         return String(classForCoder) == "UIRemoteKeyboardWindow"
     }
+    
+    class var isTopWindowKeyboard: Bool {
+        return UIApplication.shared().windows.last?.isKeyboardWindow ?? false
+    }
+    
+    class var keyboardWindow: (Bool, UIWindow?) {
+        return (isTopWindowKeyboard, UIApplication.shared().windows.last)
+    }
+    
 }
