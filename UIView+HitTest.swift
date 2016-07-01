@@ -14,9 +14,11 @@ import UIKit
 
 extension UIView {
     
-    func overlapHitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    func overlapHitTest(_ point: CGPoint, with event: UIEvent?, invisibleOn: Bool = false) -> UIView? {
         // 1
-        if !isUserInteractionEnabled || isHidden || alpha == 0 {
+        let invisible = (isHidden || alpha == 0) && invisibleOn
+        
+        if !isUserInteractionEnabled || invisible {
             return nil
         }
         //2

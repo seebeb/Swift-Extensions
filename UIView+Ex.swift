@@ -88,16 +88,14 @@ extension UIView {
 
 extension UIView {
     
-    func simulateHighlight() {
+    func simulateHighlight(withMinAlpha alpha: CGFloat = 0.5) {
         UIView.animate(withDuration: 0.1, animations: { [weak self] in
-            self?.alpha = 0.5
-            
+            self?.alpha = alpha
             }, completion: { (_) -> Void in
                 UIView.animate(withDuration: 0.1, delay: 0.1, options: [], animations: { [weak self] in
                     self?.alpha = 1
                     }, completion: nil)
         })
-        
     }
 }
 

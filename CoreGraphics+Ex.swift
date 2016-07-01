@@ -53,6 +53,32 @@ extension CGRect {
     }
 }
 
+extension CGPoint {
+    
+    func plusX(_ x: CGFloat) -> CGPoint {
+        var point = self
+        point.x += x
+        return point
+    }
+    
+    func plusY(_ y: CGFloat) -> CGPoint {
+        var point = self
+        point.y += y
+        return point
+    }
+    
+    func plusPoint(_ point: CGPoint) -> CGPoint {
+        var new = self
+        new.x += point.x
+        new.y += point.y
+        return new
+    }
+    
+    func plusXY(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
+        return plusPoint(CGPoint(x: x, y: y))
+    }
+}
+
 extension CGSize {
     
     var Max: CGSize {
