@@ -8,7 +8,6 @@
 import UIKit
 
 
-
 extension UIButton {
     
     override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -26,11 +25,11 @@ extension UIButton {
 
 extension UIButton {
     
-    func hideAndDisableButton(_ hidden: Bool = false, duration: TimeInterval = 0.3, animate: Bool) {
+    func hideAndDisableButton(_ hidden: Bool = false, duration: TimeInterval = 0.3, animated: Bool) {
         
         isEnabled = !hidden
         
-        if !animate {
+        if !animated {
             isHidden = hidden
         } else {
             UIView.animate(withDuration: duration, animations: {

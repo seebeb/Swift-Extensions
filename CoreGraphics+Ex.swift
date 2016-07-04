@@ -51,6 +51,18 @@ extension CGRect {
         let point = CGPoint(x: x, y: y)
         return plusPoint(point)
     }
+    
+    func plusWidth(_ width: CGFloat) -> CGRect {
+        var rect = self
+        rect.size.width += width
+        return rect
+    }
+    
+    func plusHeight(_ height: CGFloat) -> CGRect {
+        var rect = self
+        rect.size.height += height
+        return rect
+    }
 }
 
 extension CGPoint {

@@ -8,13 +8,17 @@
 import Foundation
 
 
-public typealias CompletionHandler = () -> ()
+public typealias Closure = () -> ()
 
 
 class Utils {
     
     class var documentPath: String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+    }
+    
+    class func documentPathWithFile(_ name: String) -> String {
+        return (documentPath as NSString).appendingPathComponent(name)
     }
     
     class func appGroupDocumentPath(_ appGroupId: String) -> String? {

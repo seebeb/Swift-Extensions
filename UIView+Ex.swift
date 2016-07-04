@@ -86,6 +86,48 @@ extension UIView {
     }
 }
 
+
+// MARK: -
+
+extension UIView {
+    
+    func plusOriginX(_ delta: CGFloat) -> UIView {
+        var frame = self.frame
+        frame.origin.x += delta
+        self.frame = frame
+        return self
+    }
+    
+    func plusOriginY(_ delta: CGFloat) -> UIView {
+        var frame = self.frame
+        frame.origin.y += delta
+        self.frame = frame
+        return self
+    }
+    
+    func plusPoint(_ point: CGPoint) -> UIView {
+        frame.origin.x += point.x
+        frame.origin.y += point.y
+        return self
+    }
+    
+    func plusOriginXY(x: CGFloat, y: CGFloat) -> UIView {
+        let point = CGPoint(x: x, y: y)
+        _ = plusPoint(point)
+        return self
+    }
+    
+    func plusWidth(_ width: CGFloat) -> UIView {
+        frame.size.width += width
+        return self
+    }
+    
+    func plusHeight(_ height: CGFloat) -> UIView {
+        frame.size.height += height
+        return self
+    }
+}
+
 extension UIView {
     
     func simulateHighlight(withMinAlpha alpha: CGFloat = 0.5) {
@@ -247,6 +289,17 @@ extension UIView {
         borderLayer.lineWidth = borderWidth
         borderLayer.frame = bounds
         layer.addSublayer(borderLayer)
+    }
+}
+
+// MARK: - 
+
+extension UIView {
+    
+    func changeAlphaAnimated(_ toAlpha: CGFloat = 0, duration: TimeInterval = 0.3, closure: ((Bool) -> ())? = nil) {
+        UIView.animate(withDuration: duration, animations: { [weak self] in
+            self?.alpha = toAlpha
+            }, completion: closure)
     }
 }
 

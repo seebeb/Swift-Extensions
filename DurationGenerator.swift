@@ -13,17 +13,17 @@ class DurationGenerator {
     var isStopped = false
 
     private var times: Int
-    private var todoHandler: CompletionHandler
+    private var todoHandler: Closure
     
-    private var completionhandler: CompletionHandler?
+    private var completionhandler: Closure?
     private var StopCondition: (() -> Bool)?
     
-    init(todo: CompletionHandler, times: Int) {
+    init(todo: Closure, times: Int) {
         self.todoHandler = todo
         self.times = times
     }
 
-    convenience init(duration: TimeInterval, times: Int, todo: CompletionHandler, completion: CompletionHandler? = nil) {
+    convenience init(duration: TimeInterval, times: Int, todo: Closure, completion: Closure? = nil) {
         self.init(todo: todo, times: times)
         
         Timer.scheduledTimer(timeInterval: duration / TimeInterval(times), target: self, selector: #selector(run(_:)), userInfo: nil, repeats: true)
@@ -31,7 +31,7 @@ class DurationGenerator {
         completionhandler = completion
     }
     
-    convenience init(interval: TimeInterval, times: Int, todo: CompletionHandler, completion: CompletionHandler? = nil) {
+    convenience init(interval: TimeInterval, times: Int, todo: Closure, completion: Closure? = nil) {
         self.init(todo: todo, times: times)
         
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(run(_:)), userInfo: nil, repeats: true)
