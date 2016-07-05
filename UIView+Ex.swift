@@ -1,5 +1,5 @@
 //
-//  UIView+Extension.swift
+//  UIView+Ex.swift
 //
 //  Created by Augus on 9/4/15.
 //  Copyright © 2015 iAugus. All rights reserved.
@@ -138,6 +138,12 @@ extension UIView {
                     self?.alpha = 1
                     }, completion: nil)
         })
+    }
+    
+    func morphingView(_ duration: TimeInterval = 0.3, toAlpha alpha: CGFloat) {
+        UIView.animate(withDuration: duration) {
+            self.alpha = alpha
+        }
     }
 }
 
