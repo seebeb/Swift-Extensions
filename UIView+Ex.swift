@@ -157,7 +157,7 @@ extension UIView {
 
 // MARK: - rotation animation
 
-extension UIView {
+extension UIView: CAAnimationDelegate {
     
     /// Angle: 𝞹
     ///

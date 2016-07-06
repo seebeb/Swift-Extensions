@@ -18,8 +18,8 @@ extension UIApplication {
         
         let _key = (key == nil) ? "ausHasLaunchedHostAppOnce" : key!
         
-        if !UserDefaults.standard().bool(forKey: _key) {
-            UserDefaults.standard().set(true, forKey: _key)
+        if !UserDefaults.standard.bool(forKey: _key) {
+            UserDefaults.standard.set(true, forKey: _key)
             
             completion()
         }

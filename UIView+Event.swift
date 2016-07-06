@@ -60,11 +60,11 @@ extension UIView {
                     let movedDistance: Int = Int(currentFingerDistance - previousFingerDistance)
                     if currentFingerDistance > previousFingerDistance {
                         print("zoom in")
-                        NotificationCenter.default().post(name: NSNotification.Name.NOTIFICATION_ZOOM_IN, object: movedDistance)
+                        NotificationCenter.default.post(name: NSNotification.Name.NOTIFICATION_ZOOM_IN, object: movedDistance)
                     }
                     else {
                         print("zoom out")
-                        NotificationCenter.default().post(name: NSNotification.Name.NOTIFICATION_ZOOM_OUT, object: movedDistance)
+                        NotificationCenter.default.post(name: NSNotification.Name.NOTIFICATION_ZOOM_OUT, object: movedDistance)
                     }
                 }
             }
@@ -84,11 +84,11 @@ extension UIView {
                 // It appears to be a swipe.
                 if _startTouchPosition1.x < currentTouchPosition.x {
                     NSLog("swipe right")
-                    NotificationCenter.default().post(name: NSNotification.Name.NOTIFICATION_SWIPE_RIGHT, object: self)
+                    NotificationCenter.default.post(name: NSNotification.Name.NOTIFICATION_SWIPE_RIGHT, object: self)
                 }
                 else {
                     NSLog("swipe left")
-                    NotificationCenter.default().post(name: NSNotification.Name.NOTIFICATION_SWIPE_LEFT
+                    NotificationCenter.default.post(name: NSNotification.Name.NOTIFICATION_SWIPE_LEFT
                         , object: self)
                 }
             }
@@ -99,7 +99,7 @@ extension UIView {
                         "touch" : touch
                     ]
                     
-                    NotificationCenter.default().post(name: NSNotification.Name.NOTIFICATION_TAP, object: self, userInfo: uInfo)
+                    NotificationCenter.default.post(name: NSNotification.Name.NOTIFICATION_TAP, object: self, userInfo: uInfo)
                 }
                 /* else if (touch.tapCount > 1) {
                  handle multi-touch

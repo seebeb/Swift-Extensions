@@ -22,8 +22,8 @@ class Utils {
     }
     
     class func appGroupDocumentPath(_ appGroupId: String) -> String? {
-        let url = FileManager.default().containerURLForSecurityApplicationGroupIdentifier(appGroupId)
-        let path = url?.absoluteString?.replacingOccurrences(of: "file:", with: "", options: .literalSearch, range: nil)
+        let url = FileManager.default.containerURLForSecurityApplicationGroupIdentifier(appGroupId)
+        let path = url?.absoluteString?.replacingOccurrences(of: "file:", with: "", options: .literal, range: nil)
         return path
     }
     

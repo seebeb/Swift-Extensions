@@ -30,13 +30,13 @@ extension UIViewController {
     */
     func topBarHeightWhenTemporaryDisappear() -> CGFloat {
         let key = "kAUSTopBarHeightWhenTemporaryDisappear"
-        if UserDefaults.standard().value(forKey: key) == nil {
-            UserDefaults.standard().setValue(topBarHeight(), forKey: key)
+        if UserDefaults.standard.value(forKey: key) == nil {
+            UserDefaults.standard.setValue(topBarHeight(), forKey: key)
         }
-        else if topBarHeight() != 0 && topBarHeight() != UserDefaults.standard().value(forKey: key) as! CGFloat {
-            UserDefaults.standard().setValue(topBarHeight(), forKey: key)
+        else if topBarHeight() != 0 && topBarHeight() != UserDefaults.standard.value(forKey: key) as! CGFloat {
+            UserDefaults.standard.setValue(topBarHeight(), forKey: key)
         }
-        return UserDefaults.standard().value(forKey: key) as! CGFloat
+        return UserDefaults.standard.value(forKey: key) as! CGFloat
     }
     
 }
