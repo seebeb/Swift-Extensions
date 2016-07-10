@@ -302,6 +302,12 @@ extension UIView {
 
 extension UIView {
     
+    
+    /// Change view's alpha animated
+    ///
+    /// - parameter toAlpha:  change to alpha, default is 0
+    /// - parameter duration: change duration, default is 0.3s
+    /// - parameter closure:  closure, default is nil
     func changeAlphaAnimated(_ toAlpha: CGFloat = 0, duration: TimeInterval = 0.3, closure: ((Bool) -> ())? = nil) {
         UIView.animate(withDuration: duration, animations: { [weak self] in
             self?.alpha = toAlpha

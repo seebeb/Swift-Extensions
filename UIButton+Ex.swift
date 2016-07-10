@@ -25,18 +25,34 @@ extension UIButton {
 
 extension UIButton {
     
-    func hideAndDisableButton(_ hidden: Bool = false, duration: TimeInterval = 0.3, animated: Bool) {
+    // Do NOT change these default values, many of my projects are using this function.
+    func hideAndDisableButton(_ hidden: Bool = true, duration: TimeInterval = 0.3, delay: TimeInterval = 0, animated: Bool = false, closure: Closure? = nil) {
         
         isEnabled = !hidden
         
         if !animated {
-            isHidden = hidden
+            let `do` = {
+                self.isHidden = hidden
+                closure?()
+            }
+            
+            if delay == 0 {
+                `do`()
+            } else {
+                executeAfterDelay(delay, closure: { 
+                    `do`()
+                })
+            }
+            
         } else {
-            UIView.animate(withDuration: duration, animations: {
-                self.alpha = !hidden ? 0 : 1
-                }, completion: { (_) in
-                    self.isHidden = hidden
-                    self.alpha = 1
+            UIView.animate(withDuration: duration, delay: delay, options: [.curveEaseInOut], animations: {
+                self.alpha = hidden ? 0 : 1
+                }, completion: { (finished) in
+                    if finished {
+                        self.isHidden = hidden
+                        self.alpha = 1
+                        closure?()                        
+                    }
             })
         }
     }

@@ -69,11 +69,11 @@ extension UIViewController {
 // MARK: - dismiss view controller
 extension UIViewController {
 
-    func dismissViewController() {
+    func dismissAnimated() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func dismissViewControllerWithoutAnimation() {
+    func dismissWithoutAnimation() {
         self.dismiss(animated: false, completion: nil)
     }
     
