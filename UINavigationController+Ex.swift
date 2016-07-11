@@ -27,8 +27,8 @@ extension UINavigationController {
         navigationBar.insertSubview(visualEffectView, belowSubview: navigationBar)
         
         visualEffectView.snp.makeConstraints { (make) in
-            _ = make.top.equalTo(view)
-            _ = make.left.bottom.right.equalTo(navigationBar)
+            make.top.equalTo(view)
+            make.left.bottom.right.equalTo(navigationBar)
         }
     }
     
@@ -43,8 +43,8 @@ extension UINavigationController {
         navigationBar.insertSubview(visualEffectView, aboveSubview: navigationBar)
         
         visualEffectView.snp.makeConstraints { (make) in
-            _ = make.top.equalTo(navigationBar).offset(-22)
-            _ = make.left.bottom.right.equalTo(navigationBar)
+            make.top.equalTo(navigationBar).offset(-22)
+            make.left.bottom.right.equalTo(navigationBar)
         }
     }
 }
