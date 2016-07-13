@@ -31,18 +31,10 @@ extension UIButton {
         isEnabled = !hidden
         
         if !animated {
-            let `do` = {
+            executeAfterDelay(delay, closure: {
                 self.isHidden = hidden
                 closure?()
-            }
-            
-            if delay == 0 {
-                `do`()
-            } else {
-                executeAfterDelay(delay, closure: { 
-                    `do`()
-                })
-            }
+            })
             
         } else {
             UIView.animate(withDuration: duration, delay: delay, options: [.curveEaseInOut], animations: {
