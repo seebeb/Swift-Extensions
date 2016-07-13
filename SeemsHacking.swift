@@ -27,6 +27,10 @@ func onlyExecuteOnceIfEventsTooClose(_ equal: Bool = false, interval: TimeInterv
 }
 
 
+func resetLatestSystemUpTimeExceptTheFirstTimeFunction() {
+    latestSystemUpTimeExceptTheFirstTime = nil
+}
+
 private var latestSystemUpTimeExceptTheFirstTime: TimeInterval!
 
 /// Executing at the first time anyway
