@@ -10,6 +10,10 @@ import Foundation
 
 public typealias Closure = () -> ()
 
+public func NSLocalizedString(_ key: String) -> String {
+    return NSLocalizedString(key, comment: "")
+}
+
 
 class Utils {
     
