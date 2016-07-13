@@ -91,6 +91,7 @@ extension UIView {
 
 extension UIView {
     
+    @discardableResult
     func plusOriginX(_ delta: CGFloat) -> UIView {
         var frame = self.frame
         frame.origin.x += delta
@@ -98,6 +99,7 @@ extension UIView {
         return self
     }
     
+    @discardableResult
     func plusOriginY(_ delta: CGFloat) -> UIView {
         var frame = self.frame
         frame.origin.y += delta
@@ -105,23 +107,27 @@ extension UIView {
         return self
     }
     
+    @discardableResult
     func plusPoint(_ point: CGPoint) -> UIView {
         frame.origin.x += point.x
         frame.origin.y += point.y
         return self
     }
     
+    @discardableResult
     func plusOriginXY(x: CGFloat, y: CGFloat) -> UIView {
         let point = CGPoint(x: x, y: y)
-        _ = plusPoint(point)
+        plusPoint(point)
         return self
     }
     
+    @discardableResult
     func plusWidth(_ width: CGFloat) -> UIView {
         frame.size.width += width
         return self
     }
     
+    @discardableResult
     func plusHeight(_ height: CGFloat) -> UIView {
         frame.size.height += height
         return self
@@ -249,7 +255,7 @@ extension UIView {
      - parameter radius:  Radius to round to
      */
     func round(corners: UIRectCorner, radius: CGFloat) {
-        _ = _round(corners, radius: radius)
+        _round(corners, radius: radius)
     }
     
     /**
@@ -279,6 +285,7 @@ extension UIView {
         layer.borderColor = borderColor.cgColor
     }
     
+    @discardableResult
     private func _round(_ corners: UIRectCorner, radius: CGFloat) -> CAShapeLayer {
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()

@@ -10,11 +10,11 @@ import UIKit
 // MARK: - top bar (status bar + navigation bar)
 extension UIViewController {
     
-    func statusBarFrame() -> CGRect {
+    var statusBarFrame: CGRect {
         return view.window?.convert(UIApplication.shared().statusBarFrame, to: view) ?? CGRect.zero
     }
     
-    func topBarHeight() -> CGFloat {
+    var topBarHeight: CGFloat {
         var navBarHeight: CGFloat {
             guard let bar = navigationController?.navigationBar else { return 0 }
             return view.window?.convert(bar.frame, to: view).height ?? 0
@@ -29,12 +29,12 @@ extension UIViewController {
      - Why not set a constant (64.0 or 32.0)? Apple may change the constant in some device in the future.
     */
     func topBarHeightWhenTemporaryDisappear() -> CGFloat {
-        let key = "kAUSTopBarHeightWhenTemporaryDisappear"
+        let key = "kASTopBarHeightWhenTemporaryDisappear"
         if UserDefaults.standard.value(forKey: key) == nil {
-            UserDefaults.standard.setValue(topBarHeight(), forKey: key)
+            UserDefaults.standard.setValue(topBarHeight, forKey: key)
         }
-        else if topBarHeight() != 0 && topBarHeight() != UserDefaults.standard.value(forKey: key) as! CGFloat {
-            UserDefaults.standard.setValue(topBarHeight(), forKey: key)
+        else if topBarHeight != 0 && topBarHeight != UserDefaults.standard.value(forKey: key) as! CGFloat {
+            UserDefaults.standard.setValue(topBarHeight, forKey: key)
         }
         return UserDefaults.standard.value(forKey: key) as! CGFloat
     }

@@ -14,6 +14,13 @@ import UIKit
 
 extension UIView {
     
+    
+    ///
+    /// - parameter point:       point
+    /// - parameter event:       evet
+    /// - parameter invisibleOn: If you want hidden view can not be hit, set `invisibleOn` to true
+    ///
+    /// - returns: UIView
     func overlapHitTest(_ point: CGPoint, with event: UIEvent?, invisibleOn: Bool = false) -> UIView? {
         // 1
         let invisible = (isHidden || alpha == 0) && invisibleOn

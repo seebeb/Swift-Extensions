@@ -18,11 +18,13 @@ class DurationGenerator {
     private var completionhandler: Closure?
     private var StopCondition: (() -> Bool)?
     
+    @discardableResult
     init(todo: Closure, times: Int) {
         self.todoHandler = todo
         self.times = times
     }
 
+    @discardableResult
     convenience init(duration: TimeInterval, times: Int, todo: Closure, completion: Closure? = nil) {
         self.init(todo: todo, times: times)
         
@@ -31,6 +33,7 @@ class DurationGenerator {
         completionhandler = completion
     }
     
+    @discardableResult
     convenience init(interval: TimeInterval, times: Int, todo: Closure, completion: Closure? = nil) {
         self.init(todo: todo, times: times)
         
