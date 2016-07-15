@@ -26,3 +26,29 @@ extension UIApplication {
     }
     
 }
+
+extension UIApplication {
+    
+    @objc private func simulateMemoryWarning() {
+        UIControl().sendAction(Selector(("_performMemoryWarning")), to: UIApplication.shared(), for: nil)
+    }
+    
+    func simulatingMemoryWarningInDebugging() {
+        
+        #if DEBUG
+        
+        guard let vc = UIApplication.topMostViewController else { return }
+        
+        let button = UIButton()
+        button.setTitle("Simulate Memory Warning", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+        button.addTarget(self, action: #selector(simulateMemoryWarning), for: .touchUpInside)
+        
+        vc.view.addSubview(button)
+        button.snp.makeConstraints { (make) in
+            make.right.bottom.equalTo(-8)
+        }
+        
+        #endif
+    }
+}

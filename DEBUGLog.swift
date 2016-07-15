@@ -17,12 +17,19 @@ import Foundation
         NSLog("[\(filename.lastPathComponent):\(line)] \(function) - \(message)")
     }
     
+    func DEBUGPrint(_ any: Any?) {
+        print(any)
+    }
+    
 #else
     
     func DEBUGLog(_ message: String?, filename: String = #file, function: String = #function, line: Int = #line) {
     }
     
     func DEBUGLog(_ message: AnyObject?, filename: NSString = #file, function: String = #function, line: Int = #line) {
+    }
+    
+    func DEBUGPrint(_ any: Any?) {
     }
     
 #endif

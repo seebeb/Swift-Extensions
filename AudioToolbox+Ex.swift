@@ -8,8 +8,6 @@
 
 import Foundation
 import AudioToolbox
-import AVFoundation
-import MediaPlayer
 
 class AudioToolBox: NSObject {
     
