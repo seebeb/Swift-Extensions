@@ -21,6 +21,10 @@ import Foundation
         print(any)
     }
     
+    func DEBUGPrint(_ any: Any?, prefix: String = "", suffix: String = "") {
+        print(prefix + "\(any)" + suffix)
+    }
+    
 #else
     
     func DEBUGLog(_ message: String?, filename: String = #file, function: String = #function, line: Int = #line) {
@@ -30,6 +34,9 @@ import Foundation
     }
     
     func DEBUGPrint(_ any: Any?) {
+    }
+    
+    func DEBUGPrint(_ any: Any?, prefix: String = "", suffix: String = "") {
     }
     
 #endif
