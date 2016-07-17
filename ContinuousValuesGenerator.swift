@@ -8,6 +8,50 @@
 import Foundation
 
 
+class ContinuousExecutor<T: Arithmetic> {
+
+    private var currentValue: T
+    
+    @discardableResult
+    init(startValue: T, endValue: T, offsetPerTime: T, generatedValue: ((T) -> ()), completion: Closure? = nil) {
+        
+        currentValue = startValue
+        
+        let totalOffset = (endValue - startValue).double
+        
+        guard abs(totalOffset) > abs(offsetPerTime.double) else {
+            generatedValue(endValue)
+            completion?()
+            return
+        }
+        
+        let realOffsetPerTime = T(totalOffset > 0 ? abs(offsetPerTime.double) : -abs(offsetPerTime.double))
+        
+        run(start: startValue, end: endValue, offset: realOffsetPerTime, generated: generatedValue, completion: completion)
+    }
+    
+    // recursion
+    private func run(start: T, end: T, offset: T, generated: ((T) -> ()), completion: Closure? = nil) {
+                
+        guard (offset.double > 0) ? currentValue < end : currentValue > end else {
+            
+            if currentValue != end {
+                generated(end)
+            }
+            
+            completion?()
+            return
+        }
+        
+        currentValue += offset
+        
+        generated(currentValue)
+        
+        run(start: currentValue, end: end, offset: offset, generated: generated, completion: completion)
+    }
+}
+
+
 class ContinuousValuesGenerator<T: Arithmetic> {
     
     private var times: Int
