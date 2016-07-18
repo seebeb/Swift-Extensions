@@ -8,30 +8,6 @@
 import Foundation
 
 
-class V: UIViewController {
-    
-
-    @objc func changeBrightnessSmoothlyTo(_ toValue: CGFloat) {
-        let fromValue = UIScreen.main().brightness
-        
-        ContinuousValuesGeneratorWithDuration(0.3, startValue: fromValue, endValue: toValue, offsetPerTime: 0.01, generatedValue: {
-            UIScreen.main().brightness = $0
-            }, completion: nil)
-        
-        UIView.animate(withDuration: <#T##TimeInterval#>, animations: <#T##() -> Void#>)
-    }
-    
-    func changeBrightnessSmoothly(withDuration duration: TimeInterval, toValue: CGFloat) {
-        let fromValue = UIScreen.main().brightness
-        
-        ContinuousValuesGeneratorWithDuration(duration, startValue: fromValue, endValue: toValue, offsetPerTime: 0.01, generatedValue: {
-            UIScreen.main().brightness = $0
-            }, completion: nil)
-    }
-
-}
-
-
 class ContinuousValuesGenerator<T: Arithmetic> {
 
     private var currentValue: T
