@@ -8,10 +8,41 @@
 import Foundation
 
 
-class ContinuousExecutor<T: Arithmetic> {
+class V: UIViewController {
+    
+
+    @objc func changeBrightnessSmoothlyTo(_ toValue: CGFloat) {
+        let fromValue = UIScreen.main().brightness
+        
+        ContinuousValuesGeneratorWithDuration(0.3, startValue: fromValue, endValue: toValue, offsetPerTime: 0.01, generatedValue: {
+            UIScreen.main().brightness = $0
+            }, completion: nil)
+        
+        UIView.animate(withDuration: <#T##TimeInterval#>, animations: <#T##() -> Void#>)
+    }
+    
+    func changeBrightnessSmoothly(withDuration duration: TimeInterval, toValue: CGFloat) {
+        let fromValue = UIScreen.main().brightness
+        
+        ContinuousValuesGeneratorWithDuration(duration, startValue: fromValue, endValue: toValue, offsetPerTime: 0.01, generatedValue: {
+            UIScreen.main().brightness = $0
+            }, completion: nil)
+    }
+
+}
+
+
+class ContinuousValuesGenerator<T: Arithmetic> {
 
     private var currentValue: T
     
+    /// Animated Value Generator
+    ///
+    /// - parameter startValue:     start value
+    /// - parameter endValue:       end value
+    /// - parameter offsetPerTime:  offset per time. Positive / Negative number makes no matter !!
+    /// - parameter generatedValue: new generated nember per time
+    /// - parameter completion:     completion closure
     @discardableResult
     init(startValue: T, endValue: T, offsetPerTime: T, generatedValue: ((T) -> ()), completion: Closure? = nil) {
         
@@ -35,9 +66,7 @@ class ContinuousExecutor<T: Arithmetic> {
                 
         guard (offset.double > 0) ? currentValue < end : currentValue > end else {
             
-            if currentValue != end {
-                generated(end)
-            }
+            if currentValue != end { generated(end) }
             
             completion?()
             return
@@ -52,7 +81,7 @@ class ContinuousExecutor<T: Arithmetic> {
 }
 
 
-class ContinuousValuesGenerator<T: Arithmetic> {
+class ContinuousValuesGeneratorWithDuration<T: Arithmetic> {
     
     private var times: Int
     private var startValue: T
@@ -71,7 +100,7 @@ class ContinuousValuesGenerator<T: Arithmetic> {
     /// - parameter generatedValue: new generated nember per time
     /// - parameter completion:     completion closure
     @discardableResult
-    init(duration: TimeInterval, startValue: T, endValue: T, offsetPerTime: T, generatedValue: ((T) -> ()), completion: Closure? = nil) {
+    init(_ duration: TimeInterval, startValue: T, endValue: T, offsetPerTime: T, generatedValue: ((T) -> ()), completion: Closure? = nil) {
         
         let times = (endValue - startValue) / offsetPerTime
         self.times = abs(times.int)
