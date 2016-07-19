@@ -47,11 +47,11 @@ extension UIView {
             }
         }
         
-        guard let previousTouchPosition1 = previousTouchPosition1, previousTouchPosition2 = previousTouchPosition2 else { return }
+        guard let previousTouchPosition1 = previousTouchPosition1, let previousTouchPosition2 = previousTouchPosition2 else { return }
         
         if touch.phase == .moved {
             if allTouches.count > 1 {
-                guard let currentTouchPosition1 = allTouches.object(0)?.location(in: self), currentTouchPosition2 = allTouches.object(1)?.location(in: self) else { return }
+                guard let currentTouchPosition1 = allTouches.object(0)?.location(in: self), let currentTouchPosition2 = allTouches.object(1)?.location(in: self) else { return }
                 
                 let currentFingerDistance = CGDistance(currentTouchPosition1, currentTouchPosition2)
                 let previousFingerDistance = CGDistance(previousTouchPosition1, previousTouchPosition2)

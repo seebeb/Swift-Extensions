@@ -13,7 +13,7 @@ import Foundation
 private var latestSystemUpTime = ProcessInfo.processInfo.systemUptime
 
 /// Not executing at the first time anyway
-func onlyExecuteOnceIfEventsTooClose(_ equal: Bool = false, interval: TimeInterval = 0.1, closure: (() -> ())) {
+func onlyExecuteOnceIfEventsTooClose(_ equal: Bool = false, interval: TimeInterval = 0.1, closure: Closure) {
     
     let systemUptime = ProcessInfo.processInfo.systemUptime
     
@@ -34,7 +34,7 @@ func resetLatestSystemUpTimeExceptTheFirstTimeFunction() {
 private var latestSystemUpTimeExceptTheFirstTime: TimeInterval!
 
 /// Executing at the first time anyway
-func onlyExecuteOnceIfEventsTooCloseExceptTheFirstTime(_ equal: Bool = false, interval: TimeInterval = 0.1, closure: (() -> ())) {
+func onlyExecuteOnceIfEventsTooCloseExceptTheFirstTime(_ equal: Bool = false, interval: TimeInterval = 0.1, closure: Closure) {
     
     let systemUptime = ProcessInfo.processInfo.systemUptime
     
