@@ -11,7 +11,9 @@ import UIKit
 extension UIButton {
     
     override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-
+        
+        DEBUGLog("override UIButton's hitTest && change hitTest frame")
+        
         let minimalWidthAndHeight: CGFloat = 60
         
         let buttonSize = frame.size
