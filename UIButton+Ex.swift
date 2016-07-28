@@ -10,23 +10,6 @@ import UIKit
 
 extension UIButton {
     
-    override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        
-        DEBUGLog("override UIButton's hitTest && change hitTest frame")
-        
-        let minimalWidthAndHeight: CGFloat = 60
-        
-        let buttonSize = frame.size
-        let widthToAdd = (minimalWidthAndHeight - buttonSize.width > 0) ? minimalWidthAndHeight - buttonSize.width : 0
-        let heightToAdd = (minimalWidthAndHeight - buttonSize.height > 0) ? minimalWidthAndHeight - buttonSize.height : 0
-        let largerFrame = CGRect(x: 0-(widthToAdd / 2), y: 0-(heightToAdd / 2), width: buttonSize.width + widthToAdd, height: buttonSize.height + heightToAdd)
-        return largerFrame.contains(point) ? self : nil
-    }
-    
-}
-
-extension UIButton {
-    
     // Do NOT change these default values, many of my projects are using this function.
     func hideAndDisableButton(_ hidden: Bool = true, duration: TimeInterval = 0.3, delay: TimeInterval = 0, animated: Bool = false, closure: Closure? = nil) {
         

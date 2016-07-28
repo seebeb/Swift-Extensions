@@ -21,7 +21,7 @@ class Utils {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
     }
     
-    class func documentPathWithFile(_ name: String) -> String {
+    class func documentPathForFile(_ name: String) -> String {
         return (documentPath as NSString).appendingPathComponent(name)
     }
     
@@ -29,6 +29,11 @@ class Utils {
         let url = FileManager.default.containerURLForSecurityApplicationGroupIdentifier(appGroupId)
         let path = url?.absoluteString?.replacingOccurrences(of: "file:", with: "", options: .literal, range: nil)
         return path
+    }
+    
+    
+    class func bundlePathForFile(_ name: String) -> String {
+        return (Bundle.main.bundlePath as NSString).appendingPathComponent(name)
     }
     
 }

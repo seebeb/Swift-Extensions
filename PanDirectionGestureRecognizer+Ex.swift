@@ -48,7 +48,7 @@ class PanDirectionGestureRecognizer: UIPanGestureRecognizer {
             state = .cancelled
         case .down where velocity.y < 0 || isHorizontal:
             state = .cancelled
-            
+
         case .horizontal where isVertical:
             state = .cancelled
         case .vertical where isHorizontal:
