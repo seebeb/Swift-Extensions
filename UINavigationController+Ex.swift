@@ -24,7 +24,10 @@ extension UINavigationController {
         completelyTransparentBar()
         
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        navigationBar.insertSubview(visualEffectView, belowSubview: navigationBar)
+        
+        // Do NOT insert to `navigationBar`, or the bar items will be covered.
+        // navigationBar.insertSubview(visualEffectView, belowSubview: navigationBar)
+        view.insertSubview(visualEffectView, belowSubview: navigationBar)
         
         visualEffectView.snp.makeConstraints { (make) in
             make.top.equalTo(view)
