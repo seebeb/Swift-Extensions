@@ -20,7 +20,7 @@ extension UIImageView {
         }
     }
     
-    func changeImageColor(tintColor: UIColor) {
+    func changeImageColor(_ tintColor: UIColor) {
         self.image = self.image?.withRenderingMode(.alwaysTemplate)
         self.tintColor = tintColor
     }
