@@ -15,19 +15,19 @@ class AlertController {
     
     typealias CompletionHandler = (Bool) -> ()
     
-    class func alert(_ title: String = "", message: String = "", actionTitle: String = ok, baseViewController: UIViewController? = nil, closure: CompletionHandler?) {
-        AlertController.alert(title, message: message, actionTitle: actionTitle, addCancelAction: false, baseViewController: baseViewController, closure: closure)
+    class func alert(_ title: String = "", message: String = "", actionTitle: String = ok, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+        AlertController.alert(title, message: message, actionTitle: actionTitle, addCancelAction: false, baseViewController: baseViewController, tintColor: tintColor, closure: closure)
     }
     
-    class func alertWithCancelAction(_ title: String = "", message: String = "", actionTitle: String = ok, baseViewController: UIViewController? = nil, closure: CompletionHandler?) {
-        AlertController.alert(title, message: message, actionTitle: actionTitle, addCancelAction: true, baseViewController: baseViewController, closure: closure)
+    class func alertWithCancelAction(_ title: String = "", message: String = "", actionTitle: String = ok, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+        AlertController.alert(title, message: message, actionTitle: actionTitle, addCancelAction: true, baseViewController: baseViewController, tintColor: tintColor, closure: closure)
     }
     
-    class func multiAlertsWithOptions(multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, closure: CompletionHandler?) {
-        alertWithOptions(multiItemsOfInfo, baseViewController: baseViewController, closure: closure)
+    class func multiAlertsWithOptions(multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+        alertWithOptions(multiItemsOfInfo, baseViewController: baseViewController, tintColor: tintColor, closure: closure)
     }
     
-    private class func alert(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, baseViewController: UIViewController? = nil, closure: CompletionHandler?) {
+    private class func alert(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         
         guard let baseVC = baseViewController ?? UIApplication.topMostViewController else { return }
         
@@ -47,10 +47,12 @@ class AlertController {
         
         alertController.addAction(okAction)
         
+        tintColor != nil ? alertController.view.tintColor = tintColor : ()
+        
         baseVC.present(alertController, animated: true, completion: nil)
     }
     
-    private class func alertWithOptions(_ multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, closure: CompletionHandler?) {
+    private class func alertWithOptions(_ multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         
         guard let baseVC = baseViewController ?? UIApplication.topMostViewController else { return }
         
@@ -78,6 +80,9 @@ class AlertController {
             guard tempInfoArray.count > 0 else { return }
             
             let alertController = UIAlertController(title: nil, message: tempInfoArray.first, preferredStyle: .alert)
+            
+            tintColor != nil ? alertController.view.tintColor = tintColor : ()
+
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)
             baseVC.present(alertController, animated: true, completion: nil)
