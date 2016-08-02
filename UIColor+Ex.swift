@@ -42,7 +42,7 @@ extension UIColor {
 
 extension UIColor {
     
-    private var components: UnsafePointer<CGFloat> { get { return cgColor.__unsafeComponents! } }
+    var components: UnsafePointer<CGFloat> { get { return cgColor.__unsafeComponents! } }
     
     var cRed: CGFloat { get { return components[0] } }
     

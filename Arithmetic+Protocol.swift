@@ -134,18 +134,18 @@ extension CGFloat: Arithmetic {
 
 // MARK: -
 
-func plus<T: Arithmetic>(a: T, b: T) -> T {
+func plus<T: Arithmetic>(_ a: T, _ b: T) -> T {
     return a + b
 }
 
-func minus<T: Arithmetic>(a: T, b: T) -> T {
+func minus<T: Arithmetic>(_ a: T, _ b: T) -> T {
     return a - b
 }
 
-func multiply<T: Arithmetic>(a: T, b: T) -> T {
+func multiply<T: Arithmetic>(_ a: T, _ b: T) -> T {
     return a * b
 }
 
-func divide<T: Arithmetic>(a: T, b: T) -> T {
+func divide<T: Arithmetic>(_ a: T, _ b: T) -> T {
     return a / b
 }

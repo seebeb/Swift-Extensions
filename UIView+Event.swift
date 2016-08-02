@@ -26,7 +26,7 @@ private let SWIPE_DRAG_HORIZ_MIN: CGFloat = 10
 
 extension UIView {
     
-    func detectTouchEvent(event: UIEvent?) {
+    func detectTouchEvent(_ event: UIEvent?) {
         
         guard let event = event else { return }
         

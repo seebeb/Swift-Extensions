@@ -10,7 +10,7 @@ import MapKit
 
 extension MKMapView {
     
-    func fixMKMapViewMemoryLeaking(closure: Closure?) {
+    func fixMKMapViewMemoryLeaking(_ closure: Closure?) {
         
         switch mapType {
             
