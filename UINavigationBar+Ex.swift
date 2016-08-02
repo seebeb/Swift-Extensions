@@ -17,9 +17,14 @@ extension UINavigationBar {
         get {
             return objc_getAssociatedObject(self, &xoAssociationKey) as? Bool ?? false
         }
-        set(newValue) {
+        set {
             objc_setAssociatedObject(self, &xoAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            navigationBarImageView?.isHidden = newValue
         }
+    }
+    
+    private var navigationBarImageView: UIImageView? {
+        return hairlineImageViewInNavigationBar(self)
     }
     
     private func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
