@@ -11,7 +11,7 @@ import UIKit
 extension UIView {
     
     var snapshot: UIImage? {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main().scale)
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
         drawHierarchy(in: bounds, afterScreenUpdates: true)
         let result = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

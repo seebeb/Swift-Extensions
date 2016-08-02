@@ -48,7 +48,7 @@ class UIPlaceholderTextView : UITextView {
         }
     }
     
-    override var attributedText : AttributedString? {
+    override var attributedText: NSAttributedString! {
         willSet(attributedText) {
             super.attributedText = attributedText
         }

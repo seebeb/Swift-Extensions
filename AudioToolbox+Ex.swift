@@ -24,7 +24,7 @@ class AudioToolBox: NSObject {
     }
     
     private func play(bundle: Bundle, name: String?, type: String?) {
-        guard let filePath = bundle.pathForResource(name, ofType: type) else { return }
+        guard let filePath = bundle.path(forResource: name, ofType: type) else { return }
         
         let url = URL(fileURLWithPath: filePath)
         

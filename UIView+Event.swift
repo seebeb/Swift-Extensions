@@ -30,7 +30,7 @@ extension UIView {
         
         guard let event = event else { return }
         
-        guard let allTouches = event.allTouches() else { return }
+        guard let allTouches = event.allTouches else { return }
         
         guard let touch = allTouches.first else { return }
         
