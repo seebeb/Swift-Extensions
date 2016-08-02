@@ -30,7 +30,7 @@ extension UIApplication {
 extension UIApplication {
     
     @objc private func simulateMemoryWarning() {
-        UIControl().sendAction(Selector(("_performMemoryWarning")), to: UIApplication.shared(), for: nil)
+        UIControl().sendAction(Selector(("_performMemoryWarning")), to: UIApplication.shared, for: nil)
     }
     
     func simulatingMemoryWarningInDebugging() {

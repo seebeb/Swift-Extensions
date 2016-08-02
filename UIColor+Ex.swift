@@ -42,19 +42,19 @@ extension UIColor {
 
 extension UIColor {
     
-    private var components: UnsafePointer<CGFloat> { get { return cgColor.components! } }
+    private var components: UnsafePointer<CGFloat> { get { return cgColor.__unsafeComponents! } }
     
-    var red: CGFloat { get { return components[0] } }
+    var cRed: CGFloat { get { return components[0] } }
     
-    var green: CGFloat { get { return components[1] } }
+    var cGreen: CGFloat { get { return components[1] } }
     
-    var blue: CGFloat { get { return components[2] } }
+    var cBlue: CGFloat { get { return components[2] } }
     
     func whiter(_ scale: CGFloat) -> UIColor {
         return UIColor(
-            red: red * scale,
-            green: green * scale,
-            blue: blue,
+            red: cRed * scale,
+            green: cGreen * scale,
+            blue: cBlue,
             alpha: 1.0
         )
     }

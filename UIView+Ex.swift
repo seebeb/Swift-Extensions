@@ -12,7 +12,7 @@ extension UIView {
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
-            parentResponder = parentResponder!.next()
+            parentResponder = parentResponder!.next
             if let viewController = parentResponder as? UIViewController {
                 return viewController
             }
@@ -115,7 +115,7 @@ extension UIView {
     }
     
     @discardableResult
-    func plusOriginXY(x: CGFloat, y: CGFloat) -> UIView {
+    func plusOriginXY(_ x: CGFloat, _ y: CGFloat) -> UIView {
         let point = CGPoint(x: x, y: y)
         plusPoint(point)
         return self
@@ -207,10 +207,10 @@ extension UIView: CAAnimationDelegate {
         
         if animated {
             UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { () -> Void in
-                self.transform = self.transform.rotate(angle)
+                self.transform = self.transform.rotated(by: angle)
                 }, completion: nil)
         } else {
-            self.transform = self.transform.rotate(angle)
+            self.transform = self.transform.rotated(by: angle)
         }
         
     }
@@ -254,7 +254,7 @@ extension UIView {
      - parameter corners: Corners to round
      - parameter radius:  Radius to round to
      */
-    func round(corners: UIRectCorner, radius: CGFloat) {
+    func round(_ corners: UIRectCorner, radius: CGFloat) {
         _round(corners, radius: radius)
     }
     
@@ -266,7 +266,7 @@ extension UIView {
      - parameter borderColor: The border color
      - parameter borderWidth: The border width
      */
-    func round(corners: UIRectCorner, radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
+    func round(_ corners: UIRectCorner, radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
         let mask = _round(corners, radius: radius)
         addBorder(mask, borderColor: borderColor, borderWidth: borderWidth)
     }
@@ -278,7 +278,7 @@ extension UIView {
      - parameter borderColor: The border color
      - parameter borderWidth: The border width
      */
-    func fullyRound(diameter: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
+    func fullyRound(_ diameter: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
         layer.masksToBounds = true
         layer.cornerRadius = diameter / 2
         layer.borderWidth = borderWidth
@@ -297,7 +297,7 @@ extension UIView {
     private func addBorder(_ mask: CAShapeLayer, borderColor: UIColor, borderWidth: CGFloat) {
         let borderLayer = CAShapeLayer()
         borderLayer.path = mask.path
-        borderLayer.fillColor = UIColor.clear().cgColor
+        borderLayer.fillColor = UIColor.clear.cgColor
         borderLayer.strokeColor = borderColor.cgColor
         borderLayer.lineWidth = borderWidth
         borderLayer.frame = bounds

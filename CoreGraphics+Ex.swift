@@ -47,7 +47,7 @@ extension CGRect {
         return frame
     }
     
-    func plusXY(x: CGFloat, y: CGFloat) -> CGRect {
+    func plusXY(_ x: CGFloat, _ y: CGFloat) -> CGRect {
         let point = CGPoint(x: x, y: y)
         return plusPoint(point)
     }

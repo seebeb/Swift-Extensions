@@ -14,7 +14,7 @@ extension DateFormatter {
     class func stringFromTime(_ seconds: Int) -> String {
         let timeFormater = DateFormatter()
         timeFormater.dateFormat = seconds / 3600 > 0 ? "HH:mm:ss" : "mm:ss"
-        timeFormater.timeZone = TimeZone(name: "GTM")
+        timeFormater.timeZone = TimeZone(abbreviation: "GTM")
         
         return timeFormater.string(from: NSDate(timeIntervalSince1970: Double(seconds)) as Date)
     }

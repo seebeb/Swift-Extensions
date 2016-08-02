@@ -48,8 +48,8 @@ extension UIButton {
     
     func simulateHighlight(interval i: TimeInterval = 0.15) {
         isHighlighted = true
-        DispatchQueue.main.after(when: .now() + i) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + i, execute: { [weak self] in
             self?.isHighlighted = false
-        }
+        })
     }
 }
