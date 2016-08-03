@@ -59,25 +59,25 @@ extension Int: Arithmetic {
     var cgFloat: CGFloat { return CGFloat(self) }
 }
 
-extension Int8 : Arithmetic {
+extension Int8: Arithmetic {
     var int: Int { return Int(self) }
     var double: Double { return Double(self) }
     var cgFloat: CGFloat { return CGFloat(self) }
 }
 
-extension Int16 : Arithmetic {
+extension Int16: Arithmetic {
     var int: Int { return Int(self) }
     var double: Double { return Double(self) }
     var cgFloat: CGFloat { return CGFloat(self) }
 }
 
-extension Int32 : Arithmetic {
+extension Int32: Arithmetic {
     var int: Int { return Int(self) }
     var double: Double { return Double(self) }
     var cgFloat: CGFloat { return CGFloat(self) }
 }
 
-extension Int64 : Arithmetic {
+extension Int64: Arithmetic {
     var int: Int { return Int(self) }
     var double: Double { return Double(self) }
     var cgFloat: CGFloat { return CGFloat(self) }
