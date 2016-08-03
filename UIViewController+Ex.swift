@@ -7,7 +7,9 @@
 
 import UIKit
 
-// MARK: - top bar (status bar + navigation bar)
+
+// MARK: - Top bar (status bar + navigation bar)
+
 extension UIViewController {
     
     var statusBarFrame: CGRect {
@@ -41,7 +43,9 @@ extension UIViewController {
     
 }
 
-// MARK: - keyboard notification
+
+// MARK: - Keyboard notification
+
 extension UIViewController {
     func keyboardWillChangeFrameNotification(_ notification: Notification, scrollBottomConstant: NSLayoutConstraint) {
         let duration = (notification as NSNotification).userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
@@ -66,7 +70,9 @@ extension UIViewController {
     
 }
 
-// MARK: - dismiss view controller
+
+// MARK: - Dismiss view controller
+
 extension UIViewController {
 
     func dismissAnimated() {
@@ -77,4 +83,21 @@ extension UIViewController {
         self.dismiss(animated: false, completion: nil)
     }
     
+}
+
+
+// MAEK: - Edge dismiss gesture
+
+extension UIViewController {
+    
+    func configureScreenEdgeDismissGesture(_ edges: UIRectEdge = .left, animated: Bool = true, alsoForPad: Bool = false) {
+        
+        if UIDevice.current.userInterfaceIdiom == .pad && !alsoForPad { return }
+        
+        let selector = animated ? #selector(dismissAnimated) : #selector(dismissWithoutAnimation)
+        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: selector)
+        gesture.edges = edges
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(gesture)
+    }
 }
