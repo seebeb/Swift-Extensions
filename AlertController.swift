@@ -23,7 +23,7 @@ extension UIAlertController {
         }
     }
 
-    func show(animated a: Bool = true, statusBarStyle: UIStatusBarStyle? = nil, completion: Closure? = nil) {
+    func show(animated a: Bool = true, hideStatusBar: Bool = false, statusBarStyle: UIStatusBarStyle? = nil, completion: Closure? = nil) {
         
         alertWindow = UIWindow(frame: UIScreen.main.bounds)
         alertWindow?.backgroundColor = .clear
@@ -33,6 +33,8 @@ extension UIAlertController {
         
         if let _w = UIApplication.shared.delegate?.window, let w = _w {
             alertWindow?.tintColor = w.tintColor
+            
+            vc.isStatusBarHidden = hideStatusBar
             
             if let style = w.rootViewController?.preferredStatusBarStyle {
                 vc.statusBarStyle = style
@@ -60,6 +62,12 @@ private class BlankViewController: UIViewController {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
         }
+    }
+    
+    var isStatusBarHidden: Bool!
+    
+    private override var prefersStatusBarHidden: Bool {
+        return isStatusBarHidden ?? false
     }
     
     private override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -9,6 +9,7 @@ import Foundation
 
 
 extension Array {
+    
     func find(_ includedElement: (Element) -> Bool) -> Int? {
         for (idx, element) in enumerated() {
             if includedElement(element) {
@@ -16,5 +17,12 @@ extension Array {
             }
         }
         return nil
+    }
+}
+
+extension Array {
+    
+    mutating func append(_ newElements: [Element]) {
+        newElements.forEach() { append($0) }
     }
 }
