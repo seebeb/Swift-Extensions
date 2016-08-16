@@ -333,3 +333,18 @@ extension UIView {
     }
 }
 
+
+// MARK: - 
+
+extension UIView {
+    
+    func addGestureRecognizers(_ gestures: [UIGestureRecognizer]) {
+        gestures.forEach() {
+            addGestureRecognizer($0)
+        }
+    }
+    
+    func addGestureRecognizers(_ gestures: UIGestureRecognizer...) {
+        addGestureRecognizers(gestures)
+    }
+}
