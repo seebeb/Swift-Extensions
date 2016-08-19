@@ -23,11 +23,11 @@ extension UINavigationBar {
         }
     }
     
-    private var navigationBarImageView: UIImageView? {
+    fileprivate var navigationBarImageView: UIImageView? {
         return hairlineImageViewInNavigationBar(self)
     }
     
-    private func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
+    fileprivate func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
         if view is UIImageView && view.bounds.height <= 1.0 {
             return view as? UIImageView
         }

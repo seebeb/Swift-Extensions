@@ -223,7 +223,7 @@ extension UIView: CAAnimationDelegate {
         return angle * (180 / M_PI)
     }
     
-    private var angle: Double {
+    fileprivate var angle: Double {
         return atan2(Double(transform.b), Double(transform.a))
     }
 }
@@ -297,7 +297,7 @@ extension UIView {
     }
     
     @discardableResult
-    private func _round(_ corners: UIRectCorner, radius: CGFloat) -> CAShapeLayer {
+    fileprivate func _round(_ corners: UIRectCorner, radius: CGFloat) -> CAShapeLayer {
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.cgPath
@@ -305,7 +305,7 @@ extension UIView {
         return mask
     }
     
-    private func addBorder(_ mask: CAShapeLayer, borderColor: UIColor, borderWidth: CGFloat) {
+    fileprivate func addBorder(_ mask: CAShapeLayer, borderColor: UIColor, borderWidth: CGFloat) {
         let borderLayer = CAShapeLayer()
         borderLayer.path = mask.path
         borderLayer.fillColor = UIColor.clear.cgColor
