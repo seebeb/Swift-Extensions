@@ -87,10 +87,12 @@ extension UIColor {
             throw UIColorInputError.missingHashMarkAsPrefix
         }
         
-        guard let hexString: String = rgba.substring(from: rgba.characters.index(rgba.startIndex, offsetBy: 1)),
-            var   hexValue:  UInt32 = 0
-            , Scanner(string: hexString).scanHexInt32(&hexValue) else {
-                throw UIColorInputError.unableToScanHexValue
+        let hexString = rgba.substring(from: rgba.characters.index(rgba.startIndex, offsetBy: 1))
+        
+        var hexValue: UInt32 = 0
+        
+        guard Scanner(string: hexString).scanHexInt32(&hexValue) else {
+            throw UIColorInputError.unableToScanHexValue
         }
         
         switch (hexString.characters.count) {
@@ -139,11 +141,11 @@ extension UIColor {
         }
     }
     
-    public override var description: String {
+    open override var description: String {
         return self.hexString(true)
     }
     
-    public override var debugDescription: String {
+    open override var debugDescription: String {
         return self.hexString(true)
     }
 }

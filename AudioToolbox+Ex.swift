@@ -28,7 +28,7 @@ class AudioToolBox: NSObject {
         
         let url = URL(fileURLWithPath: filePath)
         
-        AudioServicesCreateSystemSoundID(url, &soundID)
+        AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
         AudioServicesPlaySystemSound(soundID)
     }
 }

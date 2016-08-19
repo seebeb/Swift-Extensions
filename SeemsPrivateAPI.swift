@@ -10,10 +10,10 @@ import UIKit
 
 extension UIView {
     
-    private func loopView(_ nameOfView: String, shouldReturn: Bool = true, execute: ((subView: UIView) -> ())) {
+    fileprivate func loopView(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
         for v in subviews {
-            if String(v.classForCoder) == nameOfView {
-                execute(subView: v)
+            if String(describing: v.classForCoder) == nameOfView {
+                execute(v)
                 if shouldReturn {
                     return
                 }

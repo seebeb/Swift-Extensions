@@ -96,7 +96,7 @@ extension UIView {
                 //-- else, check if it's a single touch
                 if touch.tapCount == 1 {
                     let uInfo: [NSObject : AnyObject] = [
-                        "touch" : touch
+                        "touch" as NSObject : touch
                     ]
                     
                     NotificationCenter.default.post(name: NSNotification.Name.NOTIFICATION_TAP, object: self, userInfo: uInfo)
@@ -117,9 +117,9 @@ extension UIView {
 }
 
 extension NSNotification.Name {
-    static let NOTIFICATION_TAP = "NOTIFICATION_TAP" as NSNotification.Name
-    static let NOTIFICATION_ZOOM_IN = "NOTIFICATION_ZOOM_IN" as NSNotification.Name
-    static let NOTIFICATION_ZOOM_OUT = "NOTIFICATION_ZOOM_OUT" as NSNotification.Name
-    static let NOTIFICATION_SWIPE_LEFT = "NOTIFICATION_SWIPE_LEFT" as NSNotification.Name
-    static let NOTIFICATION_SWIPE_RIGHT = "NOTIFICATION_SWIPE_RIGHT" as NSNotification.Name
+    static let NOTIFICATION_TAP = NSNotification.Name(rawValue: "NOTIFICATION_TAP")
+    static let NOTIFICATION_ZOOM_IN = NSNotification.Name(rawValue: "NOTIFICATION_ZOOM_IN")
+    static let NOTIFICATION_ZOOM_OUT = NSNotification.Name(rawValue: "NOTIFICATION_ZOOM_OUT")
+    static let NOTIFICATION_SWIPE_LEFT = NSNotification.Name(rawValue: "NOTIFICATION_SWIPE_LEFT")
+    static let NOTIFICATION_SWIPE_RIGHT = NSNotification.Name(rawValue: "NOTIFICATION_SWIPE_RIGHT")
 }

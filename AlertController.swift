@@ -48,7 +48,7 @@ extension UIAlertController {
         alertWindow?.rootViewController?.present(self, animated: a, completion: completion)
     }
     
-    public override func viewDidDisappear(_ animated: Bool) {
+    open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         alertWindow?.removeFromSuperview()

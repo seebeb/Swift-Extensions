@@ -14,7 +14,7 @@ extension UIWindow {
     // do not use `NSClassFromString("UIRemoteKeyboardWindow")`, this is private API
     
     var isKeyboardWindow: Bool {
-        return String(classForCoder) == "UIRemoteKeyboardWindow"
+        return String(describing: classForCoder) == "UIRemoteKeyboardWindow"
     }
     
     class var isTopWindowKeyboard: Bool {
