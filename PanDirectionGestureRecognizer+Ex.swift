@@ -65,7 +65,7 @@ class UIPanGestureRecognizerWithDirection: UIPanGestureRecognizer {
     
     var direction: PanDirection
     
-    override init(target: AnyObject?, action: Selector?) {
+    override init(target: Any?, action: Selector?) {
         direction = .none
         super.init(target: target, action: action)
     }
@@ -100,7 +100,7 @@ class UIPanGestureRecognizerWithEdgeDirection: UIPanGestureRecognizer {
     
     private let edgeOffset: CGFloat = 44.0
     
-    override init(target: AnyObject?, action: Selector?) {
+    override init(target: Any?, action: Selector?) {
         direction = .none
         super.init(target: target, action: action)
     }
