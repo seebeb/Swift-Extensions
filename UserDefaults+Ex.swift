@@ -72,7 +72,7 @@ extension UserDefaults {
 
 extension UserDefaults {
     
-    func setArchivedData(_ object: AnyObject?, forKey key: String) {
+    func setArchivedData(_ object: Any?, forKey key: String) {
         var data: Data?
         if let object = object {
             data = NSKeyedArchiver.archivedData(withRootObject: object)
