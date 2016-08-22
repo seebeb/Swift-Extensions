@@ -76,9 +76,7 @@ private class BlankViewController: UIViewController {
         
         guard !UIDevice.isPad && !tempIsStatusBarHidden! else { return }
         
-        isStatusBarHidden = toInterfaceOrientation.isLandscape
-        
-        setNeedsStatusBarAppearanceUpdate()
+        isStatusBarHidden = toInterfaceOrientation.isLandscape        
     }
     
     private override var prefersStatusBarHidden: Bool {
