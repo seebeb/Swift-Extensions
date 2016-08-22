@@ -64,10 +64,23 @@ private class BlankViewController: UIViewController {
         }
     }
     
-    var isStatusBarHidden: Bool!
+    var isStatusBarHidden: Bool = false
+    
+    private var tempIsStatusBarHidden: Bool?
+    
+    private override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        
+        tempIsStatusBarHidden == nil ? tempIsStatusBarHidden = isStatusBarHidden : ()
+        
+        guard !UIDevice.isPad && !tempIsStatusBarHidden! else { return }
+        
+        isStatusBarHidden = toInterfaceOrientation.isLandscape
+        
+        setNeedsStatusBarAppearanceUpdate()
+    }
     
     private override var prefersStatusBarHidden: Bool {
-        return isStatusBarHidden ?? false
+        return isStatusBarHidden
     }
     
     private override var preferredStatusBarStyle: UIStatusBarStyle {
