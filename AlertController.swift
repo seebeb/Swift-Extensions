@@ -70,6 +70,8 @@ private class BlankViewController: UIViewController {
     
     private override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         
+        // hide status bar in landscape on iPhone if needed
+        
         tempIsStatusBarHidden == nil ? tempIsStatusBarHidden = isStatusBarHidden : ()
         
         guard !UIDevice.isPad && !tempIsStatusBarHidden! else { return }
