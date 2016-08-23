@@ -10,15 +10,21 @@ import Foundation
 
 extension Set {
     
-    func object(_ index: Int) -> Element? {
+    /// Find the element at the specific index
+    /// No need to use this to find the first element, just use `aSet.first`
+    ///
+    /// - parameter atIndex: index
+    ///
+    /// - returns: result
+    func object(_ atIndex: Int) -> Element? {
         
-        guard index > 0 else { return nil }
+        guard atIndex >= 0 else { return nil }
         
-        switch index {
+        switch atIndex {
         case 0: return first
         case 1: return self[self.index(after: startIndex)]
         default:
-            return self[self.index(startIndex, offsetBy: index - 1)]
+            return self[self.index(startIndex, offsetBy: atIndex - 1)]
         }
     }
 }

@@ -18,6 +18,22 @@ extension Array {
         }
         return nil
     }
+    
+    /// Find the element at the specific index
+    /// No need to use this to find the first element, just use `aArray.first`
+    ///
+    /// - parameter atIndex: index
+    ///
+    /// - returns: result
+    func object(_ atIndex: Int) -> Element? {
+        
+        guard atIndex >= 0 else { return nil }
+        
+        guard atIndex < count else { return nil }
+        
+        return self[atIndex]
+    }
+    
 }
 
 extension Array {
