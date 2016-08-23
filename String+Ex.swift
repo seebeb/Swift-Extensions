@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension String {
+public extension String {
     
     var isBlank : Bool {
         let s = self
@@ -17,4 +17,16 @@ extension String {
         let ok = s.isEmpty || r == nil
         return ok
     }
+}
+
+public extension String {
+    
+    public init<Subject>(_ instance: Subject) {
+        self.init(describing: instance)
+    }
+    
+//    public init<Subject>(_ subject: Subject) {
+//        self.init(reflecting: instance)
+//    }
+    
 }

@@ -12,6 +12,14 @@ import UIKit
 
 extension CGRect {
     
+    var center: CGPoint {
+        let x = origin.x + width / 2
+        let y = origin.y + height / 2
+        return CGPoint(x: x, y: y)
+    }
+    
+    // MARK: -
+    
     var Max: CGRect {
         var rect = self
         let _max = max(width, height)

@@ -82,3 +82,28 @@ extension Int {
         return self != 0
     }
 }
+
+
+// MARK: - Calculations
+
+// MARK: - Total
+
+func total<T : Arithmetic>(_ values: [T]) -> T {
+    var t = T(0)
+    values.forEach() { t += $0 }
+    return t
+}  
+
+func total<T : Arithmetic>(_ values: T ...) -> T {
+    return total(values)
+}
+
+// MARK: - Average
+
+func average<T : Arithmetic>(_ values: [T]) -> T {
+    return total(values) / T(values.count)
+}
+
+func average<T : Arithmetic>(_ values: T ...) -> T {
+    return total(values) / T(values.count)
+}
