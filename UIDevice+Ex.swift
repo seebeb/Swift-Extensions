@@ -10,9 +10,24 @@ import UIKit
 
 extension UIDevice {
     
+    @available(iOS, deprecated: 1.0, message: "Please use `UIDevice.current.isPad`")
     static var isPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
+    
+    var isPad: Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    var hardwareVersion: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        
+        let versionCode = String(utf8String: NSString(bytes: &systemInfo.machine, length: Int(_SYS_NAMELEN), encoding: String.Encoding.ascii.rawValue)!.utf8String!)!
+        
+        return versionCode
+    }
+
 }
 
 

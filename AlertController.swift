@@ -74,7 +74,7 @@ private class BlankViewController: UIViewController {
         
         tempIsStatusBarHidden == nil ? tempIsStatusBarHidden = isStatusBarHidden : ()
         
-        guard !UIDevice.isPad && !tempIsStatusBarHidden! else { return }
+        guard !UIDevice.current.isPad && !tempIsStatusBarHidden! else { return }
         
         isStatusBarHidden = toInterfaceOrientation.isLandscape        
     }
