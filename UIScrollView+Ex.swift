@@ -55,8 +55,6 @@ extension UIScrollView {
             view = sv
         }
         
-        print(view)
-        
         let v = UIView()
         view.addSubview(v)
         v.snp.makeConstraints { (make) in
@@ -65,16 +63,13 @@ extension UIScrollView {
         }
         
         if let color = color {
-            
             let center = CGPoint(x: 44, y: 44)
             let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
-            
             let shapeLayer = CAShapeLayer()
             shapeLayer.path = circlePath.cgPath
             shapeLayer.fillColor = color.cgColor
             v.layer.addSublayer(shapeLayer)
         }
-        
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTriggerOff))
         v.addGestureRecognizer(recognizer)
