@@ -10,7 +10,14 @@ import UIKit
 
 extension UIView {
     
-    fileprivate func loopView(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
+    func loopView(_ closure: ((_ subView: UIView) -> ())) {
+        for v in subviews {
+            closure(v)
+            v.loopView(closure)
+        }
+    }
+    
+    func loopView(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
         for v in subviews {
             if String(describing: v.classForCoder) == nameOfView {
                 execute(v)
