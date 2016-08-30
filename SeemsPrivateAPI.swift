@@ -10,6 +10,10 @@ import UIKit
 
 extension UIView {
     
+    func isEqualToNameOfClass(_ name: String) -> Bool {
+        return String(describing: classForCoder) == name
+    }
+    
     func loopView(_ closure: ((_ subView: UIView) -> ())) {
         for v in subviews {
             closure(v)
@@ -19,7 +23,7 @@ extension UIView {
     
     func loopView(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
         for v in subviews {
-            if String(describing: v.classForCoder) == nameOfView {
+            if isEqualToNameOfClass(nameOfView) {
                 execute(v)
                 if shouldReturn {
                     return

@@ -14,6 +14,16 @@ private var xoAssociationKey: UInt8 = 0
 
 extension UIAlertController {
     
+    func addActions(_ actions: [UIAlertAction]) {
+        actions.forEach({
+            self.addAction($0)
+        })
+    }
+    
+    func addActions(_ actions: UIAlertAction...) {
+        addActions(actions)
+    }
+    
     private var alertWindow: UIWindow? {
         get {
             return objc_getAssociatedObject(self, &xoAssociationKey) as? UIWindow
@@ -89,7 +99,7 @@ private class BlankViewController: UIViewController {
 }
 
 
-// MARK: - 
+// MARK: -
 
 private let ok = NSLocalizedString("OK", comment: "")
 private let cancel = NSLocalizedString("Cancel", comment: "")

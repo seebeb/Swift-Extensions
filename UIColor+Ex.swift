@@ -9,11 +9,11 @@ import UIKit
 
 extension UIColor {
     
-    class func random() -> UIColor {
+    class var random: UIColor {
         let randomRed = CGFloat(drand48())
         let randomGreen = CGFloat(drand48())
-        let randomBlue = CGFloat(drand48())        
-        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)        
+        let randomBlue = CGFloat(drand48())
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
     
     func darker(_ scale: CGFloat) -> UIColor {

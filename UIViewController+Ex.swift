@@ -82,7 +82,14 @@ extension UIViewController {
     func dismissWithoutAnimation() {
         self.dismiss(animated: false, completion: nil)
     }
-    
+}
+
+
+// MARK: - 
+
+extension Selector {
+    static let dismissAnimated = #selector(UIViewController.dismissAnimated)
+    static let dismissWithoutAnimation = #selector(UIViewController.dismissWithoutAnimation)
 }
 
 

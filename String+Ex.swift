@@ -30,3 +30,41 @@ public extension String {
 //    }
     
 }
+
+
+// MARK: - 
+
+extension String {
+    
+    /// Remove last character
+    ///
+    /// - returns: the character which has been removed.
+    @discardableResult
+    mutating func removeLast() -> Character? {
+        
+        guard endIndex != startIndex else { return nil }
+        
+        let index = self.index(before: endIndex)
+        
+        return remove(at: index)
+    }
+    
+    /// Remove first character
+    ///
+    /// - returns: the character which has been removed.
+    @discardableResult
+    mutating func removeFirst() -> Character? {
+        
+        guard endIndex != startIndex else { return nil }
+        
+        return remove(at: startIndex)
+    }
+}
+
+
+// MARK: - 
+
+extension String {
+    static let ok = NSLocalizedString("OK", comment: "")
+    static let cancel = NSLocalizedString("Cancel", comment: "")
+}
