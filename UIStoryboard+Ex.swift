@@ -50,3 +50,19 @@ extension UITableView {
     }
 
 }
+
+
+// MARK: - 
+
+extension UIView {
+    
+    class func loadFromNibAndClass<T : UIView>(_ view: T.Type, owner: Any? = nil, options: [AnyHashable : Any]? = nil) -> T? {
+        
+        let name = String(describing: view.self)
+        
+        guard let nib = Bundle.main.loadNibNamed(name, owner: owner, options: options) else { return nil }
+        
+        return nib.first as? T
+    }
+}
+

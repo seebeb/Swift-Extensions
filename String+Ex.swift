@@ -65,6 +65,20 @@ extension String {
 // MARK: - 
 
 extension String {
+    
+    func replacingOccurrences(of: [String], with: String) -> String {
+        var str = self
+        of.forEach() {
+            str = str.replacingOccurrences(of: $0, with: with)
+        }
+        return str
+    }
+}
+
+
+// MARK: - 
+
+extension String {
     static let ok = NSLocalizedString("OK", comment: "")
     static let cancel = NSLocalizedString("Cancel", comment: "")
 }
