@@ -17,12 +17,10 @@ extension UIStoryboard {
 
     /// Instantiates and returns the view controller with the specified identifier.
     /// Note: withIdentifier must equal to the vc Class
-    func instantiateViewController(with vc: Swift.AnyClass) -> UIViewController {
-        return instantiateViewController(withIdentifier: String(describing: vc.self))
+    func instantiateViewController<T : UIViewController>(with vc: T.Type) -> T {
+        return instantiateViewController(withIdentifier: String(describing: vc.self)) as! T
     }
-
 }
-
 
 
 // MARK: - 
@@ -30,13 +28,13 @@ extension UIStoryboard {
 extension UITableView {
     
     /// Returns a reusable table-view cell object for the specified reuse identifier and adds it to the table.
-    /// Note: withIdentifier must equal to the Cell Class.
-    func dequeueReusableCell(with cell: Swift.AnyClass, for indexPath: IndexPath) -> UITableViewCell {
-        return dequeueReusableCell(withIdentifier: String(describing: cell.self), for: indexPath)
+    /// Note: withIdentifier must be equal to the Cell Class.
+    func dequeueReusableCell<T : UITableViewCell>(with cell: T.Type, for indexPath: IndexPath) -> T {
+        return dequeueReusableCell(withIdentifier: String(describing: cell.self), for: indexPath) as! T
     }
     
     /// Registers a nib object containing a cell with the table view under a specified identifier.
-    /// Nib name must equal to the Cell Class, and the forCellReuseIdentifier must equal to Cell Class as well.
+    /// Nib name must be equal to the Cell Class, and the forCellReuseIdentifier must equal to Cell Class as well.
     func registerNib(_ cell: Swift.AnyClass) {
         let id = String(describing: cell.self)
         let nib = UINib(nibName: id, bundle: nil)
@@ -48,7 +46,6 @@ extension UITableView {
     func register(_ cellClass: Swift.AnyClass) {
         register(cellClass, forCellReuseIdentifier: String(describing: cellClass))
     }
-
 }
 
 
@@ -56,6 +53,13 @@ extension UITableView {
 
 extension UIView {
     
+    /// Load view from nib. Note: Nib name must be equal to the class name.
+    ///
+    /// - parameter view:    class name for the view
+    /// - parameter owner:   nib name for the view
+    /// - parameter options: options
+    ///
+    /// - returns: view
     class func loadFromNibAndClass<T : UIView>(_ view: T.Type, owner: Any? = nil, options: [AnyHashable : Any]? = nil) -> T? {
         
         let name = String(describing: view.self)
