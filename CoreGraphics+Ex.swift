@@ -102,17 +102,21 @@ extension CGPoint {
 extension CGSize {
     
     var Max: CGSize {
-        var size = self
         let _max = max(width, height)
-        size = CGSize(width: _max, height: _max)
-        return size
+        return CGSize(width: _max, height: _max)
     }
     
     var Min: CGSize {
-        var size = self
         let _max = min(width, height)
-        size = CGSize(width: _max, height: _max)
-        return size
+        return CGSize(width: _max, height: _max)
+    }
+    
+    var maxSL: CGFloat {
+        return max(width, height)
+    }
+    
+    var minSL: CGFloat {
+        return min(width, height)
     }
 }
 

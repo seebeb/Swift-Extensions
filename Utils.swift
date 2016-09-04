@@ -36,6 +36,30 @@ class Utils {
         return (Bundle.main.bundlePath as NSString).appendingPathComponent(name)
     }
     
+    @discardableResult
+    class func deleteFileWithPath(_ path: String) -> Bool {
+        let exists = FileManager.default.fileExists(atPath: path)
+        if exists {
+            do {
+                try FileManager.default.removeItem(atPath: path)
+            } catch {
+                print("error: \(error.localizedDescription)")
+                return false
+            }
+        }
+        return exists
+    }
+    
+    /// Delete file in Documents Path
+    ///
+    /// - parameter name: name of the file
+    ///
+    /// - returns: success or failed
+    @discardableResult
+    class func deleteFileWithName(_ name: String) -> Bool {
+        let path = documentPath + name
+        return deleteFileWithPath(path)
+    }
 }
 
 var GlobalMainQueue: DispatchQueue {
