@@ -10,11 +10,11 @@ import UIKit
 
 extension UIApplication {
     
-    class func initializeInTheFirstTime(_ completion: (() -> Void)) {
-        UIApplication.initializeInTheFirstTime(nil, completion: completion)
+    func initializeInTheFirstTime(_ completion: (() -> Void)) {
+        initializeInTheFirstTime(nil, completion: completion)
     }
     
-    class func initializeInTheFirstTime(_ key: String?, completion: (() -> Void)) {
+    func initializeInTheFirstTime(_ key: String?, completion: (() -> Void)) {
         
         let _key = (key == nil) ? "ausHasLaunchedHostAppOnce" : key!
         
