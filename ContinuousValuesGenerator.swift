@@ -76,7 +76,7 @@ class ContinuousValuesGeneratorWithDuration<T: Arithmetic> {
     /// - parameter generatedValue: new generated nember per time
     /// - parameter completion:     completion closure
     @discardableResult
-    init(_ duration: TimeInterval, startValue: T, endValue: T, offsetPerTime: T, generatedValue: ((T) -> ()), completion: Closure? = nil) {
+    init(_ duration: TimeInterval, startValue: T, endValue: T, offsetPerTime: T, generatedValue: @escaping ((T) -> ()), completion: Closure? = nil) {
         
         let times = (endValue - startValue) / offsetPerTime
         self.times = abs(times.int)
