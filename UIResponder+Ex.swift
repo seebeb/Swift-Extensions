@@ -18,7 +18,7 @@ extension UIResponder {
         return _currentFirstResponder
     }
     
-    @objc private func findFirstResponder(_ sender: AnyObject) {
+    @objc fileprivate func findFirstResponder(_ sender: AnyObject) {
         _currentFirstResponder = self
     }
     

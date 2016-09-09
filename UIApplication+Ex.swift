@@ -37,7 +37,7 @@ extension UIApplication {
         
         #if DEBUG
         
-        guard let vc = UIApplication.topMostViewController else { return }
+        guard let vc = UIApplication.shared.topMostViewController else { return }
         
         let button = UIButton()
         button.setTitle("Simulate Memory Warning", for: .normal)

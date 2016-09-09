@@ -24,7 +24,7 @@ extension UIAlertController {
         addActions(actions)
     }
     
-    private var alertWindow: UIWindow? {
+    fileprivate var alertWindow: UIWindow? {
         get {
             return objc_getAssociatedObject(self, &xoAssociationKey) as? UIWindow
         }
@@ -76,9 +76,9 @@ private class BlankViewController: UIViewController {
     
     var isStatusBarHidden: Bool = false
     
-    private var tempIsStatusBarHidden: Bool?
+    fileprivate var tempIsStatusBarHidden: Bool?
     
-    private override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+    fileprivate override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         
         // hide status bar in landscape on iPhone if needed
         
@@ -89,11 +89,11 @@ private class BlankViewController: UIViewController {
         isStatusBarHidden = toInterfaceOrientation.isLandscape        
     }
     
-    private override var prefersStatusBarHidden: Bool {
+    fileprivate override var prefersStatusBarHidden: Bool {
         return isStatusBarHidden
     }
     
-    private override var preferredStatusBarStyle: UIStatusBarStyle {
+    fileprivate override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
     }
 }
@@ -128,16 +128,16 @@ class AlertController {
         alertWithOptions(multiItemsOfInfo, baseViewController: baseViewController, tintColor: tintColor, closure: closure)
     }
     
-    private class func alert(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+    fileprivate class func alert(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         
-        guard let baseVC = baseViewController ?? UIApplication.topMostViewController else { return }
+        guard let baseVC = baseViewController ?? UIApplication.shared.topMostViewController else { return }
         
         let alertController = configured(title, message: message, actionTitle: actionTitle, addCancelAction: addCancelAction, tintColor: tintColor, closure: closure)
         
         baseVC.present(alertController, animated: true, completion: nil)
     }
     
-    private class func configured(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, tintColor: UIColor? = nil, closure: CompletionHandler?) -> UIAlertController {
+    fileprivate class func configured(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, tintColor: UIColor? = nil, closure: CompletionHandler?) -> UIAlertController {
         
         let okAction = UIAlertAction(title: actionTitle, style: .default) { (_) -> Void in
             closure?(true)
@@ -160,9 +160,9 @@ class AlertController {
         return alertController
     }
     
-    private class func alertWithOptions(_ multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+    fileprivate class func alertWithOptions(_ multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         
-        guard let baseVC = baseViewController ?? UIApplication.topMostViewController else { return }
+        guard let baseVC = baseViewController ?? UIApplication.shared.topMostViewController else { return }
         
         GlobalMainQueue.async {
             

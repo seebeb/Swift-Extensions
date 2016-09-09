@@ -13,7 +13,7 @@ class AudioToolBox: NSObject {
     
     static let shared = AudioToolBox()
     
-    private var soundID: SystemSoundID = 0
+    fileprivate var soundID: SystemSoundID = 0
     
     func playM4RWithName(_ name: String?, bundle: Bundle = Bundle.main) {
         playWithBundle(bundle, name: name, type: "m4r")
@@ -23,7 +23,7 @@ class AudioToolBox: NSObject {
         playWithBundle(bundle, name: name, type: "mp3")
     }
     
-    private func playWithBundle(_ bundle: Bundle, name: String?, type: String?) {
+    fileprivate func playWithBundle(_ bundle: Bundle, name: String?, type: String?) {
         guard let filePath = bundle.path(forResource: name, ofType: type) else { return }
         
         let url = URL(fileURLWithPath: filePath)

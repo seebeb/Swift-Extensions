@@ -10,7 +10,7 @@ import Foundation
 
 class ContinuousValuesGenerator<T: Arithmetic> {
 
-    private var currentValue: T
+    fileprivate var currentValue: T
     
     /// Animated Value Generator
     ///
@@ -38,7 +38,7 @@ class ContinuousValuesGenerator<T: Arithmetic> {
     }
     
     // recursion
-    private func run(start: T, end: T, offset: T, generated: ((T) -> ()), completion: Closure? = nil) {
+    fileprivate func run(start: T, end: T, offset: T, generated: ((T) -> ()), completion: Closure? = nil) {
                 
         guard (offset.double > 0) ? currentValue < end : currentValue > end else {
             
@@ -59,12 +59,12 @@ class ContinuousValuesGenerator<T: Arithmetic> {
 
 class ContinuousValuesGeneratorWithDuration<T: Arithmetic> {
     
-    private var times: Int
-    private var startValue: T
-    private var endValue: T
-    private var offsetPerTime: T
-    private var completionHandler: Closure?
-    private var generatedValueHandler: ((T) -> ())
+    fileprivate var times: Int
+    fileprivate var startValue: T
+    fileprivate var endValue: T
+    fileprivate var offsetPerTime: T
+    fileprivate var completionHandler: Closure?
+    fileprivate var generatedValueHandler: ((T) -> ())
     
     
     /// Animated Value Generator
@@ -116,7 +116,7 @@ class ContinuousValuesGeneratorWithDuration<T: Arithmetic> {
         completionHandler = completion
     }
     
-    @objc private func run(_ timer: Timer) {
+    @objc fileprivate func run(_ timer: Timer) {
         
         #if DEBUG
             

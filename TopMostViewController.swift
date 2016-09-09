@@ -15,6 +15,25 @@ import UIKit
 
 extension UIApplication {
     
+    var topMostViewController: UIViewController? {
+        var topController = UIApplication.shared.keyWindow?.rootViewController
+        while topController?.presentedViewController != nil {
+            topController = topController?.presentedViewController
+        }
+        return topController
+    }
+    
+    /// App has more than one window and just want to get topMostViewController of the AppDelegate window.
+    var appDelegateWindowTopMostViewController: UIViewController? {
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        var topController = delegate?.window?.rootViewController
+        while topController?.presentedViewController != nil {
+            topController = topController?.presentedViewController
+        }
+        return topController
+    }
+    
+    @available(iOS, deprecated: 1.0, message: "Please use `UIApplication.shared.topMostViewController`")
     class var topMostViewController: UIViewController? {
         var topController = UIApplication.shared.keyWindow?.rootViewController
         while topController?.presentedViewController != nil {
@@ -24,6 +43,7 @@ extension UIApplication {
     }
     
     /// App has more than one window and just want to get topMostViewController of the AppDelegate window.
+    @available(iOS, deprecated: 1.0, message: "Please use `UIApplication.shared.topMostViewController`")
     class var appDelegateWindowTopMostViewController: UIViewController? {
         let delegate = UIApplication.shared.delegate as? AppDelegate
         var topController = delegate?.window?.rootViewController
