@@ -59,6 +59,20 @@ extension String {
         
         return remove(at: startIndex)
     }
+    
+    var lastRemoved: String {
+        
+        guard startIndex != endIndex else { return self }
+        
+        return substring(to: index(before: endIndex))
+    }
+    
+    var firstRemoved: String {
+        
+        guard startIndex != endIndex else { return self }
+        
+        return substring(from: index(after: startIndex))
+    }
 }
 
 
