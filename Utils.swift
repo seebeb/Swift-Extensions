@@ -15,29 +15,28 @@ public func NSLocalizedString(_ key: String) -> String {
 }
 
 
-class Utils {
+struct Utils {
     
-    class var documentPath: String {
+    static var documentPath: String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
     }
     
-    class func documentPathForFile(_ name: String) -> String {
-        return (documentPath as NSString).appendingPathComponent(name)
+    static func documentPathForFile(_ named: String) -> String {
+        return (documentPath as NSString).appendingPathComponent(named)
     }
     
-    class func appGroupDocumentPath(_ appGroupId: String) -> String? {
+    static func appGroupDocumentPath(_ appGroupId: String) -> String? {
         let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupId)
         let path = url?.absoluteString.replacingOccurrences(of: "file:", with: "", options: .literal, range: nil)
         return path
     }
     
-    
-    class func bundlePathForFile(_ name: String) -> String {
-        return (Bundle.main.bundlePath as NSString).appendingPathComponent(name)
+    static func bundlePathForFile(_ named: String) -> String {
+        return (Bundle.main.bundlePath as NSString).appendingPathComponent(named)
     }
     
     @discardableResult
-    class func deleteFileWithPath(_ path: String) -> Bool {
+    static func deleteFileWithPath(_ path: String) -> Bool {
         let exists = FileManager.default.fileExists(atPath: path)
         if exists {
             do {
@@ -52,15 +51,42 @@ class Utils {
     
     /// Delete file in Documents Path
     ///
-    /// - parameter name: name of the file
+    /// - parameter named: name of the file
     ///
     /// - returns: success or failed
     @discardableResult
-    class func deleteFileWithName(_ name: String) -> Bool {
-        let path = documentPath + name
+    static func deleteFileWithName(_ named: String) -> Bool {
+        let path = documentPath + named
         return deleteFileWithPath(path)
     }
 }
+
+extension Utils {
+    
+    static var libraryPath: String {
+        return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!
+    }
+    
+    static func libraryPathForFile(_ named: String) -> String {
+        return (libraryPath as NSString).appendingPathComponent(named)
+    }
+}
+
+extension Utils {
+    
+    static var cachePath: String {
+        return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+    }
+    
+    static func cachePathForFile(_ named: String) -> String {
+        return (cachePath as NSString).appendingPathComponent(named)
+    }
+    
+    static var tempPath: String {
+        return NSTemporaryDirectory()
+    }
+}
+
 
 var GlobalMainQueue: DispatchQueue {
     return DispatchQueue.main
