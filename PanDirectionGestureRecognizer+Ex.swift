@@ -213,6 +213,7 @@ public class UIHorizontalPanGestureRecognizerWithEdgeDirection: UIPanGestureReco
                 direction = .left
             }
         }
+        print(direction)
     }
 }
 
