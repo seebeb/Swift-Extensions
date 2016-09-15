@@ -10,6 +10,11 @@ import UIKit
 import SnapKit
 
 extension UIScrollView {
+
+    enum Priority {
+        case top
+        case bottom
+    }
     
     @discardableResult
     func scrollToTop(animated: Bool = true) -> CGPoint {
@@ -26,15 +31,23 @@ extension UIScrollView {
     }
     
     @discardableResult
-    func scrollToTopOrBottomAutomatically(animated: Bool = true) -> CGPoint {
+    func scrollToTopOrBottomAutomatically(animated: Bool = true, priority: Priority = .top) -> CGPoint {
         
         let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
         
         guard bottomOffset.y > 0 else { return .zero }
         
         let topOffset = CGPoint(x: 0, y: -contentInset.top)
-        let offset = contentOffset == bottomOffset ? topOffset : bottomOffset
-        
+
+        let offset: CGPoint
+
+        switch priority {
+        case .top:
+            offset = contentOffset != topOffset ? topOffset : bottomOffset
+        case .bottom:
+            offset = contentOffset == bottomOffset ? topOffset : bottomOffset
+        }
+
         setContentOffset(offset, animated: animated)
         
         return offset

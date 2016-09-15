@@ -81,10 +81,16 @@ class UIPlaceholderTextView : UITextView {
     }
     
     func placeholderRectForBounds(bounds : CGRect) -> CGRect {
-        var x = contentInset.left + 4.0
-        var y = contentInset.top  + 9.0
-        let w = frame.size.width - contentInset.left - contentInset.right - 16.0
-        let h = frame.size.height - contentInset.top - contentInset.bottom - 16.0
+
+        let left = contentInset.left
+        let right = contentInset.right
+        let top = contentInset.top
+        let bottom = contentInset.bottom
+
+        var x = left + 4.0
+        var y = top  + 9.0
+        let w = frame.size.width - left - right - 16.0
+        let h = frame.size.height - top - bottom - 16.0
         
         if let style = self.typingAttributes[NSParagraphStyleAttributeName] as? NSParagraphStyle {
             x += style.headIndent

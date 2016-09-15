@@ -58,7 +58,6 @@ public class PanDirectionGestureRecognizer: UIPanGestureRecognizer {
             break
         }
     }
-    
 }
 
 public class UIPanGestureRecognizerWithDirection: UIPanGestureRecognizer {
@@ -93,40 +92,6 @@ public class UIPanGestureRecognizerWithDirection: UIPanGestureRecognizer {
         }
     }
 }
-
-/// haven't completed yet
-//public class UIPanAbsoluteGestureRecognizerWithDirection: UIPanGestureRecognizer {
-//
-//    var direction: PanDirection
-//
-//    override init(target: Any?, action: Selector?) {
-//        direction = .none
-//        super.init(target: target, action: action)
-//    }
-//
-//    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-//        super.touchesMoved(touches, with: event)
-//
-//        guard state == .began else { return }
-//
-//        let velocity = self.velocity(in: view)
-//        let isHorizontal = fabs(velocity.x) > fabs(velocity.y)
-//
-//        if isHorizontal {
-//            if velocity.x > 0 {
-//                direction = .right
-//            } else {
-//                direction = .left
-//            }
-//        } else {
-//            if velocity.y > 0 {
-//                direction = .down
-//            } else {
-//                direction = .up
-//            }
-//        }
-//    }
-//}
 
 public class UIPanGestureRecognizerWithEdgeDirection: UIPanGestureRecognizer {
     
@@ -171,49 +136,3 @@ public class UIPanGestureRecognizerWithEdgeDirection: UIPanGestureRecognizer {
         }
     }
 }
-
-
-/// Only has [.left, .right, leftEdge, .rightEdge]
-/// Used in iTumblr
-public class UIHorizontalPanGestureRecognizerWithEdgeDirection: UIPanGestureRecognizer {
-
-    public var edgeOffset: CGFloat = 44.0
-    public var horizontalSensitivity: CGFloat = 0.3 // 0 ~ 1
-
-    var direction: PanDirection
-
-    override init(target: Any?, action: Selector?) {
-        direction = .none
-        super.init(target: target, action: action)
-    }
-
-    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesMoved(touches, with: event)
-
-        guard state == .began else { return }
-
-        let velocity = self.velocity(in: view)
-        let locationX = location(in: view).x
-        print("x: \(velocity.x)")
-        print("y: \(velocity.y)")
-        let isHorizontal = fabs(velocity.x) > fabs(velocity.y)
-
-        guard isHorizontal else { direction = .none; return }
-
-        if velocity.x > 0 {
-            if locationX < edgeOffset {
-                direction = .leftEdge
-            } else {
-                direction = .right
-            }
-        } else {
-            if locationX > UIScreen.width - edgeOffset {
-                direction = .rightEdge
-            } else {
-                direction = .left
-            }
-        }
-        print(direction)
-    }
-}
-
