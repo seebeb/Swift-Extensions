@@ -42,7 +42,7 @@ struct Utils {
             do {
                 try FileManager.default.removeItem(atPath: path)
             } catch {
-                print("error: \(error.localizedDescription)")
+                log.error("error: \(error.localizedDescription)")
                 return false
             }
         }
