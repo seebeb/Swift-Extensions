@@ -50,6 +50,18 @@ extension UIImage {
 
 extension UIImage {
 
+    func roundedScaledToSize(_ size: CGSize) -> UIImage {
+        return scaledToSize(size).rounded()
+    }
+
+    func scaledToSize(_ size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        draw(in: CGRect(origin: .zero, size: size))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return scaledImage ?? UIImage()
+    }
+
     func rounded(radius: CGFloat? = nil) -> UIImage {
 
         let imageLayer = CALayer()
@@ -60,11 +72,11 @@ extension UIImage {
         let radius = radius ?? min(size.width, size.height) / 2
         imageLayer.cornerRadius = radius
 
-        UIGraphicsBeginImageContext(size)
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
         imageLayer.render(in: UIGraphicsGetCurrentContext()!)
         let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        return roundedImage!
+        return roundedImage ?? UIImage()
     }
 }
