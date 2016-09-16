@@ -161,6 +161,35 @@ extension UIView {
 }
 
 
+// MARK: - 
+
+extension UIView {
+
+    func isEqualToNameOfClass(_ name: String) -> Bool {
+        return String(describing: classForCoder) == name
+    }
+
+    func loopView(_ closure: ((_ subView: UIView) -> ())) {
+        for v in subviews {
+            closure(v)
+            v.loopView(closure)
+        }
+    }
+
+    func loopView(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
+        for v in subviews {
+            if isEqualToNameOfClass(nameOfView) {
+                execute(v)
+                if shouldReturn {
+                    return
+                }
+            }
+            v.loopView(nameOfView, shouldReturn: shouldReturn, execute: execute)
+        }
+    }
+}
+
+
 // MARK: - rotation animation
 
 extension UIView: CAAnimationDelegate {

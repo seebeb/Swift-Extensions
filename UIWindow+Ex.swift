@@ -26,3 +26,24 @@ extension UIWindow {
     }
     
 }
+
+
+// MARK: - 
+
+func changeKeyboardColorWith(_ color: UIColor) {
+
+    guard UIWindow.keyboardWindow.0, let kbWindow = UIWindow.keyboardWindow.1 else { return }
+
+    kbWindow.loopView("UIKBBackdropView") { (subView) in
+        subView.backgroundColor = color
+    }
+}
+
+func opaqueKeyboardKeyView() {
+
+    guard UIWindow.keyboardWindow.0, let kbWindow = UIWindow.keyboardWindow.1 else { return }
+
+    kbWindow.loopView("UIKBKeyView", shouldReturn: false) { (subView) in
+        subView.isOpaque = true
+    }
+}
