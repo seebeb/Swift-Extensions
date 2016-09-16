@@ -10,8 +10,7 @@ import UIKit
 
 
 extension UIImage {
-    
-    
+
     /// Convert Optional CGImage to UIImage
     ///
     /// - parameter cgImage: Optional CGImage
@@ -43,5 +42,29 @@ extension UIImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         self.init(cgImage: image?.cgImage)
+    }
+}
+
+
+// MARK: - 
+
+extension UIImage {
+
+    func rounded(radius: CGFloat? = nil) -> UIImage {
+
+        let imageLayer = CALayer()
+        imageLayer.frame = CGRect(origin: .zero, size: size)
+        imageLayer.contents = cgImage
+        imageLayer.masksToBounds = true
+
+        let radius = radius ?? min(size.width, size.height) / 2
+        imageLayer.cornerRadius = radius
+
+        UIGraphicsBeginImageContext(size)
+        imageLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return roundedImage!
     }
 }

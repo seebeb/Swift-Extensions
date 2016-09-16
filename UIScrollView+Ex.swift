@@ -31,7 +31,7 @@ extension UIScrollView {
     }
     
     @discardableResult
-    func scrollToTopOrBottomAutomatically(animated: Bool = true, priority: Priority = .top) -> CGPoint {
+    func scrollToTopOrBottomAutomatically(animated: Bool = true, priority: Priority = .top, fuzzyOffset: CGFloat = 0) -> CGPoint {
         
         let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
         
@@ -43,9 +43,9 @@ extension UIScrollView {
 
         switch priority {
         case .top:
-            offset = contentOffset != topOffset ? topOffset : bottomOffset
+            offset = abs(contentOffset.y - topOffset.y) > abs(fuzzyOffset) ? topOffset : bottomOffset
         case .bottom:
-            offset = contentOffset == bottomOffset ? topOffset : bottomOffset
+            offset = abs(contentOffset.y - bottomOffset.y) <= abs(fuzzyOffset) ? topOffset : bottomOffset
         }
 
         setContentOffset(offset, animated: animated)
