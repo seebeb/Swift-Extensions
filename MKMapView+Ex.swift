@@ -1,6 +1,5 @@
 //
 //  MKMapView+Ex.swift
-//  RemindersPlus
 //
 //  Created by Augus on 7/2/16.
 //  Copyright © 2016 iAugus. All rights reserved.

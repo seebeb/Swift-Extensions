@@ -1,6 +1,5 @@
 //
 //  UIView+Event.swift
-//  RemindersPlus
 //
 //  Created by Augus on 6/28/16.
 //  Copyright © 2016 iAugus. All rights reserved.

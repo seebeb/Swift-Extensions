@@ -1,6 +1,5 @@
 //
 //  UIButton+HitTest.swift
-//  Flags
 //
 //  Created by Augus on 7/23/16.
 //  Copyright © 2016 iAugus. All rights reserved.

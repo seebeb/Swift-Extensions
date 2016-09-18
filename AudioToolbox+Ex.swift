@@ -1,6 +1,5 @@
 //
 //  AudioToolbox+Ex.swift
-//  RemindersPlus
 //
 //  Created by Augus on 7/10/16.
 //  Copyright © 2016 iAugus. All rights reserved.

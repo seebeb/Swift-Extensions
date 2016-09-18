@@ -1,6 +1,5 @@
 //
 //  Arithmetic+Protocol.swift
-//  PushUps
 //
 //  Created by Augus on 7/16/16.
 //  Copyright © 2016 iAugus. All rights reserved.

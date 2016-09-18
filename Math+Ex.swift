@@ -1,6 +1,5 @@
 //
 //  Math+Ex.swift
-//  PushUps
 //
 //  Created by Augus on 8/7/16.
 //  Copyright © 2016 iAugus. All rights reserved.
