@@ -73,6 +73,14 @@ extension UIView {
         frame.origin.y = originY
         self.frame = frame
     }
+
+    func setFrameMaxX(_ maxX: CGFloat) {
+        setFrameOriginX(maxX - frame.width)
+    }
+
+    func setFrameMaxY(_ maxY: CGFloat) {
+        setFrameOriginY(maxY - frame.height)
+    }
     
     /**
      set current view's absolute center to other view's center

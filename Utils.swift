@@ -9,6 +9,7 @@ import Foundation
 
 
 public typealias Closure = () -> ()
+public typealias Completion = (Bool) -> ()
 
 public func NSLocalizedString(_ key: String) -> String {
     return NSLocalizedString(key, comment: "")

@@ -43,6 +43,20 @@ extension UIImage {
         UIGraphicsEndImageContext()
         self.init(cgImage: image?.cgImage)
     }
+
+    convenience init(frame: CGRect, color: UIColor?, isOpaque: Bool = true, scale: CGFloat = 0) {
+        if color == nil {
+            self.init()
+        } else {
+
+            UIGraphicsBeginImageContextWithOptions(frame.size, isOpaque, scale)
+            color?.setFill()
+            UIRectFill(frame)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            self.init(cgImage: image?.cgImage)
+        }
+    }
 }
 
 
