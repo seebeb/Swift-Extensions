@@ -12,9 +12,7 @@ import SwiftyBeaver
 #else
     public struct log {
         static func verbose(_ log: Any?) {}
-        static func debug(_ log: Any?) {
-            print("log")
-        }
+        static func debug(_ log: Any?) {}
         static func info(_ log: Any?) {}
         static func warning(_ log: Any?) {}
         static func error(_ log: Any?) {}
@@ -33,11 +31,11 @@ public extension SwiftyBeaver {
             let console = ConsoleDestination()
 
             // ⚫️🔴🔵⚪️🎾🌕🌎
-            console.levelColor.Verbose = "⚪️"
-            console.levelColor.Debug = "🎾"
-            console.levelColor.Info = "🔵"
-            console.levelColor.Verbose = "🌕"
-            console.levelColor.Error = "🔴"
+            console.levelColor.Verbose = "⚪️ "
+            console.levelColor.Debug = "🎾 "
+            console.levelColor.Info = "🔵 "
+            console.levelColor.Verbose = "🌕 "
+            console.levelColor.Error = "🔴 "
 
             // log to Xcode Console
             log.addDestination(console)
