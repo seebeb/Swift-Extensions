@@ -33,8 +33,9 @@ func changeKeyboardColorWith(_ color: UIColor) {
 
     guard UIWindow.keyboardWindow.0, let kbWindow = UIWindow.keyboardWindow.1 else { return }
 
-    kbWindow.loopView("UIKBBackdropView") { (subView) in
+    kbWindow.loopSubiews("UIKBBackdropView") { (subView) in
         subView.backgroundColor = color
+        log.debug(subView)
     }
 }
 
@@ -42,7 +43,7 @@ func opaqueKeyboardKeyView() {
 
     guard UIWindow.keyboardWindow.0, let kbWindow = UIWindow.keyboardWindow.1 else { return }
 
-    kbWindow.loopView("UIKBKeyView", shouldReturn: false) { (subView) in
+    kbWindow.loopSubiews("UIKBKeyView", shouldReturn: false) { (subView) in
         subView.isOpaque = true
     }
 }

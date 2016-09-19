@@ -177,6 +177,26 @@ extension UIView {
         return String(describing: classForCoder) == name
     }
 
+    func loopSubiews(_ closure: ((_ subView: UIView) -> ())) {
+        for v in subviews {
+            closure(v)
+            v.loopSubiews(closure)
+        }
+    }
+
+    func loopSubiews(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
+        for v in subviews {
+            if isEqualToNameOfClass(nameOfView) {
+                execute(v)
+                if shouldReturn {
+                    return
+                }
+            }
+            v.loopSubiews(nameOfView, shouldReturn: shouldReturn, execute: execute)
+        }
+    }
+
+    @available(iOS, deprecated: 1.0, message: "Please use `loopSubiews` instead.")
     func loopView(_ closure: ((_ subView: UIView) -> ())) {
         for v in subviews {
             closure(v)
@@ -184,6 +204,7 @@ extension UIView {
         }
     }
 
+    @available(iOS, deprecated: 1.0, message: "Please use `loopSubiews` instead.")
     func loopView(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
         for v in subviews {
             if isEqualToNameOfClass(nameOfView) {
