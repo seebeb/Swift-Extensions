@@ -17,6 +17,7 @@ extension CGRect {
         let y = origin.y + height / 2
         return CGPoint(x: x, y: y)
     }
+
     
     // MARK: -
     
@@ -33,6 +34,38 @@ extension CGRect {
         rect.size = CGSize(width: _min, height: _min)
         return rect
     }
+
+
+    // MARK: - 
+
+    func changeOriginX(_ x: CGFloat) -> CGRect {
+        var frame = self
+        frame.origin.x = x
+        return frame
+    }
+
+    func changeOriginY(_ y: CGFloat) -> CGRect {
+        var frame = self
+        frame.origin.y = y
+        return frame
+    }
+
+    func changeMaxX(_ x: CGFloat) -> CGRect {
+        return changeOriginX(x - width)
+    }
+
+    func changeMaxY(_ y: CGFloat) -> CGRect {
+        return changeOriginY(y - height)
+    }
+
+    func changeMidX(_ x: CGFloat) -> CGRect {
+        return changeOriginX(x - width / 2)
+    }
+
+    func changeMidY(_ y: CGFloat) -> CGRect {
+        return changeOriginY(y - height / 2)
+    }
+
     
     // MARK: - 
     

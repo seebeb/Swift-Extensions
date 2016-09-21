@@ -76,11 +76,19 @@ extension UIViewController {
 extension UIViewController {
 
     func dismissAnimated() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func dismissWithoutAnimation() {
-        self.dismiss(animated: false, completion: nil)
+        dismiss(animated: false, completion: nil)
+    }
+
+    func popViewControllerAnimated() {
+        _ = navigationController?.popViewController(animated: true)
+    }
+
+    func popViewControllerWithoutAnimation() {
+        _ = navigationController?.popViewController(animated: false)
     }
 }
 
@@ -90,6 +98,8 @@ extension UIViewController {
 extension Selector {
     static let dismissAnimated = #selector(UIViewController.dismissAnimated)
     static let dismissWithoutAnimation = #selector(UIViewController.dismissWithoutAnimation)
+    static let popViewControllerAnimated = #selector(UIViewController.popViewControllerAnimated)
+    static let popViewControllerWithoutAnimation = #selector(UIViewController.popViewControllerWithoutAnimation)
 }
 
 

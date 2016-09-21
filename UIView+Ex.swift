@@ -163,8 +163,8 @@ extension UIView {
 
 extension UIView {
     
-    func isPointInside(_ fromView: UIView, point: CGPoint, event: UIEvent?) -> Bool {
-        return self.point(inside: fromView.convert(point, to: self), with: event)
+    func point(inside point: CGPoint, from view: UIView, event: UIEvent?) -> Bool {
+        return self.point(inside: view.convert(point, to: self), with: event)
     }
 }
 
@@ -177,14 +177,23 @@ extension UIView {
         return String(describing: classForCoder) == name
     }
 
-    func loopSubiews(_ closure: ((_ subView: UIView) -> ())) {
+
+    /// loop subviews and subviews' subviews
+    ///
+    /// - parameter closure: subview
+    func loopViews(_ closure: ((_ subView: UIView) -> ())) {
         for v in subviews {
             closure(v)
-            v.loopSubiews(closure)
+            v.loopViews(closure)
         }
     }
 
-    func loopSubiews(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
+    /// loop subviews and subviews' subviews
+    ///
+    /// - parameter nameOfView:   name of subview
+    /// - parameter shouldReturn: should return or not when meeting the specific subview
+    /// - parameter execute:      subview
+    func loopViews(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
         for v in subviews {
             if isEqualToNameOfClass(nameOfView) {
                 execute(v)
@@ -192,28 +201,7 @@ extension UIView {
                     return
                 }
             }
-            v.loopSubiews(nameOfView, shouldReturn: shouldReturn, execute: execute)
-        }
-    }
-
-    @available(iOS, deprecated: 1.0, message: "Please use `loopSubiews` instead.")
-    func loopView(_ closure: ((_ subView: UIView) -> ())) {
-        for v in subviews {
-            closure(v)
-            v.loopView(closure)
-        }
-    }
-
-    @available(iOS, deprecated: 1.0, message: "Please use `loopSubiews` instead.")
-    func loopView(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
-        for v in subviews {
-            if isEqualToNameOfClass(nameOfView) {
-                execute(v)
-                if shouldReturn {
-                    return
-                }
-            }
-            v.loopView(nameOfView, shouldReturn: shouldReturn, execute: execute)
+            v.loopViews(nameOfView, shouldReturn: shouldReturn, execute: execute)
         }
     }
 }

@@ -96,21 +96,21 @@ class ContinuousValuesGeneratorWithDuration<T: Arithmetic> {
             return
         }
         
-        let tempTotalTimes = self.times
+//        let tempTotalTimes = self.times
         let interval = duration / Double(self.times)
         
-        #if DEBUG
-            let note = endValue.double != 0 && endValue.double < 0.0001 ? " (Attention: About 0)" : ""
-            print("\n" + "###########  Animated Value Generator  #############" + "\n")
-            print("Start value: \(startValue)")
-            print("End value: \(endValue)" + note)
-            print("Offset per time: \(self.offsetPerTime)")
-            print("Duration: \(duration)")
-            print("Interval: \(interval)")
-            print("Total times: \(tempTotalTimes)")
-            print("\n" + "###########  Animated Value Generator  #############" + "\n")
-        #endif
-        
+//        #if DEBUG
+//            let note = endValue.double != 0 && endValue.double < 0.0001 ? " (Attention: About 0)" : ""
+//            print("\n" + "###########  Animated Value Generator  #############" + "\n")
+//            print("Start value: \(startValue)")
+//            print("End value: \(endValue)" + note)
+//            print("Offset per time: \(self.offsetPerTime)")
+//            print("Duration: \(duration)")
+//            print("Interval: \(interval)")
+//            print("Total times: \(tempTotalTimes)")
+//            print("\n" + "###########  Animated Value Generator  #############" + "\n")
+//        #endif
+
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(run(_:)), userInfo: nil, repeats: true).fire()
         
         completionHandler = completion
@@ -118,16 +118,16 @@ class ContinuousValuesGeneratorWithDuration<T: Arithmetic> {
     
     @objc fileprivate func run(_ timer: Timer) {
         
-        #if DEBUG
-            
-            let output: (T) -> () = {
-                print("Animated Value Generator - Current Value: \($0)")
-            }
-            
-            output(startValue)
-            
-        #endif
-        
+//        #if DEBUG
+//            
+//            let output: (T) -> () = {
+//                print("Animated Value Generator - Current Value: \($0)")
+//            }
+//            
+//            output(startValue)
+//            
+//        #endif
+
         guard times > 0 else {
             timer.invalidate()
             
@@ -135,9 +135,9 @@ class ContinuousValuesGeneratorWithDuration<T: Arithmetic> {
                 
                 generatedValueHandler(endValue)
                 
-                #if DEBUG
-                    output(endValue)
-                #endif
+//                #if DEBUG
+//                    output(endValue)
+//                #endif
             }
             
             completionHandler?()
