@@ -34,7 +34,7 @@ public extension SwiftyBeaver {
             console.levelColor.Verbose = "⚪️ "
             console.levelColor.Debug = "🎾 "
             console.levelColor.Info = "🔵 "
-            console.levelColor.Verbose = "🌕 "
+            console.levelColor.Warning = "🌕 "
             console.levelColor.Error = "🔴 "
 
             // log to Xcode Console
