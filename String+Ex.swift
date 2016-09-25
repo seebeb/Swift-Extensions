@@ -35,6 +35,35 @@ public extension String {
 // MARK: - 
 
 extension String {
+
+    func slice(from: String, to: String) -> String? {
+        return (range(of: from)?.upperBound).flatMap { sInd in
+            (range(of: to, range: sInd..<endIndex)?.lowerBound).map { eInd in
+                substring(with: sInd..<eInd)
+            }
+        }
+    }
+}
+
+extension String {
+
+    subscript(i: Int) -> String {
+        guard i >= 0 && i < characters.count else { return "" }
+        return String(self[index(startIndex, offsetBy: i)])
+    }
+
+    subscript(range: Range<Int>) -> String {
+        let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex) ?? endIndex
+        return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) ?? endIndex))
+    }
+
+    subscript(range: ClosedRange<Int>) -> String {
+        let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex) ?? endIndex
+        return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) ?? endIndex))
+    }
+}
+
+extension String {
     
     /// Remove last character
     ///
@@ -59,14 +88,36 @@ extension String {
         
         return remove(at: startIndex)
     }
-    
+
+    /// Remove last character
+    ///
+    /// - returns: characters which are left
+    func dropLast() -> String {
+
+        guard startIndex != endIndex else { return self }
+
+        return substring(to: index(before: endIndex))
+    }
+
+    /// Remove fisrt character
+    ///
+    /// - returns: characters which are left
+    func dropFirst() -> String {
+
+        guard startIndex != endIndex else { return self }
+
+        return substring(from: index(after: startIndex))
+    }
+
+    @available(iOS, deprecated: 1.0, message: "Please use `dropLast()`")
     var lastRemoved: String {
         
         guard startIndex != endIndex else { return self }
         
         return substring(to: index(before: endIndex))
     }
-    
+
+    @available(iOS, deprecated: 1.0, message: "Please use `dropFirst()`")
     var firstRemoved: String {
         
         guard startIndex != endIndex else { return self }

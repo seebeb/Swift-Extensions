@@ -1,47 +1,43 @@
 //
-//  AlamofireSwiftyJSON.swift
-//  AlamofireSwiftyJSON
+//  Alamofire-SwiftyJSON.swift
 //
-//  Created by Pinglin Tang on 14-9-22.
-//  Copyright (c) 2014 SwiftyJSON. All rights reserved.
+//  Created by Augus on 9/25/16.
+//  Copyright © 2016 iAugus. All rights reserved.
 //
 
 import Foundation
 import Alamofire
 import SwiftyJSON
 
+extension DataRequest {
 
-//extension Request {
-//    
-//    public static func SwiftyJSONResponseSerializer(options: NSJSONReadingOptions = .AllowFragments)
-//        -> ResponseSerializer<JSON, NSError>
-//    {
-//        return ResponseSerializer { _, _, data, error in
-//            guard error == nil else { return .Failure(error!) }
-//            
-//            guard let validData = data, validData.length > 0 else {
-//                let failureReason = "JSON could not be serialized. Input data was nil or zero length."
-//                let error = Error.errorWithCode(.JSONSerializationFailed, failureReason: failureReason)
-//                return .Failure(error)
-//            }
-//            
-//            let json:JSON = SwiftyJSON.JSON(data: validData)
-//            if let jsonError = json.error {
-//                return Result.Failure(jsonError)
-//            }
-//            
-//            return Result.Success(json)
-//        }
-//    }
-//    
-//    public func responseSwiftyJSON(
-//        options: JSONSerialization.ReadingOptions = .allowFragments,
-//        completionHandler: Response<JSON, NSError> -> Void)
-//        -> Self
-//    {
-//        return response(
-//            responseSerializer: Request.SwiftyJSONResponseSerializer(options: options),
-//            completionHandler: completionHandler
-//        )
-//    }
-//}
+    @discardableResult
+    public func responseSwiftyJSON(
+        queue: DispatchQueue? = nil,
+        options: JSONSerialization.ReadingOptions = .allowFragments,
+        completionHandler:@escaping (URLRequest, HTTPURLResponse?, SwiftyJSON.JSON, NSError?) -> Void)
+        -> Self
+    {
+
+        return response(queue: queue, responseSerializer: DataRequest.jsonResponseSerializer(options: options), completionHandler: { (response) in
+
+            DispatchQueue.global(qos: .default).async(execute: {
+
+                var responseJSON: JSON
+                if response.result.isFailure
+                {
+                    responseJSON = JSON.null
+                } else {
+                    responseJSON = SwiftyJSON.JSON(response.result.value!)
+                }
+                (queue ?? DispatchQueue.main).async(execute: {
+                    completionHandler(response.request!, response.response, responseJSON, response.result.error as NSError?)
+                })
+            })
+        })
+    }
+
+    fileprivate func responseSwiftyJSON(_ completionHandler: @escaping (URLRequest, HTTPURLResponse?, SwiftyJSON.JSON, NSError?) -> Void) -> Self {
+        return responseSwiftyJSON(queue: nil, options:JSONSerialization.ReadingOptions.allowFragments, completionHandler:completionHandler)
+    }
+}
