@@ -64,6 +64,42 @@ extension UIImage {
 
 extension UIImage {
 
+    func tintedImageWithColor(_ color: UIColor) -> UIImage? {
+
+        guard let maskImage = self.cgImage else { return nil }
+
+        let width = self.size.width
+        let height = self.size.height
+        let bounds = CGRect(x: 0, y: 0, width: width, height: height)
+
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+
+        guard let bitmapContext = CGContext(data: nil,
+                                            width: Int(width),
+                                            height: Int(height),
+                                            bitsPerComponent: 8,
+                                            bytesPerRow: 0,
+                                            space: colorSpace,
+                                            bitmapInfo: bitmapInfo.rawValue) else { return nil }
+
+        bitmapContext.clip(to: bounds, mask: maskImage)
+        bitmapContext.setFillColor(color.cgColor)
+        bitmapContext.fill(bounds)
+
+        guard let cImage = bitmapContext.makeImage() else { return nil }
+
+        let coloredImage = UIImage(cgImage: cImage)
+
+        return coloredImage
+    }
+}
+
+
+// MARK: - 
+
+extension UIImage {
+
     func roundedScaledToSize(_ size: CGSize) -> UIImage {
         return scaledToSize(size).rounded()
     }
