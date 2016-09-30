@@ -65,6 +65,16 @@ public func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
+// MARK: - 
+
+public func == (lhs: String?, rhs: (String, String)) -> Bool {
+    if lhs == rhs.0 || lhs == rhs.1 {
+        return true
+    }
+    return false
+}
+
+
 // MARK: -
 
 extension Bool {
