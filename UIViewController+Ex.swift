@@ -75,19 +75,19 @@ extension UIViewController {
 
 extension UIViewController {
 
-    func dismissAnimated() {
+    @IBAction func dismissAnimated() {
         dismiss(animated: true, completion: nil)
     }
     
-    func dismissWithoutAnimation() {
+    @IBAction func dismissWithoutAnimation() {
         dismiss(animated: false, completion: nil)
     }
 
-    func popViewControllerAnimated() {
+    @IBAction func popViewControllerAnimated() {
         _ = navigationController?.popViewController(animated: true)
     }
 
-    func popViewControllerWithoutAnimation() {
+    @IBAction func popViewControllerWithoutAnimation() {
         _ = navigationController?.popViewController(animated: false)
     }
 }
