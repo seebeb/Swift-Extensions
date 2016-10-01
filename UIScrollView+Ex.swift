@@ -15,6 +15,14 @@ extension UIScrollView {
         case top
         case bottom
     }
+
+    var isOnTop: Bool {
+        return contentOffset.y == -contentInset.top
+    }
+
+    var isAtBottom: Bool {
+        return contentOffset.y == contentSize.height - bounds.size.height
+    }
     
     @discardableResult
     func scrollToTop(animated: Bool = true) -> CGPoint {

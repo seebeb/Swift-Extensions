@@ -300,6 +300,38 @@ extension UIView {
     }
 }
 
+
+// MARK: -
+
+extension UIView {
+
+    enum ShakeDirection {
+        case horizontal
+        case vertical
+    }
+
+    func startShaking(duration: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeatCount: Float = FLT_MAX) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = duration
+        animation.repeatCount = repeatCount
+        animation.autoreverses = true
+        switch direction {
+        case .horizontal:
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: center.x - offset, y: center.y))
+            animation.toValue = NSValue(cgPoint:CGPoint(x: center.x + offset, y: center.y))
+        case .vertical:
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: center.x, y: center.y - offset))
+            animation.toValue = NSValue(cgPoint:CGPoint(x: center.x, y: center.y + offset))
+        }
+        layer.add(animation, forKey: "position")
+    }
+
+    func stopShaking() {
+        layer.removeAnimation(forKey: "position")
+    }
+}
+
+
 // MARK: - Corner raidus
 // REFERENCE: http://stackoverflow.com/a/35621736/4656574
 
