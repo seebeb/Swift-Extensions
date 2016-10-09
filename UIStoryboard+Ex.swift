@@ -11,6 +11,7 @@ import UIKit
 extension UIStoryboard {
     static var Main: UIStoryboard { return UIStoryboard(name: "Main", bundle: nil) }
     static var MainInterface: UIStoryboard { return UIStoryboard(name: "MainInterface", bundle: nil) }
+    static var More: UIStoryboard { return UIStoryboard(name: "More", bundle: nil) }
 }
 
 extension UIStoryboard {
