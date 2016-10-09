@@ -35,7 +35,6 @@ func changeKeyboardColorWith(_ color: UIColor) {
 
     kbWindow.loopViews("UIKBBackdropView") { (subView) in
         subView.backgroundColor = color
-        log.debug(subView)
     }
 }
 
