@@ -9,7 +9,24 @@
 import UIKit
 import SnapKit
 
+protocol UIScrollViewScrollToBottomDelegate {
+    func scrollViewWillScrollToBottom(_ scrollView: UIScrollView)
+    func scrollViewDidScrollToBottom(_ scrollView: UIScrollView)
+}
+
+private var xoAssociationKey: UInt8 = 0
+private var xoAssociationDelegateKey: UInt8 = 0
+
 extension UIScrollView {
+
+    var scrollToBottomDelegate: UIScrollViewScrollToBottomDelegate? {
+        get {
+            return objc_getAssociatedObject(self, &xoAssociationDelegateKey) as? UIScrollViewScrollToBottomDelegate
+        }
+        set {
+            objc_setAssociatedObject(self, &xoAssociationDelegateKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
 
     enum Priority {
         case top
@@ -23,11 +40,22 @@ extension UIScrollView {
     var isAtBottom: Bool {
         return contentOffset.y == contentSize.height - bounds.size.height
     }
+
+    /// default is false
+    var rightBottomTriggerBoundToScrollViewDidScrollToTop: Bool {
+        get {
+            return objc_getAssociatedObject(self, &xoAssociationKey) as? Bool ?? false
+        }
+        set {
+            objc_setAssociatedObject(self, &xoAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
     
     @discardableResult
     func scrollToTop(animated: Bool = true) -> CGPoint {
         let topOffset = CGPoint(x: 0, y: -contentInset.top)
         setContentOffset(topOffset, animated: animated)
+        bindToScrollViewDidScrollToTopIfNeeded()
         return topOffset
     }
     
@@ -35,6 +63,7 @@ extension UIScrollView {
     func scrollToBottom(animated: Bool = true) -> CGPoint {
         let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height)
         setContentOffset(bottomOffset, animated: animated)
+        scrollViewScrollingToBottom()
         return bottomOffset
     }
     
@@ -57,6 +86,12 @@ extension UIScrollView {
         }
 
         setContentOffset(offset, animated: animated)
+
+        if offset == topOffset {
+            bindToScrollViewDidScrollToTopIfNeeded()
+        } else {
+            scrollViewScrollingToBottom()
+        }
         
         return offset
     }
@@ -142,5 +177,28 @@ extension UIScrollView {
         b.layer.addSublayer(shapeLayer)
 
         return b
+    }
+
+    private func bindToScrollViewDidScrollToTopIfNeeded() {
+
+        guard rightBottomTriggerBoundToScrollViewDidScrollToTop else { return }
+
+        // call scrollViewShouldScrollToTop as well, may be needed somewhere
+        _ = delegate?.scrollViewShouldScrollToTop?(self)
+
+        executeAfterDelay(0.3, closure: { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.delegate?.scrollViewDidScrollToTop?(strongSelf)
+        })
+    }
+
+    private func scrollViewScrollingToBottom() {
+
+        scrollToBottomDelegate?.scrollViewWillScrollToBottom(self)
+
+        executeAfterDelay(0.3) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.scrollToBottomDelegate?.scrollViewDidScrollToBottom(strongSelf)
+        }
     }
 }
