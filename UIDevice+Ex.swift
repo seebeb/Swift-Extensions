@@ -10,7 +10,7 @@ import UIKit
 
 extension UIDevice {
     
-    @available(iOS, deprecated: 1.0, message: "Please use `UIDevice.current.isPad`")
+    @available(iOS, deprecated, message: "Please use `UIDevice.current.isPad`")
     static var isPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }

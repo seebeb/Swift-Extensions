@@ -16,6 +16,12 @@ public func NSLocalizedString(_ key: String) -> String {
     return NSLocalizedString(key, comment: "")
 }
 
+extension AppDelegate {
+    
+    class var shared: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+}
 
 struct Utils {
     

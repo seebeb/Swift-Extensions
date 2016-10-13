@@ -109,7 +109,7 @@ extension String {
         return substring(from: index(after: startIndex))
     }
 
-    @available(iOS, deprecated: 1.0, message: "Please use `dropLast()`")
+    @available(*, deprecated, message: "Please use `dropLast()`")
     var lastRemoved: String {
         
         guard startIndex != endIndex else { return self }
@@ -117,7 +117,7 @@ extension String {
         return substring(to: index(before: endIndex))
     }
 
-    @available(iOS, deprecated: 1.0, message: "Please use `dropFirst()`")
+    @available(*, deprecated, message: "Please use `dropFirst()`")
     var firstRemoved: String {
         
         guard startIndex != endIndex else { return self }

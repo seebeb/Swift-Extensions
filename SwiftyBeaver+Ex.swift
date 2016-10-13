@@ -20,11 +20,11 @@
             let console = ConsoleDestination()
 
             // ⚫️🔴🔵⚪️🎾🌕🌎
-            console.levelColor.Verbose = "⚪️ "
-            console.levelColor.Debug = "🎾 "
-            console.levelColor.Info = "🔵 "
-            console.levelColor.Warning = "🌕 "
-            console.levelColor.Error = "🔴 "
+            console.levelColor.verbose = "⚪️ "
+            console.levelColor.debug = "🎾 "
+            console.levelColor.info = "🔵 "
+            console.levelColor.warning = "🌕 "
+            console.levelColor.error = "🔴 "
 
             // log to Xcode Console
             log.addDestination(console)
