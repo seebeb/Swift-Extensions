@@ -158,4 +158,6 @@ extension String {
 extension String {
     static let ok = NSLocalizedString("OK", comment: "")
     static let cancel = NSLocalizedString("Cancel", comment: "")
+    static let delete = NSLocalizedString("Delete", comment: "")
+    static let deleteAll = NSLocalizedString("Delete All", comment: "")
 }
