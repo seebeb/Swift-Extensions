@@ -8,9 +8,9 @@
 import Foundation
 
 
-extension Array {
+public extension Array {
     
-    func find(_ includedElement: (Element) -> Bool) -> Int? {
+    public func find(_ includedElement: (Element) -> Bool) -> Int? {
         for (idx, element) in enumerated() {
             if includedElement(element) {
                 return idx
@@ -25,7 +25,7 @@ extension Array {
     /// - parameter atIndex: index
     ///
     /// - returns: result
-    func object(_ atIndex: Int) -> Element? {
+    public func object(_ atIndex: Int) -> Element? {
         
         guard atIndex >= 0 else { return nil }
         
@@ -36,9 +36,23 @@ extension Array {
     
 }
 
-extension Array {
+public extension Array {
     
-    mutating func append(_ newElements: [Element]) {
+    public mutating func append(_ newElements: [Element]) {
         newElements.forEach() { append($0) }
+    }
+}
+
+public extension Sequence where Iterator.Element: Hashable {
+
+    public var unique: [Iterator.Element] {
+        return Array(Set(self))
+    }
+}
+
+public extension Array where Element: Equatable {
+
+    public var originalOrderUnique: Array  {
+        return reduce([]){ $0.contains($1) ? $0 : $0 + [$1] }
     }
 }
