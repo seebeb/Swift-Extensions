@@ -9,16 +9,18 @@
 import UIKit
 
 
-private var xoAssociationKey: UInt8 = 0
-
 extension UINavigationBar {
+
+    private struct Association {
+        static var key = 0
+    }
     
     var isBottomHairlineHidden: Bool {
         get {
-            return objc_getAssociatedObject(self, &xoAssociationKey) as? Bool ?? false
+            return objc_getAssociatedObject(self, &Association.key) as? Bool ?? false
         }
         set {
-            objc_setAssociatedObject(self, &xoAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &Association.key, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
             navigationBarImageView?.isHidden = newValue
         }
     }
@@ -28,6 +30,7 @@ extension UINavigationBar {
     }
     
     fileprivate func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
+        
         if view is UIImageView && view.bounds.height <= 1.0 {
             return view as? UIImageView
         }
