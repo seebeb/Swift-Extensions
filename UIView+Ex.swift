@@ -195,7 +195,7 @@ extension UIView {
     /// - parameter execute:      subview
     func loopViews(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
         for v in subviews {
-            if isEqualToNameOfClass(nameOfView) {
+            if v.isEqualToNameOfClass(nameOfView) {
                 execute(v)
                 if shouldReturn {
                     return

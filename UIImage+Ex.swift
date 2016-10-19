@@ -93,6 +93,33 @@ extension UIImage {
 
         return coloredImage
     }
+
+    /// Invert the color of the image, then return the new image
+    ///
+    /// REFERENCE: http://stackoverflow.com/a/38835122/4656574
+    ///
+    /// - parameter cgResult: whether oa not to convert to cgImgae, default is false
+    ///
+    /// - returns: inverted image, may nil if failed
+    func inverseImage(cgResult: Bool = false) -> UIImage? {
+
+        let coreImage = UIKit.CIImage(image: self)
+
+        guard let filter = CIFilter(name: "CIColorInvert") else { return nil }
+
+        filter.setValue(coreImage, forKey: kCIInputImageKey)
+
+        guard let result = filter.value(forKey: kCIOutputImageKey) as? UIKit.CIImage else { return nil }
+
+        if cgResult {
+
+            guard let cgImage = CIContext(options: nil).createCGImage(result, from: result.extent) else { return nil }
+
+            return UIImage(cgImage: cgImage)
+        }
+        
+        return UIImage(ciImage: result)
+    }
 }
 
 
