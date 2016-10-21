@@ -42,6 +42,14 @@ struct Utils {
     static func bundlePathForFile(_ named: String) -> String {
         return (Bundle.main.bundlePath as NSString).appendingPathComponent(named)
     }
+
+    static func createFolder(_ path: String) -> String {
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: path) {
+            try? fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+        }
+        return path
+    }
     
     @discardableResult
     static func deleteFileWithPath(_ path: String) -> Bool {
