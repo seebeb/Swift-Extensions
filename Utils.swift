@@ -78,6 +78,30 @@ struct Utils {
 }
 
 extension Utils {
+
+    static func clearTmpDirectory() {
+        do {
+            try tmpContents.forEach() {
+                try FileManager.default.removeItem(atPath: $0)
+            }
+        } catch {}
+    }
+
+    static var tmpContents: [String] {
+        let paths = (try? FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())) ?? []
+        return paths.map() {
+            return (NSTemporaryDirectory() as NSString).appendingPathComponent($0)
+        }
+    }
+
+    static func isDirectoryFor(_ path: String) -> Bool {
+        var isDirectory: ObjCBool = false
+        FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
+        return isDirectory.boolValue
+    }
+}
+
+extension Utils {
     
     static var libraryPath: String {
         return NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!

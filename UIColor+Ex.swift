@@ -37,6 +37,15 @@ extension UIColor {
     func alpha(_ scale: CGFloat) -> UIColor {
         return withAlphaComponent(scale)
     }
+
+    var alpha: CGFloat {
+        var h = CGFloat(0)
+        var s = CGFloat(0)
+        var b = CGFloat(0)
+        var a = CGFloat(0)
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return a
+    }
     
 }
 
