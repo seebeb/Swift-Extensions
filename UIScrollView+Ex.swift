@@ -14,8 +14,8 @@ protocol UIScrollViewScrollToBottomDelegate {
     func scrollViewDidScrollToBottom(_ scrollView: UIScrollView)
 }
 
-private var xoAssociationKey: UInt8 = 0
-private var xoAssociationDelegateKey: UInt8 = 0
+private var xoAssociationKey = "xoAssociationKey"
+private var xoAssociationDelegateKey = "xoAssociationDelegateKey"
 
 extension UIScrollView {
 
@@ -80,9 +80,11 @@ extension UIScrollView {
 
         switch priority {
         case .top:
-            offset = abs(contentOffset.y - topOffset.y) > abs(fuzzyOffset) ? topOffset : bottomOffset
+            let shouldBeTop = abs(contentOffset.y - topOffset.y) > abs(fuzzyOffset)
+            offset = shouldBeTop ? topOffset : bottomOffset
         case .bottom:
-            offset = abs(contentOffset.y - bottomOffset.y) <= abs(fuzzyOffset) ? topOffset : bottomOffset
+            let shouldBeTop = abs(contentOffset.y - bottomOffset.y) <= abs(fuzzyOffset)
+            offset = shouldBeTop ? topOffset : bottomOffset
         }
 
         setContentOffset(offset, animated: animated)
