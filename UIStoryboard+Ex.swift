@@ -109,8 +109,8 @@ extension UIView {
     
     /// Load view from nib. Note: Nib name must be equal to the class name.
     ///
-    /// - parameter view:    class name for the view
-    /// - parameter owner:   nib name for the view
+    /// - parameter view:    The name of the nib file, which need not include the .nib extension
+    /// - parameter owner:   The object to assign as the nib’s File's Owner object
     /// - parameter options: options
     ///
     /// - returns: view

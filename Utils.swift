@@ -79,15 +79,15 @@ struct Utils {
 
 extension Utils {
 
-    static func clearTmpDirectory() {
+    static func clearTempDirectory() {
         do {
-            try tmpContents.forEach() {
+            try tempContents.forEach() {
                 try FileManager.default.removeItem(atPath: $0)
             }
         } catch {}
     }
 
-    static var tmpContents: [String] {
+    static var tempContents: [String] {
         let paths = (try? FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())) ?? []
         return paths.map() {
             return (NSTemporaryDirectory() as NSString).appendingPathComponent($0)
