@@ -18,7 +18,7 @@ import Foundation
     }
     
     func DEBUGPrint(_ any: Any?) {
-        print(any)
+        print(any ?? "nil")
     }
     
     func DEBUGPrint(_ any: Any?, prefix: String = "", suffix: String = "") {
