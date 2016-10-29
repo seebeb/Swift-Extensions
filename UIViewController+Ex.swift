@@ -8,6 +8,23 @@
 import UIKit
 
 
+// MARK: - 
+
+extension UIViewController {
+
+    var isModal: Bool {
+        if presentingViewController != nil {
+            return true
+        } else if navigationController?.presentingViewController?.presentedViewController == navigationController {
+            return true
+        } else if tabBarController?.presentingViewController is UITabBarController {
+            return true
+        }
+        return false
+    }
+}
+
+
 // MARK: - Top bar (status bar + navigation bar)
 
 extension UIViewController {
