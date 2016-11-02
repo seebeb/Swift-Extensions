@@ -154,6 +154,19 @@ extension CGSize {
 }
 
 
+// MARK: - 
+
+extension CGRect {
+
+    var randomPoint: CGPoint {
+        let origin = self.origin
+        let x = CGFloat(arc4random_uniform(UInt32(self.width))) + origin.x
+        let y = CGFloat(arc4random_uniform(UInt32(self.height))) + origin.y
+        return CGPoint(x: x, y: y)
+    }
+}
+
+
 // MARK: - distance
 
 func CGDistance(_ p1: CGPoint, _ p2: CGPoint) -> CGFloat {

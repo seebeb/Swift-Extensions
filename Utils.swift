@@ -5,7 +5,7 @@
 //  Copyright © 2015 iAugus. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 public typealias Closure = () -> ()
