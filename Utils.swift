@@ -12,10 +12,6 @@ public typealias Closure = () -> ()
 public typealias Completion = (Bool) -> ()
 public typealias BoolClosure = (Bool) -> ()
 
-public func NSLocalizedString(_ key: String) -> String {
-    return NSLocalizedString(key, comment: "")
-}
-
 extension AppDelegate {
     
     class var shared: AppDelegate {
