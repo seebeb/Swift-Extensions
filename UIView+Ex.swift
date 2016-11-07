@@ -426,3 +426,32 @@ extension UIView {
         addGestureRecognizers(gestures)
     }
 }
+
+
+// MARK: - 
+
+extension UITableView {
+
+    var centerPoint: CGPoint {
+        let x = center.x + contentOffset.x
+        let y = center.y + contentOffset.y
+        return CGPoint(x: x, y: y)
+    }
+
+    var centerCellIndexPath: IndexPath? {
+        return indexPathForRow(at: centerPoint)
+    }
+}
+
+extension UICollectionView {
+
+    var centerPoint: CGPoint {
+        let x = center.x + contentOffset.x
+        let y = center.y + contentOffset.y
+        return CGPoint(x: x, y: y)
+    }
+
+    var centerItemIndexPath: IndexPath? {
+        return indexPathForItem(at: centerPoint)
+    }
+}
