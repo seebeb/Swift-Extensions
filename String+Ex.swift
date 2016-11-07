@@ -140,6 +140,17 @@ extension String {
     }
 }
 
+extension String {
+
+    func encodeURLComponent() -> String {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? self
+    }
+
+    func decodeURLComponent() -> String {
+        return self.components(separatedBy: "+").joined(separator: " ").removingPercentEncoding ?? self
+    }
+}
+
 
 // MARK: - 
 
