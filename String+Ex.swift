@@ -167,6 +167,8 @@ extension String {
 // MARK: - 
 
 extension String {
+    static let yes = NSLocalizedString("YES", comment: "")
+    static let no = NSLocalizedString("NO", comment: "")
     static let ok = NSLocalizedString("OK", comment: "")
     static let cancel = NSLocalizedString("Cancel", comment: "")
     static let delete = NSLocalizedString("Delete", comment: "")
