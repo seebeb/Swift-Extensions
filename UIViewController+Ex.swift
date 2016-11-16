@@ -127,11 +127,30 @@ extension UIViewController {
     func configureScreenEdgeDismissGesture(_ edges: UIRectEdge = .left, animated: Bool = true, alsoForPad: Bool = false) {
         
         if UIDevice.current.userInterfaceIdiom == .pad && !alsoForPad { return }
-        
-        let selector = animated ? #selector(dismissAnimated) : #selector(dismissWithoutAnimation)
-        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: selector)
-        gesture.edges = edges
+
         view.isUserInteractionEnabled = true
-        view.addGestureRecognizer(gesture)
+
+        let selector = animated ? #selector(dismissAnimated) : #selector(dismissWithoutAnimation)
+
+        func left() {
+            let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: selector)
+            gesture.edges = .left
+            view.addGestureRecognizer(gesture)
+        }
+
+        func right() {
+            let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: selector)
+            gesture.edges = .right
+            view.addGestureRecognizer(gesture)
+        }
+
+        if edges == .left {
+            left()
+        } else if edges == .right {
+            right()
+        } else if edges == [.left, .right] {
+            left()
+            right()
+        }
     }
 }
