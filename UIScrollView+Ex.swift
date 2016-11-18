@@ -9,22 +9,36 @@
 import UIKit
 import SnapKit
 
+protocol UIScrollViewScrollToTopDelegate {
+    func scrollViewWillScrollToTop(_ scrollView: UIScrollView)
+}
+
 protocol UIScrollViewScrollToBottomDelegate {
     func scrollViewWillScrollToBottom(_ scrollView: UIScrollView)
     func scrollViewDidScrollToBottom(_ scrollView: UIScrollView)
 }
 
 private var xoAssociationKey = "xoAssociationKey"
-private var xoAssociationDelegateKey = "xoAssociationDelegateKey"
+private var xoAssociationTopDelegateKey = "xoAssociationTopDelegateKey"
+private var xoAssociationBottomDelegateKey = "xoAssociationBottomDelegateKey"
 
 extension UIScrollView {
 
-    var scrollToBottomDelegate: UIScrollViewScrollToBottomDelegate? {
+    var scrollToTopDelegate: UIScrollViewScrollToTopDelegate? {
         get {
-            return objc_getAssociatedObject(self, &xoAssociationDelegateKey) as? UIScrollViewScrollToBottomDelegate
+            return objc_getAssociatedObject(self, &xoAssociationTopDelegateKey) as? UIScrollViewScrollToTopDelegate
         }
         set {
-            objc_setAssociatedObject(self, &xoAssociationDelegateKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &xoAssociationTopDelegateKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+
+    var scrollToBottomDelegate: UIScrollViewScrollToBottomDelegate? {
+        get {
+            return objc_getAssociatedObject(self, &xoAssociationBottomDelegateKey) as? UIScrollViewScrollToBottomDelegate
+        }
+        set {
+            objc_setAssociatedObject(self, &xoAssociationBottomDelegateKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
 
@@ -53,6 +67,9 @@ extension UIScrollView {
     
     @discardableResult
     func scrollToTop(animated: Bool = true) -> CGPoint {
+
+        scrollToTopDelegate?.scrollViewWillScrollToTop(self)
+
         let topOffset = CGPoint(x: 0, y: -contentInset.top)
         setContentOffset(topOffset, animated: animated)
         bindToScrollViewDidScrollToTopIfNeeded()
