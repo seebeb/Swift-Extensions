@@ -17,6 +17,14 @@ class AudioToolBox: NSObject {
     func playM4RWithName(_ name: String?, bundle: Bundle = Bundle.main) {
         playWithBundle(bundle, name: name, type: "m4r")
     }
+
+    func playM4AWithName(_ name: String?, bundle: Bundle = Bundle.main) {
+        playWithBundle(bundle, name: name, type: "m4a")
+    }
+
+    func playAIFFWithName(_ name: String?, bundle: Bundle = Bundle.main) {
+        playWithBundle(bundle, name: name, type: "aiff")
+    }
     
     func playMP3WithName(_ name: String?, bundle: Bundle = Bundle.main) {
         playWithBundle(bundle, name: name, type: "mp3")

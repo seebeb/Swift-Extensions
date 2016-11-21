@@ -8,31 +8,70 @@
 
 import UIKit
 
-/*
- [UIColor.flat.turquoise,
- UIColor.flat.greenSea,
- UIColor.flat.emerald,
- UIColor.flat.nephritis,
- UIColor.flat.peterRiver,
- UIColor.flat.belizeHole,
- UIColor.flat.amethyst,
- UIColor.flat.wisteria,
- UIColor.flat.wetAsphalt,
- UIColor.flat.midnightBlue,
- UIColor.flat.sunFlower,
- UIColor.flat.orange,
- UIColor.flat.carrot,
- UIColor.flat.pumpkin,
- UIColor.flat.alizarin,
- UIColor.flat.pomegranate,
- UIColor.flat.clouds,
- UIColor.flat.silver,
- UIColor.flat.concrete,
- UIColor.flat.asbestos]
- */
 
 /// Flat UIColors
 extension UIColor {
+
+    static let flatColors = [UIColor.flat.turquoise,
+                             UIColor.flat.greenSea,
+                             UIColor.flat.emerald,
+                             UIColor.flat.nephritis,
+                             UIColor.flat.peterRiver,
+                             UIColor.flat.belizeHole,
+                             UIColor.flat.amethyst,
+                             UIColor.flat.wisteria,
+                             UIColor.flat.wetAsphalt,
+                             UIColor.flat.midnightBlue,
+                             UIColor.flat.sunFlower,
+                             UIColor.flat.orange,
+                             UIColor.flat.carrot,
+                             UIColor.flat.pumpkin,
+                             UIColor.flat.alizarin,
+                             UIColor.flat.pomegranate,
+                             UIColor.flat.clouds,
+                             UIColor.flat.silver,
+                             UIColor.flat.concrete,
+                             UIColor.flat.asbestos
+    ]
+
+    static let vividFlatColors = [UIColor.flat.turquoise,
+                                  UIColor.flat.greenSea,
+                                  UIColor.flat.emerald,
+                                  UIColor.flat.nephritis,
+                                  UIColor.flat.peterRiver,
+                                  UIColor.flat.belizeHole,
+                                  UIColor.flat.amethyst,
+                                  UIColor.flat.wisteria,
+                                  UIColor.flat.sunFlower,
+                                  UIColor.flat.orange,
+                                  UIColor.flat.carrot,
+                                  UIColor.flat.pumpkin,
+                                  UIColor.flat.alizarin,
+                                  UIColor.flat.pomegranate
+    ]
+
+    static let flatColorsWithoutWhite = [UIColor.flat.turquoise,
+                                         UIColor.flat.greenSea,
+                                         UIColor.flat.emerald,
+                                         UIColor.flat.nephritis,
+                                         UIColor.flat.peterRiver,
+                                         UIColor.flat.belizeHole,
+                                         UIColor.flat.amethyst,
+                                         UIColor.flat.wisteria,
+                                         UIColor.flat.wetAsphalt,
+                                         UIColor.flat.midnightBlue,
+                                         UIColor.flat.sunFlower,
+                                         UIColor.flat.orange,
+                                         UIColor.flat.carrot,
+                                         UIColor.flat.pumpkin,
+                                         UIColor.flat.alizarin,
+                                         UIColor.flat.pomegranate,
+                                         UIColor.flat.silver,
+                                         UIColor.flat.concrete,
+                                         UIColor.flat.asbestos
+    ]
+
+
     /// Flat colors
     struct flat {
         /// green sea
@@ -83,8 +122,8 @@ extension UIColor {
         case RGB = 12
         case RGBA = 16
         case RRGGBB = 24
-//        case RRGGBBAA = 32
-        
+        case RRGGBBAA = 32
+
         init?(bitsCount: Int) {
             self.init(rawValue: bitsCount)
         }
@@ -129,12 +168,12 @@ extension UIColor {
             green = ((hex & 0x00ff00) >>  8)
             blue  = ((hex & 0x0000ff) >>  0)
             break;
-//        case .RRGGBBAA:
-//            red   = ((hex & 0xff000000) >> 24)
-//            green = ((hex & 0x00ff0000) >> 16)
-//            blue  = ((hex & 0x0000ff00) >>  8)
-//            alpha = ((hex & 0x000000ff) >>  0)
-//            break;
+        case .RRGGBBAA:
+            red   = ((hex & 0xff000000) >> 24)
+            green = ((hex & 0x00ff0000) >> 16)
+            blue  = ((hex & 0x0000ff00) >>  8)
+            alpha = ((hex & 0x000000ff) >>  0)
+            break;
         }
         
         self.init(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: CGFloat(alpha)/255.0)
