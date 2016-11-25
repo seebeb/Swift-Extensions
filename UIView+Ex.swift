@@ -23,22 +23,22 @@ extension UIView {
 
 extension UIView {
     
-    var maxSize: CGSize {
+    var _maxSize: CGSize {
         let maxL = max(frame.width, frame.height)
         return CGSize(width: maxL, height: maxL)
     }
     
-    var minSize: CGSize {
+    var _minSize: CGSize {
         let minL = min(frame.width, frame.height)
         return CGSize(width: minL, height: minL)
     }
 
-    var maxBounds: CGRect {
-        return CGRect(origin: .zero, size: maxSize)
+    var _maxBounds: CGRect {
+        return CGRect(origin: .zero, size: _maxSize)
     }
     
-    var minBounds: CGRect {
-        return CGRect(origin: .zero, size: minSize)
+    var _minBounds: CGRect {
+        return CGRect(origin: .zero, size: _minSize)
     }
 }
 

@@ -122,7 +122,7 @@ extension UIColor {
         case RGB = 12
         case RGBA = 16
         case RRGGBB = 24
-        case RRGGBBAA = 32
+//        case RRGGBBAA = 32
 
         init?(bitsCount: Int) {
             self.init(rawValue: bitsCount)
@@ -168,14 +168,14 @@ extension UIColor {
             green = ((hex & 0x00ff00) >>  8)
             blue  = ((hex & 0x0000ff) >>  0)
             break;
-        case .RRGGBBAA:
-            red   = ((hex & 0xff000000) >> 24)
-            green = ((hex & 0x00ff0000) >> 16)
-            blue  = ((hex & 0x0000ff00) >>  8)
-            alpha = ((hex & 0x000000ff) >>  0)
-            break;
+//        case .RRGGBBAA:
+//            red   = ((hex & 0xff000000) >> 24)
+//            green = ((hex & 0x00ff0000) >> 16)
+//            blue  = ((hex & 0x0000ff00) >>  8)
+//            alpha = ((hex & 0x000000ff) >>  0)
+//            break;
         }
-        
+
         self.init(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: CGFloat(alpha)/255.0)
         
     }
