@@ -24,7 +24,6 @@ extension UIApplication {
             completion()
         }
     }
-    
 }
 
 extension UIApplication {
