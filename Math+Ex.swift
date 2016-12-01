@@ -74,6 +74,24 @@ public func == (lhs: String?, rhs: (String, String)) -> Bool {
     return false
 }
 
+/// "augus" ~= "Augus" is true
+public func ~= (lhs: String?, rhs: String?) -> Bool {
+    if lhs == rhs {
+        return true
+    }
+    return lhs?.lowercased() == rhs?.lowercased()
+}
+
+/// "123" == 123 is true
+public func == (lhs: String, rhs: Int) -> Bool {
+    return Int(lhs) == rhs
+}
+
+/// 123 == "123" is true
+public func == (lhs: Int, rhs: String) -> Bool {
+    return lhs == Int(rhs)
+}
+
 
 // MARK: -
 

@@ -119,9 +119,9 @@ extension UIColor {
     /// Color formats
     enum ColorFormat: Int {
         
-        case RGB = 12
-        case RGBA = 16
-        case RRGGBB = 24
+        case rgb = 12
+        case rgba = 16
+        case rrggbb = 24
 //        case RRGGBBAA = 32
 
         init?(bitsCount: Int) {
@@ -147,23 +147,23 @@ extension UIColor {
     }
     
     /// Returns color with given hex integer value and color format
-    convenience init(hex: Int, format: ColorFormat = ColorFormat.RRGGBB) {
+    convenience init(hex: Int, format: ColorFormat = ColorFormat.rrggbb) {
         
         var red = 0, green = 0, blue = 0, alpha = 255
         
         switch format {
-        case .RGB:
+        case .rgb:
             red   = ((hex & 0xf00) >> 8) << 4 + ((hex & 0xf00) >> 8)
             green = ((hex & 0x0f0) >> 4) << 4 + ((hex & 0x0f0) >> 4)
             blue  = ((hex & 0x00f) >> 0) << 4 + ((hex & 0x00f) >> 0)
             break;
-        case .RGBA:
+        case .rgba:
             red   = ((hex & 0xf000) >> 12) << 4 + ((hex & 0xf000) >> 12)
             green = ((hex & 0x0f00) >>  8) << 4 + ((hex & 0x0f00) >>  8)
             blue  = ((hex & 0x00f0) >>  4) << 4 + ((hex & 0x00f0) >>  4)
             alpha = ((hex & 0x000f) >>  0) << 4 + ((hex & 0x000f) >>  4)
             break;
-        case .RRGGBB:
+        case .rrggbb:
             red   = ((hex & 0xff0000) >> 16)
             green = ((hex & 0x00ff00) >>  8)
             blue  = ((hex & 0x0000ff) >>  0)
