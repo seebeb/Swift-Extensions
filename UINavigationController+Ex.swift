@@ -47,7 +47,7 @@ extension UINavigationController {
         
         visualEffectView.snp.makeConstraints { (make) in
             make.top.equalTo(navigationBar).offset(-22)
-            make.left.bottom.right.equalTo(navigationBar)
+            make.left.bottom.right.equalToSuperview()
         }
     }
 }

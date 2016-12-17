@@ -262,14 +262,14 @@ extension UIView: CAAnimationDelegate {
     }
     
     var transformAngle: Double {
-        return angle
+        return _angle
     }
     
     var transformAngleInDegrees: Double {
-        return angle * (180 / M_PI)
+        return _angle * (180 / M_PI)
     }
     
-    fileprivate var angle: Double {
+    private var _angle: Double {
         return atan2(Double(transform.b), Double(transform.a))
     }
 }

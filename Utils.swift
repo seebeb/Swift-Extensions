@@ -128,6 +128,10 @@ var GlobalMainQueue: DispatchQueue {
     return DispatchQueue.main
 }
 
+var GlobalQuene: DispatchQueue {
+    return DispatchQueue.global(qos: .default)
+}
+
 var GlobalUserInteractiveQueue: DispatchQueue {
     return DispatchQueue.global(qos: .userInteractive)
 }
