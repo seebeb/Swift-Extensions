@@ -22,15 +22,15 @@ extension CGRect {
     // MARK: -
     
     var Max: CGRect {
-        var rect = self
-        let _max = max(width, height)
+        var rect  = self
+        let _max  = max(width, height)
         rect.size = CGSize(width: _max, height: _max)
         return rect
     }
     
     var Min: CGRect {
-        var rect = self
-        let _min = min(width, height)
+        var rect  = self
+        let _min  = min(width, height)
         rect.size = CGSize(width: _min, height: _min)
         return rect
     }
@@ -185,10 +185,10 @@ func CGTriangleDistance(_ l1: CGFloat, _ l2: CGFloat) -> CGFloat {
 // MARK: - point
 
 func CGPointInsideLoop(_ point: CGPoint, center: CGPoint, firstRadius: CGFloat, secondRadius: CGFloat) -> Bool {
-    let area = touchArea(point, center: center)
+    let area    = touchArea(point, center: center)
     let smaller = square(min(firstRadius, secondRadius))
-    let bigger = square(max(firstRadius, secondRadius))
-    
+    let bigger  = square(max(firstRadius, secondRadius))
+
     if area >= smaller && area <= bigger {
         return true
     }

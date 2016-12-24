@@ -34,11 +34,11 @@ extension UIAlertController {
     }
 
     func show(animated a: Bool = true, hideStatusBar: Bool = false, statusBarStyle: UIStatusBarStyle? = nil, completion: Closure? = nil) {
-        
-        alertWindow = UIWindow(frame: UIScreen.main.bounds)
+
+        alertWindow                  = UIWindow(frame: UIScreen.main.bounds)
         alertWindow?.backgroundColor = .clear
-        alertWindow?.windowLevel = UIWindowLevelAlert
-        
+        alertWindow?.windowLevel     = UIWindowLevelAlert
+
         let vc = BlankViewController()
         
         if let _w = UIApplication.shared.delegate?.window, let w = _w {

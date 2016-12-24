@@ -13,12 +13,12 @@ extension UINavigationController {
     
     func completelyTransparentBar() {
         navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.isTranslucent = true
-        view.backgroundColor = UIColor.clear
+        navigationBar.shadowImage     = UIImage()
+        navigationBar.isTranslucent   = true
+        view.backgroundColor          = UIColor.clear
         navigationBar.backgroundColor = UIColor.clear
     }
-    
+
     func transparentBlurBar() {
         
         completelyTransparentBar()
@@ -39,12 +39,12 @@ extension UINavigationController {
         
         completelyTransparentBar()
         
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        visualEffectView.backgroundColor = color
-        visualEffectView.alpha = alpha
+        let visualEffectView                      = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        visualEffectView.backgroundColor          = color
+        visualEffectView.alpha                    = alpha
         visualEffectView.isUserInteractionEnabled = false
         navigationBar.insertSubview(visualEffectView, aboveSubview: navigationBar)
-        
+
         visualEffectView.snp.makeConstraints { (make) in
             make.top.equalTo(navigationBar).offset(-22)
             make.left.bottom.right.equalToSuperview()

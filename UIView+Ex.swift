@@ -213,10 +213,10 @@ extension UIView: CAAnimationDelegate {
     
     /// Angle: 𝞹
     ///
-    /// - parameter duration:           <#duration description#>
-    /// - parameter beginWithClockwise: <#beginWithClockwise description#>
-    /// - parameter clockwise:          <#clockwise description#>
-    /// - parameter animated:           <#animated description#>
+    /// - parameter duration:
+    /// - parameter beginWithClockwise:
+    /// - parameter clockwise:
+    /// - parameter animated:
     
     func rotationAnimation(_ duration: CFTimeInterval? = 0.4, beginWithClockwise: Bool, clockwise: Bool, animated: Bool) {
         
@@ -229,23 +229,23 @@ extension UIView: CAAnimationDelegate {
         } else {
             if clockwise { rotationAnimation.fromValue = -M_PI }
         }
-        
-        rotationAnimation.toValue = angle
-        rotationAnimation.duration = animated ? duration! : 0
-        rotationAnimation.repeatCount = 0
-        rotationAnimation.delegate = self
-        rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-        rotationAnimation.fillMode = kCAFillModeForwards
+
+        rotationAnimation.toValue               = angle
+        rotationAnimation.duration              = animated ? duration! : 0
+        rotationAnimation.repeatCount           = 0
+        rotationAnimation.delegate              = self
+        rotationAnimation.timingFunction        = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        rotationAnimation.fillMode              = kCAFillModeForwards
         rotationAnimation.isRemovedOnCompletion = false
-        
+
         layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
     
     /// Angle: 𝞹/2
     ///
-    /// - parameter duration:  <#duration description#>
-    /// - parameter clockwise: <#clockwise description#>
-    /// - parameter animated:  <#animated description#>
+    /// - parameter duration:
+    /// - parameter clockwise:
+    /// - parameter animated:
     
     func rotationAnimation(_ duration: TimeInterval, clockwise: Bool, animated: Bool) {
         
@@ -311,17 +311,17 @@ extension UIView {
     }
 
     func startShaking(duration: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeatCount: Float = FLT_MAX) {
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = duration
-        animation.repeatCount = repeatCount
+        let animation          = CABasicAnimation(keyPath: "position")
+        animation.duration     = duration
+        animation.repeatCount  = repeatCount
         animation.autoreverses = true
         switch direction {
         case .horizontal:
             animation.fromValue = NSValue(cgPoint: CGPoint(x: center.x - offset, y: center.y))
-            animation.toValue = NSValue(cgPoint:CGPoint(x: center.x + offset, y: center.y))
+            animation.toValue   = NSValue(cgPoint:CGPoint(x: center.x + offset, y: center.y))
         case .vertical:
             animation.fromValue = NSValue(cgPoint: CGPoint(x: center.x, y: center.y - offset))
-            animation.toValue = NSValue(cgPoint:CGPoint(x: center.x, y: center.y + offset))
+            animation.toValue   = NSValue(cgPoint:CGPoint(x: center.x, y: center.y + offset))
         }
         layer.add(animation, forKey: "position")
     }
@@ -369,27 +369,27 @@ extension UIView {
      */
     func fullyRound(_ diameter: CGFloat, borderColor: UIColor, borderWidth: CGFloat) {
         layer.masksToBounds = true
-        layer.cornerRadius = diameter / 2
-        layer.borderWidth = borderWidth
-        layer.borderColor = borderColor.cgColor
+        layer.cornerRadius  = diameter / 2
+        layer.borderWidth   = borderWidth
+        layer.borderColor   = borderColor.cgColor
     }
     
     @discardableResult
     fileprivate func _round(_ corners: UIRectCorner, radius: CGFloat) -> CAShapeLayer {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
+        let path        = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask        = CAShapeLayer()
+        mask.path       = path.cgPath
         self.layer.mask = mask
         return mask
     }
     
     fileprivate func addBorder(_ mask: CAShapeLayer, borderColor: UIColor, borderWidth: CGFloat) {
-        let borderLayer = CAShapeLayer()
-        borderLayer.path = mask.path
-        borderLayer.fillColor = UIColor.clear.cgColor
+        let borderLayer         = CAShapeLayer()
+        borderLayer.path        = mask.path
+        borderLayer.fillColor   = UIColor.clear.cgColor
         borderLayer.strokeColor = borderColor.cgColor
-        borderLayer.lineWidth = borderWidth
-        borderLayer.frame = bounds
+        borderLayer.lineWidth   = borderWidth
+        borderLayer.frame       = bounds
         layer.addSublayer(borderLayer)
     }
 }

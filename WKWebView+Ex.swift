@@ -12,7 +12,7 @@ import WebKit
 extension WKWebView {
 
     // for both Text Field and Text Area
-    func javaScriptInjectionTextFieldById(_ id: String, value: String, completionHandler: ((Any?, Error?) -> ())?) {
+    func javaScriptInjectionTextFieldBy(id: String, value: String, completionHandler: ((Any?, Error?) -> ())?) {
         let js = "document.getElementById('" + id + "').value = '" + value + "'"
         evaluateJavaScript(js, completionHandler: completionHandler)
     }
@@ -20,7 +20,7 @@ extension WKWebView {
 
 extension WKWebView {
 
-    func labelTextById(_ id: String, completion: @escaping (String?) -> ()) {
+    func labelTextBy(id: String, completion: @escaping (String?) -> ()) {
 
         let js = "document.getElementById('\(id)').textContent"
         
@@ -33,7 +33,7 @@ extension WKWebView {
         })
     }
 
-    func labelTextByName(_ name: String, completion: @escaping (String?) -> ()) {
+    func labelTextBy(name: String, completion: @escaping (String?) -> ()) {
 
         let js = "document.getElementsByName('\(name)')[0].textContent"
 
@@ -50,7 +50,14 @@ extension WKWebView {
 
 extension WKWebView {
 
-    func clickButtonById(_ id: String, completionHandler: ((Any?, Error?) -> ())?) {
+    func clickElememtBy(className name: String, completionHandler: ((Any?, Error?) -> ())?) {
+
+        let js = "document.getElementsByClassName('\(name)')[0];element.onclick = function() {};"
+
+        evaluateJavaScript(js, completionHandler: completionHandler)
+    }
+
+    func clickButtonBy(id: String, completionHandler: ((Any?, Error?) -> ())?) {
 
         let js = "document.getElementById('\(id)').click();"
 

@@ -145,10 +145,10 @@ extension UIScrollView {
             color = color?.withAlphaComponent(0.8)
         }
 
-        let center = CGPoint(x: 44, y: 44)
-        let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.cgPath
+        let center           = CGPoint(x: 44, y: 44)
+        let circlePath       = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
+        let shapeLayer       = CAShapeLayer()
+        shapeLayer.path      = circlePath.cgPath
         shapeLayer.fillColor = color!.cgColor
         v.layer.addSublayer(shapeLayer)
 
@@ -171,8 +171,8 @@ extension UIScrollView {
             view = sv
         }
 
-        let b = UIButton()
-        b.backgroundColor = .clear
+        let b                      = UIButton()
+        b.backgroundColor          = .clear
         b.isUserInteractionEnabled = true
         b.addTarget(target, action: action, for: .touchUpInside)
         view.addSubview(b)
@@ -188,10 +188,10 @@ extension UIScrollView {
             color = color?.withAlphaComponent(0.8)
         }
 
-        let center = CGPoint(x: 0, y: 44)
-        let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.cgPath
+        let center           = CGPoint(x: 0, y: 44)
+        let circlePath       = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
+        let shapeLayer       = CAShapeLayer()
+        shapeLayer.path      = circlePath.cgPath
         shapeLayer.fillColor = color!.cgColor
         b.layer.addSublayer(shapeLayer)
 

@@ -21,10 +21,10 @@
 
             // ⚫️🔴🔵⚪️🎾🌕🌎
             console.levelColor.verbose = "⚪️ "
-            console.levelColor.debug = "🎾 "
-            console.levelColor.info = "🔵 "
+            console.levelColor.debug   = "🎾 "
+            console.levelColor.info    = "🔵 "
             console.levelColor.warning = "🌕 "
-            console.levelColor.error = "🔴 "
+            console.levelColor.error   = "🔴 "
 
             // log to Xcode Console
             log.addDestination(console)

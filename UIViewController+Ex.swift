@@ -113,9 +113,9 @@ extension UIViewController {
 // MARK: - 
 
 extension Selector {
-    static let dismissAnimated = #selector(UIViewController.dismissAnimated)
-    static let dismissWithoutAnimation = #selector(UIViewController.dismissWithoutAnimation)
-    static let popViewControllerAnimated = #selector(UIViewController.popViewControllerAnimated)
+    static let dismissAnimated                   = #selector(UIViewController.dismissAnimated)
+    static let dismissWithoutAnimation           = #selector(UIViewController.dismissWithoutAnimation)
+    static let popViewControllerAnimated         = #selector(UIViewController.popViewControllerAnimated)
     static let popViewControllerWithoutAnimation = #selector(UIViewController.popViewControllerWithoutAnimation)
 }
 

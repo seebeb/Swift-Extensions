@@ -32,6 +32,10 @@ extension String {
         }
     }
 
+    func toNoneNilURL(forceToHttps: Bool = false) -> URL {
+        return toURL(forceToHttps: forceToHttps) ?? URL(string: "https://")!
+    }
+
     func httpsURL() -> URL? {
 
         guard let url = URL(string: self) else { return nil }

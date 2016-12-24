@@ -167,12 +167,12 @@ extension String {
 // MARK: - 
 
 extension String {
-    static let yes = NSLocalizedString("YES", comment: "")
-    static let no = NSLocalizedString("NO", comment: "")
-    static let ok = NSLocalizedString("OK", comment: "")
-    static let error = NSLocalizedString("Error", comment: "")
-    static let confirm = NSLocalizedString("Confirm", comment: "")
-    static let cancel = NSLocalizedString("Cancel", comment: "")
-    static let delete = NSLocalizedString("Delete", comment: "")
+    static let yes       = NSLocalizedString("YES", comment: "")
+    static let no        = NSLocalizedString("NO", comment: "")
+    static let ok        = NSLocalizedString("OK", comment: "")
+    static let error     = NSLocalizedString("Error", comment: "")
+    static let confirm   = NSLocalizedString("Confirm", comment: "")
+    static let cancel    = NSLocalizedString("Cancel", comment: "")
+    static let delete    = NSLocalizedString("Delete", comment: "")
     static let deleteAll = NSLocalizedString("Delete All", comment: "")
 }
