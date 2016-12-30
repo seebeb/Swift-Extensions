@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 // REFERENCE: http://stackoverflow.com/a/33830605/4656574
 
 enum AppConfiguration {
@@ -18,6 +16,7 @@ enum AppConfiguration {
 }
 
 struct Config {
+
     // This is private because the use of 'appConfiguration' is preferred.
     fileprivate static let isTestFlight = Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     

@@ -125,21 +125,29 @@ extension Selector {
 extension UIViewController {
     
     func configureScreenEdgeDismissGesture(_ edges: UIRectEdge = .left, animated: Bool = true, alsoForPad: Bool = false) {
-        
+        let action = animated ? #selector(dismissAnimated) : #selector(dismissWithoutAnimation)
+        configureScreenEdgeGestures(edges, alsoForPad: alsoForPad, action: action)
+    }
+
+    func configureScreenEdgePopGesture(_ edges: UIRectEdge = .left, animated: Bool = true, alsoForPad: Bool = false) {
+        let action = animated ? #selector(popViewControllerAnimated) : #selector(popViewControllerWithoutAnimation)
+        configureScreenEdgeGestures(edges, alsoForPad: alsoForPad, action: action)
+    }
+
+    func configureScreenEdgeGestures(_ edges: UIRectEdge = .left, alsoForPad: Bool = false, action: Selector) {
+
         if UIDevice.current.userInterfaceIdiom == .pad && !alsoForPad { return }
 
         view.isUserInteractionEnabled = true
 
-        let selector = animated ? #selector(dismissAnimated) : #selector(dismissWithoutAnimation)
-
         func left() {
-            let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: selector)
+            let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: action)
             gesture.edges = .left
             view.addGestureRecognizer(gesture)
         }
 
         func right() {
-            let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: selector)
+            let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: action)
             gesture.edges = .right
             view.addGestureRecognizer(gesture)
         }

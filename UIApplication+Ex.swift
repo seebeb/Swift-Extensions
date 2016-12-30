@@ -27,16 +27,6 @@ extension UIApplication {
 }
 
 extension UIApplication {
-
-    func rotateToPortraitIfNeeded() {
-
-        guard UIApplication.shared.statusBarOrientation.isLandscape else { return }
-
-        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-    }
-}
-
-extension UIApplication {
     
     @objc fileprivate func simulateMemoryWarning() {
         UIControl().sendAction(Selector(("_performMemoryWarning")), to: UIApplication.shared, for: nil)

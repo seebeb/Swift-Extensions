@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 extension UIImage {
 
     /// Convert Optional CGImage to UIImage
@@ -56,6 +54,20 @@ extension UIImage {
             UIGraphicsEndImageContext()
             self.init(cgImage: image?.cgImage)
         }
+    }
+}
+
+
+// MARK: - 
+
+extension UIImage {
+
+    var originalRender: UIImage {
+        return withRenderingMode(.alwaysOriginal)
+    }
+
+    var templateRender: UIImage {
+        return withRenderingMode(.alwaysTemplate)
     }
 }
 
