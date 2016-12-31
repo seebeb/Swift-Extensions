@@ -24,6 +24,17 @@ public extension UISearchBar {
             }
         })
     }
+
+
+    public func changeTextFieldTintColor(_ color: UIColor) {
+
+        loopViews() {
+            if let tf = $0 as? UITextField {
+                tf.tintColor = color
+                return
+            }
+        }
+    }
 }
 
 

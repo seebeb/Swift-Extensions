@@ -161,4 +161,14 @@ extension UIViewController {
             right()
         }
     }
+
+    /// one of these two parameters must not be nil
+    func configureEdgeGestures(leftEdgeAction: Selector? = nil, rightEdgeAction: Selector? = nil, alsoForPad: Bool = false) {
+        if let la = leftEdgeAction {
+            configureScreenEdgeGestures(.left, alsoForPad: alsoForPad, action: la)
+        }
+        if let ra = rightEdgeAction {
+            configureScreenEdgeGestures(.right, alsoForPad: alsoForPad, action: ra)
+        }
+    }
 }
