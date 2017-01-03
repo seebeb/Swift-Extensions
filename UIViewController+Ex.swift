@@ -124,17 +124,17 @@ extension Selector {
 
 extension UIViewController {
     
-    func configureScreenEdgeDismissGesture(_ edges: UIRectEdge = .left, animated: Bool = true, alsoForPad: Bool = false) {
+    func configureScreenEdgeDismissGesture(_ edges: UIRectEdge = .left, animated: Bool = true, alsoForPad: Bool = true) {
         let action = animated ? #selector(dismissAnimated) : #selector(dismissWithoutAnimation)
         configureScreenEdgeGestures(edges, alsoForPad: alsoForPad, action: action)
     }
 
-    func configureScreenEdgePopGesture(_ edges: UIRectEdge = .left, animated: Bool = true, alsoForPad: Bool = false) {
+    func configureScreenEdgePopGesture(_ edges: UIRectEdge = .left, animated: Bool = true, alsoForPad: Bool = true) {
         let action = animated ? #selector(popViewControllerAnimated) : #selector(popViewControllerWithoutAnimation)
         configureScreenEdgeGestures(edges, alsoForPad: alsoForPad, action: action)
     }
 
-    func configureScreenEdgeGestures(_ edges: UIRectEdge = .left, alsoForPad: Bool = false, action: Selector) {
+    func configureScreenEdgeGestures(_ edges: UIRectEdge = .left, alsoForPad: Bool = true, action: Selector) {
 
         if UIDevice.current.userInterfaceIdiom == .pad && !alsoForPad { return }
 
@@ -163,7 +163,7 @@ extension UIViewController {
     }
 
     /// one of these two parameters must not be nil
-    func configureEdgeGestures(leftEdgeAction: Selector? = nil, rightEdgeAction: Selector? = nil, alsoForPad: Bool = false) {
+    func configureEdgeGestures(leftEdgeAction: Selector? = nil, rightEdgeAction: Selector? = nil, alsoForPad: Bool = true) {
         if let la = leftEdgeAction {
             configureScreenEdgeGestures(.left, alsoForPad: alsoForPad, action: la)
         }

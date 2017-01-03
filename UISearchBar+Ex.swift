@@ -35,6 +35,22 @@ public extension UISearchBar {
             }
         }
     }
+
+    public func customMode(with color: UIColor, placeholder: String?) {
+
+        loopViews() {
+
+            if let tf = $0 as? UITextField {
+                tf.tintColor = color
+                tf.textColor = color
+
+                if let ph = placeholder {
+                    let str = NSAttributedString(string: ph, attributes: [NSForegroundColorAttributeName: color.withAlphaComponent(0.5)])
+                    tf.attributedPlaceholder = str
+                }
+            }
+        }
+    }
 }
 
 
