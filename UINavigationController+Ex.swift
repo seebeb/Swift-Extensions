@@ -9,21 +9,6 @@ import UIKit
 import SnapKit
 
 extension UINavigationController {
-
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-
-        // fix that set status bar style does not work on iPad
-        guard UIDevice.current.isPad else { return super.preferredStatusBarStyle }
-
-        if let rootViewController = self.viewControllers.first {
-            return rootViewController.preferredStatusBarStyle
-        }
-
-        return super.preferredStatusBarStyle
-    }
-}
-
-extension UINavigationController {
     
     func completelyTransparentBar() {
         navigationBar.setBackgroundImage(UIImage(), for: .default)
