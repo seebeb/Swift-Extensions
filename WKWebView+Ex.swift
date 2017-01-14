@@ -16,6 +16,16 @@ extension WKWebView {
         let js = "document.getElementById('" + id + "').value = '" + value + "'"
         evaluateJavaScript(js, completionHandler: completionHandler)
     }
+
+    func javaScriptInjectionDivReplaceContentBy(id: String, newValue: String, completionHandler: ((Any?, Error?) -> ())?) {
+        let js = "document.getElementById('" + id + "').innerHTML ='" + newValue + "';"
+        evaluateJavaScript(js, completionHandler: completionHandler)
+    }
+
+    func javaScriptInjectionDivReplaceContentBy(name: String, newValue: String, completionHandler: ((Any?, Error?) -> ())?) {
+        let js = "document.getElementsByName('" + name + "').innerHTML ='" + newValue + "';"
+        evaluateJavaScript(js, completionHandler: completionHandler)
+    }
 }
 
 extension WKWebView {
