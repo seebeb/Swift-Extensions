@@ -151,6 +151,10 @@ extension CGSize {
     var minSL: CGFloat {
         return min(width, height)
     }
+
+    func scale(_ delta: CGFloat) -> CGSize {
+        return CGSize(width: width * delta, height: height * delta)
+    }
 }
 
 
