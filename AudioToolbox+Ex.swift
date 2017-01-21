@@ -34,8 +34,10 @@ class AudioToolBox: NSObject {
         guard let filePath = bundle.path(forResource: name, ofType: type) else { return }
         
         let url = URL(fileURLWithPath: filePath)
-        
-        AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
-        AudioServicesPlaySystemSound(soundID)
+
+        DispatchQueue.global(qos: .background).async {
+            AudioServicesCreateSystemSoundID(url as CFURL, &self.soundID)
+            AudioServicesPlaySystemSound(self.soundID)
+        }
     }
 }
