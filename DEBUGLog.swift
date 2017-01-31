@@ -14,7 +14,7 @@ import Foundation
 //    }
     
     func DEBUGLog(_ message: Any?, filename: NSString = #file, function: String = #function, line: Int = #line) {
-        NSLog("[\(filename.lastPathComponent):\(line)] \(function) - \(message)")
+        NSLog("[\(filename.lastPathComponent):\(line)] \(function) - \(String(describing: message))")
     }
     
     func DEBUGPrint(_ any: Any?) {
@@ -22,9 +22,9 @@ import Foundation
     }
     
     func DEBUGPrint(_ any: Any?, prefix: String = "", suffix: String = "") {
-        print(prefix + "\(any)" + suffix)
+        print(prefix + String(describing: any) + suffix)
     }
-    
+
 #else
     
 //    func DEBUGLog(_ message: String?, filename: String = #file, function: String = #function, line: Int = #line) {
