@@ -148,3 +148,11 @@ func multiply<T : Arithmetic>(_ a: T, _ b: T) -> T {
 func divide<T : Arithmetic>(_ a: T, _ b: T) -> T {
     return a / b
 }
+
+func boundValue<T : Arithmetic>(_ x: T, between a: T, and b: T) -> T {
+    if a > b {
+        return max(b, min(x, a))
+    } else {
+        return max(a, min(x, b))
+    }
+}
