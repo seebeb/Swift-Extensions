@@ -8,6 +8,8 @@
 
 import Foundation
 
+let EMPTY_URL = URL(string: "https://")!
+
 extension URL {
 
     func httpsURL() -> URL {
