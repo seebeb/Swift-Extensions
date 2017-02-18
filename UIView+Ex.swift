@@ -310,9 +310,9 @@ extension UIView {
         case vertical
     }
 
-    func startShaking(duration: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeatCount: Float = FLT_MAX) {
+    func startShaking(frequency: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeatCount: Float = FLT_MAX) {
         let animation          = CABasicAnimation(keyPath: "position")
-        animation.duration     = duration
+        animation.duration     = frequency
         animation.repeatCount  = repeatCount
         animation.autoreverses = true
         switch direction {
@@ -328,6 +328,16 @@ extension UIView {
 
     func stopShaking() {
         layer.removeAnimation(forKey: "position")
+    }
+
+    func shaking(withDuration: TimeInterval, frequency: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeartCount: Float = FLT_MAX) {
+
+        startShaking(frequency: frequency, offset: offset, direction: direction, repeatCount: repeartCount)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + withDuration, execute: { [weak self] in
+            guard let ss = self else { return }
+            ss.stopShaking()
+        })
     }
 }
 
