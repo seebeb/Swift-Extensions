@@ -11,6 +11,8 @@ import UIKit
 public typealias Closure = () -> ()
 public typealias Completion = (Bool) -> ()
 public typealias BoolClosure = (Bool) -> ()
+public typealias URLClosure = (URL) -> ()
+public typealias OptionalURLClosure = (URL?) -> ()
 
 extension AppDelegate {
     
