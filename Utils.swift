@@ -14,6 +14,8 @@ public typealias BoolClosure = (Bool) -> ()
 public typealias URLClosure = (URL) -> ()
 public typealias OptionalURLClosure = (URL?) -> ()
 
+let IS_64_BIT = MemoryLayout<Int>.size == MemoryLayout<Int64>.size
+
 extension AppDelegate {
     
     class var shared: AppDelegate {
