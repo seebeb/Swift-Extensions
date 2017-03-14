@@ -160,6 +160,12 @@ extension UIScrollView {
     }
 
     @discardableResult
+    func configureLeftBottomCornerScrollTrigger(superView: UIView? = nil, color: UIColor? = nil, radius: CGFloat = 4) -> UIView? {
+        let action = #selector(didTriggerOff)
+        return configureLeftBottomCornerTrigger(target: self, action: action, superView: superView, color: color, radius: radius)
+    }
+
+    @discardableResult
     func configureLeftBottomCornerTrigger(target: Any?, action: Selector, superView: UIView? = nil, color: UIColor? = nil, radius: CGFloat = 4) -> UIButton? {
 
         let view: UIView
