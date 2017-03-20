@@ -1,6 +1,5 @@
 //
-//  Constants.swift
-//  iTumblr
+//  App.swift
 //
 //  Created by Augus on 9/8/16.
 //  Copyright © 2016 iAugus. All rights reserved.
@@ -30,11 +29,11 @@ struct APP {
 
 extension APP {
     
-    var version: String? {
+    static var version: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
     
-    var build: String? {
+    static var build: String? {
         return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
     }    
 }
