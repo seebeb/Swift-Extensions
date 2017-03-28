@@ -222,12 +222,12 @@ extension UIView: CAAnimationDelegate {
         
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         
-        let angle: Double = beginWithClockwise ? (clockwise ? M_PI : 0) : (clockwise ? 0 : -M_PI)
+        let angle = beginWithClockwise ? (clockwise ? Double.pi : 0) : (clockwise ? 0 : -Double.pi)
         
         if beginWithClockwise {
-            if !clockwise { rotationAnimation.fromValue = M_PI }
+            if !clockwise { rotationAnimation.fromValue = Double.pi }
         } else {
-            if clockwise { rotationAnimation.fromValue = -M_PI }
+            if clockwise { rotationAnimation.fromValue = -Double.pi }
         }
 
         rotationAnimation.toValue               = angle
@@ -249,7 +249,7 @@ extension UIView: CAAnimationDelegate {
     
     func rotationAnimation(_ duration: TimeInterval, clockwise: Bool, animated: Bool) {
         
-        let angle = CGFloat(clockwise ? M_PI_2 : -M_PI_2)
+        let angle = clockwise ? CGFloat.pi / 2 : -CGFloat.pi / 2
         
         if animated {
             UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { () -> Void in
@@ -266,7 +266,7 @@ extension UIView: CAAnimationDelegate {
     }
     
     var transformAngleInDegrees: Double {
-        return _angle * (180 / M_PI)
+        return _angle * (180 / .pi)
     }
     
     private var _angle: Double {
@@ -310,7 +310,7 @@ extension UIView {
         case vertical
     }
 
-    func startShaking(frequency: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeatCount: Float = FLT_MAX) {
+    func startShaking(frequency: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeatCount: Float = .greatestFiniteMagnitude) {
         let animation          = CABasicAnimation(keyPath: "position")
         animation.duration     = frequency
         animation.repeatCount  = repeatCount
@@ -330,7 +330,7 @@ extension UIView {
         layer.removeAnimation(forKey: "position")
     }
 
-    func shaking(withDuration: TimeInterval, frequency: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeartCount: Float = FLT_MAX) {
+    func shaking(withDuration: TimeInterval, frequency: TimeInterval = 0.2, offset: CGFloat = 1.5, direction: ShakeDirection = .horizontal, repeartCount: Float = .greatestFiniteMagnitude) {
 
         startShaking(frequency: frequency, offset: offset, direction: direction, repeatCount: repeartCount)
 

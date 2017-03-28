@@ -146,7 +146,7 @@ extension UIScrollView {
         }
 
         let center           = CGPoint(x: 44, y: 44)
-        let circlePath       = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
+        let circlePath       = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi / 2, clockwise: true)
         let shapeLayer       = CAShapeLayer()
         shapeLayer.path      = circlePath.cgPath
         shapeLayer.fillColor = color!.cgColor
@@ -195,7 +195,7 @@ extension UIScrollView {
         }
 
         let center           = CGPoint(x: 0, y: 44)
-        let circlePath       = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
+        let circlePath       = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi / 2, clockwise: true)
         let shapeLayer       = CAShapeLayer()
         shapeLayer.path      = circlePath.cgPath
         shapeLayer.fillColor = color!.cgColor
