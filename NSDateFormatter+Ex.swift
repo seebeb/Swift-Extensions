@@ -8,14 +8,33 @@
 import Foundation
 
 
-
 extension DateFormatter {
-    
-    class func stringFromTime(_ seconds: Int) -> String {
-        let timeFormater = DateFormatter()
-        timeFormater.dateFormat = seconds / 3600 > 0 ? "HH:mm:ss" : "mm:ss"
-        timeFormater.timeZone = TimeZone(abbreviation: "GTM")
-        
-        return timeFormater.string(from: NSDate(timeIntervalSince1970: Double(seconds)) as Date)
+
+    class func stringFromTime(seconds: Int) -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = seconds / 3600 > 0 ? "HH:mm:ss" : "mm:ss"
+        timeFormatter.timeZone = TimeZone(abbreviation: "GTM")
+
+        return timeFormatter.string(from: Date(timeIntervalSince1970: Double(seconds)))
+    }
+
+    class func dateFromString(time: String) -> Date? {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        timeFormatter.timeZone = TimeZone(abbreviation: "GTM")
+
+        return timeFormatter.date(from: time)
+    }
+}
+
+
+extension Date {
+
+    func stringFromDate() -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        timeFormatter.timeZone = TimeZone(abbreviation: "GTM")
+
+        return timeFormatter.string(from: self)
     }
 }
