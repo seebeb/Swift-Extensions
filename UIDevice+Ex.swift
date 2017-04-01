@@ -16,6 +16,13 @@ extension UIDevice {
 
         setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
     }
+
+    func rotateToLandscapeIfNeeded(_ direction: UIInterfaceOrientation = .landscapeRight) {
+
+        guard UIApplication.shared.statusBarOrientation.isPortrait else { return }
+
+        setValue(direction.rawValue, forKey: "orientation")
+    }
     
     @available(iOS, deprecated, message: "Please use `UIDevice.current.isPad`")
     static var isPad: Bool {
