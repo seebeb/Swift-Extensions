@@ -29,6 +29,10 @@ class AudioToolBox: NSObject {
     func playMP3WithName(_ name: String?, bundle: Bundle = Bundle.main) {
         playWithBundle(bundle, name: name, type: "mp3")
     }
+
+    func playCAFWithName(_ name: String?, bundle: Bundle = Bundle.main) {
+        playWithBundle(bundle, name: name, type: "caf")
+    }
     
     fileprivate func playWithBundle(_ bundle: Bundle, name: String?, type: String?) {
         guard let filePath = bundle.path(forResource: name, ofType: type) else { return }
