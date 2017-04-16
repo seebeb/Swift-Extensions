@@ -16,13 +16,6 @@ public typealias OptionalURLClosure = (URL?) -> ()
 
 let IS_64_BIT = MemoryLayout<Int>.size == MemoryLayout<Int64>.size
 
-extension AppDelegate {
-    
-    class var shared: AppDelegate {
-        return UIApplication.shared.delegate as! AppDelegate
-    }
-}
-
 struct Utils {
     
     static var documentPath: String {
@@ -43,6 +36,7 @@ struct Utils {
         return (Bundle.main.bundlePath as NSString).appendingPathComponent(named)
     }
 
+    @discardableResult
     static func createFolder(_ path: String) -> String {
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: path) {
