@@ -86,5 +86,4 @@ extension UIDevice {
         let hardware: String = String(cString: hw_machine)
         return hardware
     }
-    
 }

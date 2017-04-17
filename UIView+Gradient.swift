@@ -60,4 +60,12 @@ extension UIView {
         layer.insertSublayer(gradient, at: 0)
         return gradient
     }
+
+    static func gradientLayer(colors: [UIColor], gradientOrientation orientation: GradientOrientation) -> CAGradientLayer {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.colors = colors.map { $0.cgColor }
+        gradient.startPoint = orientation.startPoint
+        gradient.endPoint = orientation.endPoint
+        return gradient
+    }
 }
