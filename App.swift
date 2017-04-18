@@ -10,20 +10,24 @@ import Foundation
 
 struct APP {
     
-    static func reviewPathWithId(_ appId: String) -> String {
-        return "https://itunes.apple.com/app/viewContentsUserReviews?id=" + appId
+    static func viewReviewPagePath(with id: String) -> String {
+        return "https://itunes.apple.com/app/viewContentsUserReviews?id=" + id
     }
     
-    static func reviewURLWithId(_ appId: String) -> URL {
-        return URL(string: reviewPathWithId(appId))!
+    static func reviewURL(with id: String) -> URL {
+        return URL(string: reviewPath(with: id))!
     }
-    
-    static func sharePathWithId(_ appId: String) -> String {
-        return "https://itunes.apple.com/app/id" + appId
+
+    static func reviewPath(with id: String) -> String {
+        return appPathOnAppStore(with: id) + "?action=write-review"
     }
-    
-    static func shareURLWithId(_ appId: String) -> URL {
-        return URL(string: sharePathWithId(appId))!
+
+    static func appPathOnAppStore(with id: String) -> String {
+        return "https://itunes.apple.com/app/id" + id
+    }
+
+    static func appUrlOnAppStore(with id: String) -> URL {
+        return URL(string: appPathOnAppStore(with: id))!
     }
 }
 
