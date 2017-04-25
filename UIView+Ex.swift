@@ -8,6 +8,14 @@
 import UIKit
 
 extension UIView {
+
+    convenience init(backgroundColor: UIColor?) {
+        self.init()
+        self.backgroundColor = backgroundColor
+    }
+}
+
+extension UIView {
     
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
