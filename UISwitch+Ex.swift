@@ -29,5 +29,4 @@ extension UISwitch {
         }
         self.isOn = isOn
     }
-    
 }
