@@ -164,6 +164,21 @@ extension String {
     }
 }
 
+
+// MARK: - 
+
+extension String {
+    
+    var url: URL {
+        return URL(string: self) ?? URL(string: "https://")!
+    }
+
+    var optionalURL: URL? {
+        return URL(string: self)
+    }
+}
+
+
 // MARK: - 
 
 extension String {
