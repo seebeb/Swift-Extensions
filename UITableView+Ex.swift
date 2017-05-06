@@ -1,6 +1,5 @@
 //
 //  UITableView+Ex.swift
-//  iTumblr
 //
 //  Created by Augus on 1/7/17.
 //  Copyright © 2017 iAugus. All rights reserved.

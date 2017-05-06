@@ -1,6 +1,5 @@
 //
 //  UIKeyboardNotificationController.swift
-//  iTumblr
 //
 //  Created by Augus on 9/14/16.
 //  Copyright © 2016 iAugus. All rights reserved.
