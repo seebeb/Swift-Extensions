@@ -17,27 +17,29 @@ protocol UIScrollViewScrollToBottomDelegate {
     func scrollViewDidScrollToBottom(_ scrollView: UIScrollView)
 }
 
-private var xoAssociationKey = "xoAssociationKey"
-private var xoAssociationTopDelegateKey = "xoAssociationTopDelegateKey"
-private var xoAssociationBottomDelegateKey = "xoAssociationBottomDelegateKey"
-
 extension UIScrollView {
+
+    private struct AssociationKey {
+        static var topDelegate = 0
+        static var bottomDelegate = 0
+        static var triggerToTop = 0
+    }
 
     var scrollToTopDelegate: UIScrollViewScrollToTopDelegate? {
         get {
-            return objc_getAssociatedObject(self, &xoAssociationTopDelegateKey) as? UIScrollViewScrollToTopDelegate
+            return objc_getAssociatedObject(self, &AssociationKey.topDelegate) as? UIScrollViewScrollToTopDelegate
         }
         set {
-            objc_setAssociatedObject(self, &xoAssociationTopDelegateKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &AssociationKey.topDelegate, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
 
     var scrollToBottomDelegate: UIScrollViewScrollToBottomDelegate? {
         get {
-            return objc_getAssociatedObject(self, &xoAssociationBottomDelegateKey) as? UIScrollViewScrollToBottomDelegate
+            return objc_getAssociatedObject(self, &AssociationKey.bottomDelegate) as? UIScrollViewScrollToBottomDelegate
         }
         set {
-            objc_setAssociatedObject(self, &xoAssociationBottomDelegateKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &AssociationKey.bottomDelegate, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
 
@@ -57,10 +59,10 @@ extension UIScrollView {
     /// default is false
     var rightBottomTriggerBoundToScrollViewDidScrollToTop: Bool {
         get {
-            return objc_getAssociatedObject(self, &xoAssociationKey) as? Bool ?? false
+            return objc_getAssociatedObject(self, &AssociationKey.triggerToTop) as? Bool ?? false
         }
         set {
-            objc_setAssociatedObject(self, &xoAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &AssociationKey.triggerToTop, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     
@@ -140,7 +142,7 @@ extension UIScrollView {
         var color = color
 
         if color == nil {
-            color = color ?? view.tintColor ?? AppDelegate().window?.tintColor ?? .black
+            color = ((color ?? view.tintColor) ?? AppDelegate().window?.tintColor) ?? .black
             color = color?.withAlphaComponent(0.8)
         }
 
@@ -189,7 +191,7 @@ extension UIScrollView {
         var color = color
 
         if color == nil {
-            color = color ?? view.tintColor ?? AppDelegate().window?.tintColor ?? .black
+            color = ((color ?? view.tintColor) ?? AppDelegate().window?.tintColor) ?? .black
             color = color?.withAlphaComponent(0.8)
         }
 
