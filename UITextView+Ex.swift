@@ -1,7 +1,6 @@
 //
 //  UITextView+Ex.swift
 //
-//
 //  Created by Augus on 9/8/15.
 //  Copyright © 2015 iAugus. All rights reserved.
 //

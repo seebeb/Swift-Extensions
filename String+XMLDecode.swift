@@ -1,6 +1,5 @@
 //
 //  String+XMLDecode.swift
-//  iTumblr
 //
 //  Created by Augus on 12/31/16.
 //  Copyright © 2016 iAugus. All rights reserved.

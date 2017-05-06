@@ -1,6 +1,5 @@
 //
 //  DetectPreferredLanguage.swift
-//  Phonetic
 //
 //  Created by Augus on 2/15/16.
 //  Copyright © 2016 iAugus. All rights reserved.

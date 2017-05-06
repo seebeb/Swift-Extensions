@@ -1,6 +1,5 @@
 //
 //  ReplaceRootViewController.swift
-//  Zoom Contacts
 //
 //  Created by Augus on 4/30/16.
 //  Copyright © 2016 iAugus. All rights reserved.

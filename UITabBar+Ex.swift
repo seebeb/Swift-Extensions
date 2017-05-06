@@ -1,6 +1,5 @@
 //
 //  UITabBar+Ex.swift
-//  Test
 //
 //  Created by Augus on 10/1/16.
 //  Copyright © 2016 iAugus. All rights reserved.
