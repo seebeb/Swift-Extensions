@@ -77,6 +77,7 @@ public extension Date {
     /// SwiftRandom extension
     public static func randomWithinDaysBeforeToday(_ days: Int) -> Date {
         let today = Date()
+
         let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
 
         let r1 = arc4random_uniform(UInt32(days))
@@ -84,9 +85,9 @@ public extension Date {
         let r3 = arc4random_uniform(UInt32(59))
         let r4 = arc4random_uniform(UInt32(59))
 
-        var offsetComponents = DateComponents()
-        offsetComponents.day = Int(r1) * -1
-        offsetComponents.hour = Int(r2)
+        var offsetComponents    = DateComponents()
+        offsetComponents.day    = Int(r1) * -1
+        offsetComponents.hour   = Int(r2)
         offsetComponents.minute = Int(r3)
         offsetComponents.second = Int(r4)
 
@@ -108,10 +109,10 @@ public extension Date {
 public extension UIColor {
     /// SwiftRandom extension
     public static func random(_ randomAlpha: Bool = false) -> UIColor {
-        let randomRed = CGFloat.random()
+        let randomRed   = CGFloat.random()
         let randomGreen = CGFloat.random()
-        let randomBlue = CGFloat.random()
-        let alpha = randomAlpha ? CGFloat.random() : 1.0
+        let randomBlue  = CGFloat.random()
+        let alpha       = randomAlpha ? CGFloat.random() : 1.0
         return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: alpha)
     }
 }
