@@ -44,13 +44,29 @@ extension UIDevice {
 
 }
 
+extension UIDevice {
+
+    var isSimulator: Bool {
+        let code = versionCode
+        return code == "i386" || code == "x86_64"
+    }
+
+    var versionCode: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+
+        let versionCode: String = String(validatingUTF8: NSString(bytes: &systemInfo.machine, length: Int(_SYS_NAMELEN), encoding: String.Encoding.ascii.rawValue)!.utf8String!)!
+
+        return versionCode
+    }
+}
 
 // MARK: - Check if device supports blur
 // REFERENCE: - http://stackoverflow.com/a/29997626/4656574
 
 extension UIDevice {
     
-    static var isBlurSupported: Bool {
+    var isBlurSupported: Bool {
         var supported = Set<String>()
         supported.insert("iPad")
         supported.insert("iPad1,1")
@@ -76,7 +92,7 @@ extension UIDevice {
         return !supported.contains(hardwareString)
     }
     
-    fileprivate static var hardwareString: String {
+    fileprivate var hardwareString: String {
         var name: [Int32] = [CTL_HW, HW_MACHINE]
         var size: Int = 2
         sysctl(&name, 2, nil, &size, &name, 0)
