@@ -121,7 +121,7 @@ public class UIPanGestureRecognizerWithEdgeDirection: UIPanGestureRecognizer {
                     direction = .right
                 }
             } else {
-                if locationX > UIScreen.width - edgeOffset {
+                if locationX > UIScreen.main.bounds.width - edgeOffset {
                     direction = .rightEdge
                 } else {
                     direction = .left
