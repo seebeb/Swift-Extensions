@@ -13,8 +13,7 @@ import UIKit
 extension CGRect {
 
     init(origin: CGPoint = .zero, sideLength: CGFloat) {
-        self.origin = origin
-        self.size = CGSize(width: sideLength, height: sideLength)
+        self.init(origin: origin, size: CGSize(width: sideLength, height: sideLength))
     }
     
     var center: CGPoint {

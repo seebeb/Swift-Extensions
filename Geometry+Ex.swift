@@ -8,6 +8,14 @@
 import UIKit
 
 
+@available(iOS, deprecated, message: "please use: init(surrounding:)")
 func UIEdgeInsetsMakeEachSide(_ distance: CGFloat) -> UIEdgeInsets {
     return UIEdgeInsetsMake(distance, distance, distance, distance)
+}
+
+extension UIEdgeInsets {
+
+    init(surrounding: CGFloat) {
+        self.init(top: surrounding, left: surrounding, bottom: surrounding, right: surrounding)
+    }
 }

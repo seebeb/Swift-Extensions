@@ -18,6 +18,17 @@ extension UINavigationController {
         navigationBar.backgroundColor = UIColor.clear
     }
 
+    func navigationBar(with color: UIColor) {
+        navigationBar.shadowImage     = UIImage()
+        view.backgroundColor          = UIColor.clear
+
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        let image = UIImage(frame: rect, color: color)
+
+        navigationBar.isTranslucent = false
+        navigationBar.setBackgroundImage(image, for: .bottom, barMetrics: .default)
+    }
+
     func transparentBlurBar() {
         
         completelyTransparentBar()
