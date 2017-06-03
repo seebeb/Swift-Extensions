@@ -9,6 +9,16 @@ import UIKit
 
 extension UITableView {
 
+    func cellForRow(at location: CGPoint) -> UITableViewCell? {
+
+        guard let indexPath = indexPathForRow(at: location) else { return nil }
+
+        return cellForRow(at: indexPath)
+    }
+}
+
+extension UITableView {
+
     func reloadData(with animation: UITableViewRowAnimation) {
         reloadSections(IndexSet(integersIn: 0 ..< numberOfSections), with: animation)
     }
