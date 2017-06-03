@@ -140,6 +140,7 @@ func total<T : Arithmetic>(_ values: T ...) -> T {
     return total(values)
 }
 
+
 // MARK: - Average
 
 func average<T : Arithmetic>(_ values: [T]) -> T {
@@ -148,4 +149,11 @@ func average<T : Arithmetic>(_ values: [T]) -> T {
 
 func average<T : Arithmetic>(_ values: T ...) -> T {
     return total(values) / T(values.count)
+}
+
+
+// MARK: -
+
+func clamp<T: Comparable>(value: T, minimum: T, maximum: T) -> T {
+    return min(max(value, minimum), maximum)
 }
