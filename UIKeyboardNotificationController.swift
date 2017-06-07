@@ -96,7 +96,7 @@ extension UIKeyboardNotificationController {
     func keyboardDidChangeFrame(kbRect: CGRect, duration: TimeInterval) {}
 }
 
-extension UIKeyboardNotificationController {
+@objc extension UIKeyboardNotificationController {
 
     func applicationWillEnterForeground() {}
 

@@ -137,6 +137,18 @@ extension CGPoint {
 }
 
 extension CGSize {
+
+    init(sideLength: CGFloat) {
+        self.init(width: sideLength, height: sideLength)
+    }
+
+    init(sideLength: Double) {
+        self.init(width: sideLength, height: sideLength)
+    }
+
+    init(sideLength: Int) {
+        self.init(width: sideLength, height: sideLength)
+    }
     
     var Max: CGSize {
         let _max = max(width, height)
@@ -238,15 +250,17 @@ func CGRectsNotContainPoint(_ point: CGPoint, rects: Array<CGRect>) -> Bool {
 
 
 // MARK: -
-
+@available(iOS, deprecated, message: "please use: CGSize:init")
 func CGSizeWithEqualLength(_ sideLength: CGFloat) -> CGSize {
     return CGSize(width: sideLength, height: sideLength)
 }
 
+@available(iOS, deprecated, message: "please use: CGSize:init")
 func CGSizeWithEqualLength(_ sideLength: Double) -> CGSize {
     return CGSize(width: sideLength, height: sideLength)
 }
 
+@available(iOS, deprecated, message: "please use: CGSize:init")
 func CGSizeWithEqualLength(_ sideLength: Int) -> CGSize {
     return CGSize(width: sideLength, height: sideLength)
 }
