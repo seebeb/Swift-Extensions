@@ -250,17 +250,17 @@ func CGRectsNotContainPoint(_ point: CGPoint, rects: Array<CGRect>) -> Bool {
 
 
 // MARK: -
-@available(iOS, deprecated, message: "please use: CGSize:init")
+@available(iOS, deprecated, message: "please use: CGSize:sideLength")
 func CGSizeWithEqualLength(_ sideLength: CGFloat) -> CGSize {
     return CGSize(width: sideLength, height: sideLength)
 }
 
-@available(iOS, deprecated, message: "please use: CGSize:init")
+@available(iOS, deprecated, message: "please use: CGSize:sideLength")
 func CGSizeWithEqualLength(_ sideLength: Double) -> CGSize {
     return CGSize(width: sideLength, height: sideLength)
 }
 
-@available(iOS, deprecated, message: "please use: CGSize:init")
+@available(iOS, deprecated, message: "please use: CGSize:sideLength")
 func CGSizeWithEqualLength(_ sideLength: Int) -> CGSize {
     return CGSize(width: sideLength, height: sideLength)
 }
