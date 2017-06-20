@@ -23,6 +23,10 @@ extension UIApplication {
         return topController
     }
 
+    var topMostNavigationController: UINavigationController? {
+        return topMostViewController as? UINavigationController
+    }
+
     /// App has more than one window and just want to get topMostViewController of the AppDelegate window.
     var appDelegateWindowTopMostViewController: UIViewController? {
         let delegate = UIApplication.shared.delegate as? AppDelegate
