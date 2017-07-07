@@ -9,7 +9,7 @@
 
 import UIKit
 
-private typealias GradientPoints = (startPoint: CGPoint, endPoint: CGPoint)
+typealias GradientPoints = (startPoint: CGPoint, endPoint: CGPoint)
 
 enum GradientOrientation {
 
@@ -50,6 +50,17 @@ extension UIView {
     }
 
     @discardableResult
+    func applyGradient(withColors colors: [UIColor], points: GradientPoints) -> CAGradientLayer {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = colors.map { $0.cgColor }
+        gradient.startPoint = points.startPoint
+        gradient.endPoint = points.endPoint
+        layer.insertSublayer(gradient, at: 0)
+        return gradient
+    }
+
+    @discardableResult
     func applyGradient(withColors colors: [UIColor], gradientOrientation orientation: GradientOrientation) -> CAGradientLayer {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = bounds
@@ -65,6 +76,14 @@ extension UIView {
         gradient.colors = colors.map { $0.cgColor }
         gradient.startPoint = orientation.startPoint
         gradient.endPoint = orientation.endPoint
+        return gradient
+    }
+
+    static func gradientLayer(colors: [UIColor], points: GradientPoints) -> CAGradientLayer {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.colors = colors.map { $0.cgColor }
+        gradient.startPoint = points.startPoint
+        gradient.endPoint = points.endPoint
         return gradient
     }
 }
