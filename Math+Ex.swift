@@ -7,10 +7,7 @@
 
 import UIKit
 
-
 // MARK: -
-
-// Xcode 8 beta6 +
 
 /**
  1 > nil // true
@@ -24,7 +21,7 @@ import UIKit
  nil <= 1 // true
  */
 
-public func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
         return l > r
@@ -35,7 +32,7 @@ public func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
-public func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
         return l >= r
@@ -44,7 +41,7 @@ public func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
-public func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
         return l < r
@@ -55,7 +52,7 @@ public func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
-public func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
     case let (l?, r?):
         return l <= r
@@ -67,7 +64,7 @@ public func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 // MARK: - 
 
-public func == (lhs: String?, rhs: (String, String)) -> Bool {
+func == (lhs: String?, rhs: (String, String)) -> Bool {
     if lhs == rhs.0 || lhs == rhs.1 {
         return true
     }
@@ -75,7 +72,7 @@ public func == (lhs: String?, rhs: (String, String)) -> Bool {
 }
 
 /// "augus" ~= "Augus" is true
-public func ~= (lhs: String?, rhs: String?) -> Bool {
+func ~= (lhs: String?, rhs: String?) -> Bool {
     if lhs == rhs {
         return true
     }
@@ -83,12 +80,12 @@ public func ~= (lhs: String?, rhs: String?) -> Bool {
 }
 
 /// "123" == 123 is true
-public func == (lhs: String, rhs: Int) -> Bool {
+func == (lhs: String, rhs: Int) -> Bool {
     return Int(lhs) == rhs
 }
 
 /// 123 == "123" is true
-public func == (lhs: Int, rhs: String) -> Bool {
+func == (lhs: Int, rhs: String) -> Bool {
     return lhs == Int(rhs)
 }
 
@@ -96,10 +93,16 @@ public func == (lhs: Int, rhs: String) -> Bool {
 // MARK: -
 
 extension Bool {
-    
-    init<T : Integer>(_ integer: T){
+
+#if swift(>=3.2)
+    init<T : BinaryInteger>(_ integer: T) {
         self.init(integer != 0)
     }
+#else
+    init<T : Integer>(_ integer: T) {
+        self.init(integer != 0)
+    }
+#endif
 }
 
 

@@ -53,7 +53,8 @@ protocol Arithmetic: Comparable {
 // MARK: - 
 
 extension Int: Arithmetic {
-    var int: Int { return Int(self) } // `Int()` is unnecessary here, but just for convenience
+    @available(iOS, deprecated, message: "unnecessary")
+    var int: Int { return self } // `Int()` is unnecessary here, but just for convenience
     var double: Double { return Double(self) }
     var cgFloat: CGFloat { return CGFloat(self) }
 }
@@ -90,14 +91,16 @@ extension Float: Arithmetic {
 
 extension Double: Arithmetic {
     var int: Int { return Int(self) }
-    var double: Double { return Double(self) } // `Double()` is unnecessary here, but just for convenience
+    @available(iOS, deprecated, message: "unnecessary")
+    var double: Double { return self } // `Double()` is unnecessary here, but just for convenience
     var cgFloat: CGFloat { return CGFloat(self) }
 }
 
 extension CGFloat: Arithmetic {
     var int: Int { return Int(self) }
     var double: Double { return Double(self) }
-    var cgFloat: CGFloat { return CGFloat(self) } // `CGFloat()` is unnecessary here, but just for convenience
+    @available(iOS, deprecated, message: "unnecessary")
+    var cgFloat: CGFloat { return self } // `CGFloat()` is unnecessary here, but just for convenience
 }
 
 //extension UInt: Arithmetic {

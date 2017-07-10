@@ -99,7 +99,30 @@ extension UICollectionView {
     func register(_ cellClass: Swift.AnyClass) {
         register(cellClass, forCellWithReuseIdentifier: String(describing: cellClass.self))
     }
+
+    func registerHeaderViewNib(_ header: Swift.AnyClass) {
+        let id = String(describing: header.self)
+        let nib = UINib(nibName: id, bundle: nil)
+        register(nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: id)
+    }
+
+    func registerFooterViewNib(_ footer: Swift.AnyClass) {
+        let id = String(describing: footer.self)
+        let nib = UINib(nibName: id, bundle: nil)
+        register(nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: id)
+    }
+
+    func dequeueReusableHeader<T : UIView>(with view: T.Type, for indexPath: IndexPath) -> T {
+        let id = String(describing: view.self)
+        return dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: id, for: indexPath) as! T
+    }
+
+    func dequeueReusableFooter<T : UIView>(with view: T.Type, for indexPath: IndexPath) -> T {
+        let id = String(describing: view.self)
+        return dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: id, for: indexPath) as! T
+    }
 }
+
 
 
 // MARK: - 

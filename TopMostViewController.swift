@@ -46,7 +46,8 @@ extension UIApplication {
  */
 
 extension UIViewController {
-    var topMostViewController: UIViewController? {
+
+    @objc var topMostViewController: UIViewController? {
         // Handling Modal views
         if let presentedViewController = self.presentedViewController {
             return presentedViewController.topMostViewController
