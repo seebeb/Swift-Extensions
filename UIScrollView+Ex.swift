@@ -49,7 +49,11 @@ extension UIScrollView {
     }
 
     var isOnTop: Bool {
-        return contentOffset.y == -contentInset.top
+        if #available(iOS 11.0, *) {
+            return contentOffset.y == -safeAreaInsets.top
+        } else {
+            return contentOffset.y == -contentInset.top
+        }
     }
 
     var isAtBottom: Bool {
@@ -67,14 +71,24 @@ extension UIScrollView {
     }
     
     @discardableResult
-    func scrollToTop(animated: Bool = true) -> CGPoint {
+    func scrollToTop(appending view: UIView? = nil, animated: Bool = true) -> CGPoint {
 
         scrollToTopDelegate?.scrollViewWillScrollToTop(self)
 
-        let topOffset = CGPoint(x: 0, y: -contentInset.top)
-        setContentOffset(topOffset, animated: animated)
+        let topOffset: CGFloat
+        let appendingHeight = view != nil ? view!.frame.height : 0
+
+        if #available(iOS 11.0, *) {
+            topOffset = -safeAreaInsets.top - appendingHeight
+        } else {
+            topOffset = -contentInset.top - appendingHeight
+        }
+
+        let point = CGPoint(x: 0, y: topOffset)
+        setContentOffset(point, animated: animated)
+
         bindToScrollViewDidScrollToTopIfNeeded()
-        return topOffset
+        return point
     }
     
     @discardableResult
@@ -92,7 +106,12 @@ extension UIScrollView {
         
         guard bottomOffset.y > 0 else { return .zero }
         
-        let topOffset = CGPoint(x: 0, y: -contentInset.top)
+        let topOffset: CGPoint
+        if #available(iOS 11.0, *) {
+            topOffset = CGPoint(x: 0, y: -safeAreaInsets.top)
+        } else {
+            topOffset = CGPoint(x: 0, y: -contentInset.top)
+        }
 
         let offset: CGPoint
 
