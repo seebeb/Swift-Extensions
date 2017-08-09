@@ -35,6 +35,15 @@ struct Utils {
         return (Bundle.main.bundlePath as NSString).appendingPathComponent(named)
     }
 
+    static func bundlePathForFile(_ named: String, type: String) -> String? {
+        return Bundle.main.path(forResource: named, ofType: type)
+    }
+
+    static func bundleURLForFile(_ named: String, type: String) -> URL? {
+        guard let path = bundlePathForFile(named, type: type) else { return nil }
+        return URL(fileURLWithPath: path)
+    }
+
     @discardableResult
     static func createFolder(_ path: String) -> String {
         let fileManager = FileManager.default
@@ -102,6 +111,39 @@ extension Utils {
     
     static func libraryPathForFile(_ named: String) -> String {
         return (libraryPath as NSString).appendingPathComponent(named)
+    }
+}
+
+extension Utils {
+
+    static func fetchRootDirectoryForiCloud(completion: @escaping (URL?) -> ()) {
+        GlobalQuene.async {
+            guard let url = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
+                GlobalMainQueue.async {
+                    completion(nil)
+                }
+                return
+            }
+
+            if !FileManager.default.fileExists(atPath: url.path, isDirectory: nil) {
+                print("create directory")
+                do {
+                    try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    print(error)
+                }
+            }
+
+            GlobalMainQueue.async {
+                completion(url)
+            }
+        }
+    }
+
+    static func localPath(forResource: String, of type: String) -> URL {
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let resourcePath = ((documentsDirectory as NSString).appendingPathComponent(forResource) as NSString).appendingPathExtension(type)
+        return URL(fileURLWithPath: resourcePath!)
     }
 }
 

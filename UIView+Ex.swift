@@ -473,3 +473,13 @@ extension UICollectionView {
         return indexPathForItem(at: centerPoint)
     }
 }
+
+
+// MARK: -
+
+extension UIView {
+
+    func copiedView<T: UIView>() -> T {
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
+    }
+}
