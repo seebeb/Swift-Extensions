@@ -20,6 +20,10 @@ struct Utils {
     static var documentPath: String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
     }
+
+    static var documentsDirectoryURL: URL {
+        return URL(fileURLWithPath: documentPath, isDirectory: true)
+    }
     
     static func documentPathForFile(_ named: String) -> String {
         return (documentPath as NSString).appendingPathComponent(named)
@@ -140,7 +144,7 @@ extension Utils {
         }
     }
 
-    static func localPath(forResource: String, of type: String) -> URL {
+    static func documentPath(forResource: String, of type: String) -> URL {
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         let resourcePath = ((documentsDirectory as NSString).appendingPathComponent(forResource) as NSString).appendingPathExtension(type)
         return URL(fileURLWithPath: resourcePath!)

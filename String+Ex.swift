@@ -26,9 +26,9 @@ public extension String {
     }
     
 //    public init<Subject>(_ subject: Subject) {
-//        self.init(reflecting: instance)
+//        self.init(reflecting: subject)
 //    }
-    
+
 }
 
 
@@ -39,7 +39,11 @@ extension String {
     func slice(from: String, to: String) -> String? {
         return (range(of: from)?.upperBound).flatMap { sInd in
             (range(of: to, range: sInd..<endIndex)?.lowerBound).map { eInd in
-                substring(with: sInd..<eInd)
+                #if swift(>=3.2)
+                    return String(self[sInd..<eInd])
+                #else
+                    return substring(with: sInd..<eInd)
+                #endif
             }
         }
     }
@@ -54,12 +58,20 @@ extension String {
 
     subscript(range: Range<Int>) -> String {
         let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex) ?? endIndex
-        return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) ?? endIndex))
+        #if swift(>=3.2)
+            return String(self[lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) ?? endIndex)])
+        #else
+            return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound, limitedBy: endIndex) ?? endIndex))
+        #endif
     }
 
     subscript(range: ClosedRange<Int>) -> String {
         let lowerIndex = index(startIndex, offsetBy: max(0,range.lowerBound), limitedBy: endIndex) ?? endIndex
-        return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) ?? endIndex))
+        #if swift(>=3.2)
+            return String(self[lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) ?? endIndex)])
+        #else
+            return substring(with: lowerIndex..<(index(lowerIndex, offsetBy: range.upperBound - range.lowerBound + 1, limitedBy: endIndex) ?? endIndex))
+        #endif
     }
 }
 
@@ -96,7 +108,11 @@ extension String {
 
         guard startIndex != endIndex else { return self }
 
-        return substring(to: index(before: endIndex))
+        #if swift(>=3.2)
+            return String(self[..<index(before: endIndex)])
+        #else
+            return substring(to: index(before: endIndex))
+        #endif
     }
 
     /// Remove fisrt character
@@ -106,7 +122,11 @@ extension String {
 
         guard startIndex != endIndex else { return self }
 
-        return substring(from: index(after: startIndex))
+        #if swift(>=3.2)
+            return String(self[index(after: startIndex)...])
+        #else
+            return substring(from: index(after: startIndex))
+        #endif
     }
 
     @available(*, deprecated, message: "Please use `dropLast()`")
