@@ -74,11 +74,17 @@ extension UIViewController {
         let isBeginOrEnd = keyboardBeginFrame.origin.y == screenHeight || keyboardEndFrame.origin.y == screenHeight
         
         let offset: CGFloat
-        if #available(iOS 11.0, *) {
-            offset = additionalSafeAreaInsets.bottom
-        } else {
+
+        #if swift(>=3.2)
+            if #available(iOS 11.0, *) {
+                offset = additionalSafeAreaInsets.bottom
+            } else {
+                offset = bottomLayoutGuide.length
+            }
+        #else
             offset = bottomLayoutGuide.length
-        }
+        #endif
+
         let heightOffset = keyboardBeginFrame.origin.y - keyboardEndFrame.origin.y - (isBeginOrEnd ? offset : 0)
         
         UIView.animate(withDuration: duration.doubleValue,
