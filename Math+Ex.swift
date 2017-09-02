@@ -126,6 +126,10 @@ extension Double {
     var cleanValue: String {
         return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
+
+    func format(numberOfDecimalPlaces: Int) -> String {
+        return String(format: "%.\(numberOfDecimalPlaces)f", self)
+    }
 }
 
 

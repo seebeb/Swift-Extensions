@@ -15,7 +15,7 @@ func ausFrameSizeForText(text: NSString, maximumSize: CGSize) -> CGRect {
 }
 
 func ausFrameSizeForText(text: NSString, font: UIFont, maximumSize: CGSize) -> CGRect {
-    return text.boundingRect(with: maximumSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+    return text.boundingRect(with: maximumSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
 }
 
 func ausFrameSizeForText(label: UILabel, text: NSString, maximum: CGSize) -> CGRect {
@@ -35,7 +35,7 @@ extension UILabel {
             let size = string.boundingRect(
                 with: CGSize(width: frame.size.width, height: CGFloat.greatestFiniteMagnitude),
                 options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                attributes: [NSFontAttributeName: font],
+                attributes: [NSAttributedStringKey.font: font],
                 context: nil).size
             
             if size.height > bounds.size.height {
@@ -53,7 +53,7 @@ extension UILabel {
         do {
             let formatedData = (data as NSString).trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
             let text = try NSAttributedString(data: formatedData.data(using: String.Encoding.unicode,allowLossyConversion: false)!,
-                                              options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                                              options: [.documentType: NSAttributedString.DocumentType.html],
                                               documentAttributes: nil)
             self.attributedText = text
         }catch{
@@ -65,14 +65,14 @@ extension UILabel {
         let constraint = CGSize(width: self.frame.width, height: CGFloat.greatestFiniteMagnitude)
         
         let context = NSStringDrawingContext()
-        let boundingBox = self.text?.boundingRect(with: constraint, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.font], context: context).size
+        let boundingBox = self.text?.boundingRect(with: constraint, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.font], context: context).size
         let size = CGSize(width: ceil(boundingBox!.width), height: ceil(boundingBox!.height))
         
         return size
     }
     
     func ausGetLabelNumberOfLines() -> Int {
-        let textStorage = NSTextStorage(string: self.text!, attributes: [NSFontAttributeName: self.font])
+        let textStorage = NSTextStorage(string: self.text!, attributes: [NSAttributedStringKey.font: self.font])
         
         let textContainer = NSTextContainer(size: self.ausGetLabelSize())
         textContainer.lineBreakMode = .byWordWrapping
@@ -101,7 +101,7 @@ extension UILabel {
         let constraint = CGSize(width: self.frame.width, height: CGFloat.greatestFiniteMagnitude)
         
         let context = NSStringDrawingContext()
-        let boundingBox = self.text?.boundingRect(with: constraint, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.font], context: context).size
+        let boundingBox = self.text?.boundingRect(with: constraint, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.font], context: context).size
         let size = CGSize(width: ceil(boundingBox!.width), height: ceil(boundingBox!.height))
         
         var frame = self.frame
@@ -118,6 +118,4 @@ extension UILabel {
         self.frame = newFrame
         return self.frame.size
     }
-    
-    
 }

@@ -60,3 +60,11 @@ extension URL {
         return results
     }
 }
+
+extension URL {
+
+    var lastPathComponentWithoutPathExtension: String {
+        let ex = pathExtension
+        return lastPathComponent.replacingOccurrences(of: ".\(ex)", with: "")
+    }
+}
