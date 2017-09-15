@@ -89,6 +89,15 @@ func == (lhs: Int, rhs: String) -> Bool {
     return lhs == Int(rhs)
 }
 
+func == <T : Comparable>(lhs: T?, rhs: [T]) -> Bool {
+    for r in rhs {
+        if r == lhs {
+            return true
+        }
+    }
+    return false
+}
+
 
 // MARK: -
 

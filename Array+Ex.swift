@@ -39,7 +39,8 @@ public extension Array {
 public extension Array {
     
     public mutating func append(_ newElements: [Element]) {
-        newElements.forEach() { append($0) }
+        self = self + newElements
+//        newElements.forEach() { append($0) }
     }
 }
 
