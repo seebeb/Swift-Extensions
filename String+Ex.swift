@@ -52,8 +52,13 @@ extension String {
 extension String {
 
     subscript(i: Int) -> String {
-        guard i >= 0 && i < characters.count else { return "" }
-        return String(self[index(startIndex, offsetBy: i)])
+        #if swift(>=3.2)
+            guard i >= 0 && i < count else { return "" }
+            return String(self[index(startIndex, offsetBy: i)])
+        #else
+            guard i >= 0 && i < characters.count else { return "" }
+            return String(self[index(startIndex, offsetBy: i)])
+        #endif
     }
 
     subscript(range: Range<Int>) -> String {
