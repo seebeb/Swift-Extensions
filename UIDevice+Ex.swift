@@ -27,6 +27,10 @@ extension UIDevice {
 
 extension UIDevice {
 
+    var isIPhoneX: Bool {
+        return UIDevice().userInterfaceIdiom == .phone && UIScreen.main.nativeBounds.height == 2436
+    }
+
     var isPad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
