@@ -8,6 +8,16 @@
 
 import UIKit
 
+extension UINavigationBar {
+
+    var lagreTitleHeight: CGFloat {
+        let maxSize = subviews
+            .filter { $0.frame.origin.y > 0 }
+            .max { $0.frame.origin.y < $1.frame.origin.y }
+            .map { $0.frame.size }
+        return maxSize?.height ?? 0
+    }
+}
 
 extension UINavigationBar {
 
