@@ -104,31 +104,31 @@ private class BlankViewController: UIViewController {
 private let ok = NSLocalizedString("OK", comment: "")
 private let cancel = NSLocalizedString("Cancel", comment: "")
 
-class AlertController {
+struct AlertController {
     
     typealias CompletionHandler = (Bool) -> ()
     
-    class func alert(_ title: String = "", message: String = "", actionTitle: String = ok, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+    static func alert(_ title: String = "", message: String = "", actionTitle: String = ok, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         alert(title, message: message, actionTitle: actionTitle, addCancelAction: false, baseViewController: baseViewController, tintColor: tintColor, closure: closure)
     }
     
-    class func configured(_ title: String = "", message: String = "", actionTitle: String = ok, tintColor: UIColor? = nil, closure: CompletionHandler?) -> UIAlertController {
+    static func configured(_ title: String = "", message: String = "", actionTitle: String = ok, tintColor: UIColor? = nil, closure: CompletionHandler?) -> UIAlertController {
         return configured(title, message: message, actionTitle: actionTitle, addCancelAction: false, tintColor: tintColor, closure: closure)
     }
     
-    class func alertWithCancelAction(_ title: String = "", message: String = "", actionTitle: String = ok, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+    static func alertWithCancelAction(_ title: String = "", message: String = "", actionTitle: String = ok, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         alert(title, message: message, actionTitle: actionTitle, addCancelAction: true, baseViewController: baseViewController, tintColor: tintColor, closure: closure)
     }
     
-    class func configuredWithCancelAction(_ title: String = "", message: String = "", actionTitle: String = ok, tintColor: UIColor? = nil, closure: CompletionHandler?) -> UIAlertController {
+    static func configuredWithCancelAction(_ title: String = "", message: String = "", actionTitle: String = ok, tintColor: UIColor? = nil, closure: CompletionHandler?) -> UIAlertController {
         return configured(title, message: message, actionTitle: actionTitle, addCancelAction: true, tintColor: tintColor, closure: closure)
     }
     
-    class func multiAlertsWithOptions(multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+    static func multiAlertsWithOptions(multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         alertWithOptions(multiItemsOfInfo, baseViewController: baseViewController, tintColor: tintColor, closure: closure)
     }
     
-    fileprivate class func alert(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+    fileprivate static func alert(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         
         guard let baseVC = baseViewController ?? UIApplication.shared.topMostViewController else { return }
         
@@ -137,7 +137,7 @@ class AlertController {
         baseVC.present(alertController, animated: true, completion: nil)
     }
     
-    fileprivate class func configured(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, tintColor: UIColor? = nil, closure: CompletionHandler?) -> UIAlertController {
+    fileprivate static func configured(_ title: String = "", message: String = "", actionTitle: String = ok, addCancelAction: Bool, tintColor: UIColor? = nil, closure: CompletionHandler?) -> UIAlertController {
         
         let okAction = UIAlertAction(title: actionTitle, style: .default) { (_) -> Void in
             closure?(true)
@@ -160,7 +160,7 @@ class AlertController {
         return alertController
     }
     
-    fileprivate class func alertWithOptions(_ multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
+    fileprivate static func alertWithOptions(_ multiItemsOfInfo: [String], baseViewController: UIViewController? = nil, tintColor: UIColor? = nil, closure: CompletionHandler?) {
         
         guard let baseVC = baseViewController ?? UIApplication.shared.topMostViewController else { return }
         

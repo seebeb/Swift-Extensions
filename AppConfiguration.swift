@@ -15,7 +15,7 @@ enum AppConfiguration {
     case appStore
 }
 
-struct Config {
+struct AppConfig {
 
     static let isTestFlight = Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     
