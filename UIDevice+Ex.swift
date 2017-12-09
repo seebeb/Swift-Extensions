@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import LocalAuthentication
 
 extension UIDevice {
 
@@ -26,6 +26,22 @@ extension UIDevice {
 }
 
 extension UIDevice {
+
+    var isFaceIDSupported: Bool {
+        if isSimulator {
+            return isIPhoneX
+        }
+
+        if #available(iOS 11.0, *) {
+            let authenticationContext = LAContext()
+            if authenticationContext.responds(to: #selector(getter: LAContext.biometryType))  {
+                if authenticationContext.biometryType == .faceID {
+                    return true
+                }
+            }
+        }
+        return false
+    }
 
     var isIPhoneX: Bool {
         return UIDevice().userInterfaceIdiom == .phone && UIScreen.main.nativeBounds.height == 2436
