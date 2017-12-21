@@ -86,9 +86,13 @@ extension UIColor {
         guard rgba.hasPrefix("#") else {
             throw UIColorInputError.missingHashMarkAsPrefix
         }
-        
-        let hexString = rgba.substring(from: rgba.index(rgba.startIndex, offsetBy: 1))
-        
+
+        #if swift(>=3.2)
+            let hexString = String(rgba[rgba.index(rgba.startIndex, offsetBy: 1)...])
+        #else
+            let hexString = rgba.substring(from: rgba.index(rgba.startIndex, offsetBy: 1))
+        #endif
+
         var hexValue: UInt32 = 0
         
         guard Scanner(string: hexString).scanHexInt32(&hexValue) else {
