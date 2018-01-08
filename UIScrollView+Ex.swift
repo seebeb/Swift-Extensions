@@ -8,13 +8,18 @@
 import UIKit
 import SnapKit
 
-protocol UIScrollViewScrollToTopDelegate {
+protocol UIScrollViewScrollToTopDelegate: class {
     func scrollViewWillScrollToTop(_ scrollView: UIScrollView)
 }
 
-protocol UIScrollViewScrollToBottomDelegate {
+protocol UIScrollViewScrollToBottomDelegate: class {
     func scrollViewWillScrollToBottom(_ scrollView: UIScrollView)
     func scrollViewDidScrollToBottom(_ scrollView: UIScrollView)
+}
+
+extension UIScrollViewScrollToBottomDelegate {
+    func scrollViewWillScrollToBottom(_ scrollView: UIScrollView) {}
+    func scrollViewDidScrollToBottom(_ scrollView: UIScrollView) {}
 }
 
 extension UIScrollView {
@@ -25,7 +30,7 @@ extension UIScrollView {
         static var triggerToTop = 0
     }
 
-    var scrollToTopDelegate: UIScrollViewScrollToTopDelegate? {
+    weak var scrollToTopDelegate: UIScrollViewScrollToTopDelegate? {
         get {
             return objc_getAssociatedObject(self, &AssociationKey.topDelegate) as? UIScrollViewScrollToTopDelegate
         }
@@ -34,7 +39,7 @@ extension UIScrollView {
         }
     }
 
-    var scrollToBottomDelegate: UIScrollViewScrollToBottomDelegate? {
+    weak var scrollToBottomDelegate: UIScrollViewScrollToBottomDelegate? {
         get {
             return objc_getAssociatedObject(self, &AssociationKey.bottomDelegate) as? UIScrollViewScrollToBottomDelegate
         }
