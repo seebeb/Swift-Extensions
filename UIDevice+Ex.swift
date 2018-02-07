@@ -32,7 +32,7 @@ extension UIDevice {
             return isIPhoneX
         }
 
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0.1, *) {
             let authenticationContext = LAContext()
             if authenticationContext.responds(to: #selector(getter: LAContext.biometryType))  {
                 if authenticationContext.biometryType == .faceID {
