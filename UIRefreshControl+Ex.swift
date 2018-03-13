@@ -16,6 +16,7 @@ extension UIRefreshControl {
 
         let offsetY = scrollView.contentOffset.y - frame.height
 
+        print(offsetY)
         scrollView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
 
         beginRefreshing()
