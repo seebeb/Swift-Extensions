@@ -11,12 +11,10 @@ import UIKit
 extension UIRefreshControl {
 
     func beginRefreshingManually() {
-
         guard let scrollView = superview as? UIScrollView else { return }
 
         let offsetY = scrollView.contentOffset.y - frame.height
 
-        print(offsetY)
         scrollView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
 
         beginRefreshing()
