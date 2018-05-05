@@ -181,18 +181,13 @@ extension UIView {
 
 extension UIView {
 
-    func isEqualToNameOfClass(_ name: String) -> Bool {
-        return String(describing: classForCoder) == name
-    }
-
-
     /// loop subviews and subviews' subviews
     ///
     /// - parameter closure: subview
-    func loopViews(_ closure: ((_ subView: UIView) -> ())) {
+    func loopDescendantViews(_ closure: ((_ subView: UIView) -> ())) {
         for v in subviews {
             closure(v)
-            v.loopViews(closure)
+            v.loopDescendantViews(closure)
         }
     }
 
@@ -201,7 +196,7 @@ extension UIView {
     /// - parameter nameOfView:   name of subview
     /// - parameter shouldReturn: should return or not when meeting the specific subview
     /// - parameter execute:      subview
-    func loopViews(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
+    func loopDescendantViews(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
         for v in subviews {
             if v.isEqualToNameOfClass(nameOfView) {
                 execute(v)
@@ -209,8 +204,25 @@ extension UIView {
                     return
                 }
             }
-            v.loopViews(nameOfView, shouldReturn: shouldReturn, execute: execute)
+            v.loopDescendantViews(nameOfView, shouldReturn: shouldReturn, execute: execute)
         }
+    }
+
+    func isEqualToNameOfClass(_ name: String) -> Bool {
+        return String(describing: classForCoder) == name
+    }
+
+
+    // MARK: - deprecated functions
+
+    @available(iOS, deprecated, message: "please use: `loopDescendantViews`")
+    func loopViews(_ closure: ((_ subView: UIView) -> ())) {
+        loopDescendantViews(closure)
+    }
+
+    @available(iOS, deprecated, message: "please use: `loopDescendantViews`")
+    func loopViews(_ nameOfView: String, shouldReturn: Bool = true, execute: ((_ subView: UIView) -> ())) {
+        loopDescendantViews(nameOfView, shouldReturn: shouldReturn, execute: execute)
     }
 }
 
