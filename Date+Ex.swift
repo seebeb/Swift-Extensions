@@ -19,6 +19,16 @@ struct Day {
 
 extension Date {
     
+    func age() -> Int {
+        let calendar = Calendar.current
+        let ageComponents = calendar.dateComponents([.year], from: self, to: Date())
+        let age = ageComponents.year
+        return age ?? 0
+    }
+}
+
+extension Date {
+    
     var wholeWeek: [Date] {
         
         var dates: [Date] = []
