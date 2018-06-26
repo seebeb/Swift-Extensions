@@ -8,6 +8,17 @@
 import UIKit
 
 extension UIView {
+    
+    var compatibleSafeAreaInsets: UIEdgeInsets {
+        if #available(iOS 11.0, *) {
+            return safeAreaInsets
+        } else {
+            return .zero
+        }
+    }
+}
+
+extension UIView {
 
     convenience init(backgroundColor: UIColor?) {
         self.init()
