@@ -121,7 +121,7 @@ extension Utils {
 extension Utils {
 
     static func fetchRootDirectoryForiCloud(completion: @escaping (URL?) -> ()) {
-        GlobalQuene.async {
+        GlobalQueue.async {
             guard let url = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
                 GlobalMainQueue.async {
                     completion(nil)
@@ -171,7 +171,7 @@ var GlobalMainQueue: DispatchQueue {
     return DispatchQueue.main
 }
 
-var GlobalQuene: DispatchQueue {
+var GlobalQueue: DispatchQueue {
     return DispatchQueue.global(qos: .default)
 }
 
